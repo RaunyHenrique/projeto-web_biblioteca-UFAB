@@ -30,7 +30,7 @@ public class ConfiguracoesDataBase {
 	public DataSource dataSource() throws IllegalStateException, PropertyVetoException {
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
 		dataSource.setDriverClass("com.mysql.jdbc.Driver");
-		dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/biblioteca_ufab");
+		dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/biblioteca_ufab?useLegacyDatetimeCode=false&serverTimezone=America/Recife&useSSL=false");
 		dataSource.setUser("root");
 		dataSource.setPassword("root");
 		return dataSource;

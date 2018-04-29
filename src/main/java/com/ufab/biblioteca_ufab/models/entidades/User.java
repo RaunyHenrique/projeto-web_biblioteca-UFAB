@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 
 import com.ufab.biblioteca_ufab.models.enums.Role;
 
@@ -28,8 +28,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne
-	private Object user_id;
+	private Long user_id;
 
 	@NotNull
 	@NotEmpty
@@ -44,11 +43,11 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Role role;	
 
-	public Object getUser_id() {
+	public Long getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(Object user_id) {
+	public void setUser_id(Long user_id) {
 		this.user_id = user_id;
 	}
 

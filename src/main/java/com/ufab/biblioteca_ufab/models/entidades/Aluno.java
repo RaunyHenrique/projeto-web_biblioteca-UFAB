@@ -5,9 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
 
 import com.ufab.biblioteca_ufab.models.enums.TipoDeCurso;
 
@@ -61,7 +61,7 @@ public class Aluno {
 	private String telefone;
 
 	@NotNull
-	private int curso_id;
+	private Long curso_id;
 	
 	@NotNull
 	private TipoDeCurso tipo_curso_id;
@@ -305,7 +305,7 @@ public class Aluno {
 	 * @author Rauny Henrique
 	 */
 
-	public int getCurso_id() {
+	public Long getCurso_id() {
 		return curso_id;
 	}
 
@@ -317,7 +317,7 @@ public class Aluno {
 	 * @author Rauny Henrique
 	 */
 	
-	public void setCurso_id(int curso_id) {
+	public void setCurso_id(Long curso_id) {
 		this.curso_id = curso_id;
 	}
 
@@ -375,7 +375,7 @@ public class Aluno {
 		int result = 1;
 		result = prime * result + ((ano == null) ? 0 : ano.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + curso_id;
+		result = prime * result + ((curso_id == null) ? 0 : curso_id.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
@@ -408,7 +408,10 @@ public class Aluno {
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
-		if (curso_id != other.curso_id)
+		if (curso_id == null) {
+			if (other.curso_id != null)
+				return false;
+		} else if (!curso_id.equals(other.curso_id))
 			return false;
 		if (endereco == null) {
 			if (other.endereco != null)
