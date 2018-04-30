@@ -11,14 +11,26 @@
 	class="table table-hover table-condensed table-striped table-bordered">
 
 	<thead>
-
+	
 		<tr>
 
-			<td>Matricula</td>
-			<td>Nome</td>
-			<td>Curso</td>
-			<td>Periodo</td>
-			<td>Telefone</td>
+			<td colspan="6">
+
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target="#modal-add-edit">Inserir aluno</button>
+
+			</td>
+
+		</tr>
+
+		<tr class="text-center">
+
+			<td style="width: 10%">Matricula</td>
+			<td style="width: 30%">Nome</td>
+			<td style="width: 20%">Curso</td>
+			<td style="width: 5%">Periodo</td>
+			<td style="width: 5%">Telefone</td>
+			<td style="width: 30%">Ações</td>
 
 		</tr>
 
@@ -28,13 +40,17 @@
 
 		<c:forEach items="${alunos}" var="aluno">
 
-			<tr>
+			<tr data-id="${aluno.id}">
 
 				<td>${aluno.matricula}</td>
 				<td>${aluno.nome}</td>
-				<td>${aluno.curso_id}</td>
+				<td>${aluno.curso.nome}</td>
 				<td>${aluno.periodo}</td>
 				<td>${aluno.telefone}</td>
+				<td class="text-center">
+					<button type="button" class="btn btn-info btn-editar">Editar</button>
+					<button type="button" class="btn btn-danger btn-deletar">Deletar</button>
+				</td>
 
 			</tr>
 
@@ -46,18 +62,7 @@
 
 		<tr>
 
-			<td colspan="3">Total de alunos cadastrados: ${alunos.size()}</td>
-
-		</tr>
-
-		<tr>
-
-			<td colspan="3">
-
-				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#modal-add-edit">Inserir aluno</button>
-
-			</td>
+			<td colspan="6">Total de alunos cadastrados: <span id="total-items">${alunos.size()}</span></td>
 
 		</tr>
 

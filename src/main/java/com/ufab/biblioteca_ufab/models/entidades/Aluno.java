@@ -2,9 +2,13 @@ package com.ufab.biblioteca_ufab.models.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -50,7 +54,7 @@ public class Aluno {
 	@NotNull
 	@NotEmpty
 	private String nomeDaMae;
-
+	
 	@NotNull
 	@NotEmpty
 	private String endereco;
@@ -60,11 +64,13 @@ public class Aluno {
 	@Column(unique = true)
 	private String telefone;
 
-	@NotNull
-	private Long curso_id;
+	@ManyToOne
+	@JoinColumn(name = "curso_id")
+	private Curso curso;
 	
 	@NotNull
-	private TipoDeCurso tipo_curso_id;
+	@Enumerated(EnumType.STRING)
+	private TipoDeCurso tipo_curso;
 
 	@NotNull
 	@NotEmpty
@@ -73,298 +79,106 @@ public class Aluno {
 	@NotNull
 	private int periodo;
 
-	public TipoDeCurso getTipo_curso_id() {
-		return tipo_curso_id;
+	public TipoDeCurso getTipo_curso() {
+		return tipo_curso;
 	}
 
-	public void setTipo_curso_id(TipoDeCurso tipo_curso_id) {
-		this.tipo_curso_id = tipo_curso_id;
+	public void setTipo_curso(TipoDeCurso tipo_curso) {
+		this.tipo_curso = tipo_curso;
 	}
-
-	/**
-	 * Retorna o valor da variável id
-	 * 
-	 * @return id
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 
 	public Long getId() {
 		return id;
 	}
 
-	/**
-	 * Inicializa a variável id com o valor recebido como parâmetro
-	 * 
-	 * @param id
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	/**
-	 * Retorna o valor da variável matricula
-	 * 
-	 * @return matricula
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 
 	public String getMatricula() {
 		return matricula;
 	}
 
-	/**
-	 * Inicializa a variável matricula com o valor recebido como parâmetro
-	 * 
-	 * @param matricula
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
-
-	/**
-	 * Retorna o valor da variável cpf
-	 * 
-	 * @return cpf
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 
 	public String getCpf() {
 		return cpf;
 	}
 
-	/**
-	 * Inicializa a variável cpf com o valor recebido como parâmetro
-	 * 
-	 * @param cpf
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
-	/**
-	 * Retorna o valor da variável rg
-	 * 
-	 * @return rg
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 
 	public String getRg() {
 		return rg;
 	}
 
-	/**
-	 * Inicializa a variável rg com o valor recebido como parâmetro
-	 * 
-	 * @param rg
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-
-	/**
-	 * Retorna o valor da variável naturalidade
-	 * 
-	 * @return naturalidade
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 
 	public String getNaturalidade() {
 		return naturalidade;
 	}
 
-	/**
-	 * Inicializa a variável naturalidade com o valor recebido como parâmetro
-	 * 
-	 * @param naturalidade
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	
 	public void setNaturalidade(String naturalidade) {
 		this.naturalidade = naturalidade;
 	}
-
-	/**
-	 * Retorna o valor da variável nome
-	 * 
-	 * @return nome
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 
 	public String getNome() {
 		return nome;
 	}
 
-	/**
-	 * Inicializa a variável nome com o valor recebido como parâmetro
-	 * 
-	 * @param nome
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	/**
-	 * Retorna o valor da variável nomeDaMae
-	 * 
-	 * @return nomeDaMae
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 
 	public String getNomeDaMae() {
 		return nomeDaMae;
 	}
 
-	/**
-	 * Inicializa a variável nomeDaMae com o valor recebido como parâmetro
-	 * 
-	 * @param nomeDaMae
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	
 	public void setNomeDaMae(String nomeDaMae) {
 		this.nomeDaMae = nomeDaMae;
 	}
-
-	/**
-	 * Retorna o valor da variável endereco
-	 * 
-	 * @return endereco
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 
 	public String getEndereco() {
 		return endereco;
 	}
 
-	/**
-	 * Inicializa a variável endereco com o valor recebido como parâmetro
-	 * 
-	 * @param endereco
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
-	/**
-	 * Retorna o valor da variável telefone
-	 * 
-	 * @return telefone
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 
 	public String getTelefone() {
 		return telefone;
 	}
 
-	/**
-	 * Inicializa a variável telefone com o valor recebido como parâmetro
-	 * 
-	 * @param telefone
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 
-	/**
-	 * Retorna o valor da variável curso_id
-	 * 
-	 * @return curso_id
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-
-	public Long getCurso_id() {
-		return curso_id;
+	public Curso getCurso() {
+		return curso;
 	}
 
-	/**
-	 * Inicializa a variável curso_id com o valor recebido como parâmetro
-	 * 
-	 * @param curso_id
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	
-	public void setCurso_id(Long curso_id) {
-		this.curso_id = curso_id;
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
-
-	/**
-	 * Retorna o valor da variável ano
-	 * 
-	 * @return ano
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 
 	public String getAno() {
 		return ano;
 	}
 
-	/**
-	 * Inicializa a variável ano com o valor recebido como parâmetro
-	 * 
-	 * @param ano
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	
 	public void setAno(String ano) {
 		this.ano = ano;
 	}
-
-	/**
-	 * Retorna o valor da variável periodo
-	 * 
-	 * @return periodo
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 
 	public int getPeriodo() {
 		return periodo;
 	}
 
-	/**
-	 * Inicializa a variável periodo com o valor recebido como parâmetro
-	 * 
-	 * @param periodo
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */	
-	
 	public void setPeriodo(int periodo) {
 		this.periodo = periodo;
 	}
@@ -375,7 +189,7 @@ public class Aluno {
 		int result = 1;
 		result = prime * result + ((ano == null) ? 0 : ano.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((curso_id == null) ? 0 : curso_id.hashCode());
+		result = prime * result + ((curso == null) ? 0 : curso.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
@@ -385,7 +199,7 @@ public class Aluno {
 		result = prime * result + periodo;
 		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
-		result = prime * result + ((tipo_curso_id == null) ? 0 : tipo_curso_id.hashCode());
+		result = prime * result + ((tipo_curso == null) ? 0 : tipo_curso.hashCode());
 		return result;
 	}
 
@@ -408,10 +222,10 @@ public class Aluno {
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
-		if (curso_id == null) {
-			if (other.curso_id != null)
+		if (curso == null) {
+			if (other.curso != null)
 				return false;
-		} else if (!curso_id.equals(other.curso_id))
+		} else if (!curso.equals(other.curso))
 			return false;
 		if (endereco == null) {
 			if (other.endereco != null)
@@ -455,7 +269,7 @@ public class Aluno {
 				return false;
 		} else if (!telefone.equals(other.telefone))
 			return false;
-		if (tipo_curso_id != other.tipo_curso_id)
+		if (tipo_curso != other.tipo_curso)
 			return false;
 		return true;
 	}

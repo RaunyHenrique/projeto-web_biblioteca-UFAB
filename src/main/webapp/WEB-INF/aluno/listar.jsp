@@ -68,7 +68,7 @@
 
 	</c:if>
 
-	<section class="container">
+	<section class="container" id="section-table">
 	
 		<jsp:include page="../table-listar.jsp"></jsp:include>
 	
@@ -78,6 +78,7 @@
 		src="${path}/assets/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript"
 		src="${path}/assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="http://chancejs.com/chance.min.js"></script>
 		
 	<jsp:include page="../modal-add-edit.jsp"></jsp:include>
 
