@@ -23,64 +23,63 @@
 
 <body>
 
-	<c:if test="${not empty mensagensErro}">
-
-		<div class="container">
-
-			<div class="alert alert-danger alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-
-				<h3>Ops, ocorrem os seguintes erros:</h3>
-
-				<c:forEach items="${mensagensErro}" var="mensagem">
-
-					<p>
-						<strong>${mensagem.getField()}</strong>
-						${mensagem.getDefaultMessage()}
-					</p>
-
-				</c:forEach>
-
-			</div>
-
-		</div>
-
-	</c:if>
-
-	<c:if test="${not empty mensagemSucesso}">
-
-		<div class="container">
-
-			<div class="alert alert-success alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-
-				<h3>${mensagemSucesso}</h3>
-
-			</div>
-
-		</div>
-
-	</c:if>
-
-	<section class="container" id="section-table">
+	<div class="container">
 	
-		<jsp:include page="../table-listar.jsp"></jsp:include>
+		<jsp:include page="../menu.jsp"></jsp:include>
 	
-	</section>
+		<c:if test="${not empty mensagensErro}">
+	
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+	
+					<h3>Ops, ocorrem os seguintes erros:</h3>
+	
+					<c:forEach items="${mensagensErro}" var="mensagem">
+	
+						<p>
+							<strong>${mensagem.getField()}</strong>
+							${mensagem.getDefaultMessage()}
+						</p>
+	
+					</c:forEach>
+	
+				</div>
+	
+		</c:if>
+	
+		<c:if test="${not empty mensagemSucesso}">
+	
+				<div class="alert alert-success alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+	
+					<h3>${mensagemSucesso}</h3>
+	
+				</div>
+	
+		</c:if>
+	
+		<section id="section-table">
+		
+			<jsp:include page="table-listar.jsp"></jsp:include>
+		
+		</section>
+			
+	</div>
 
 	<script type="text/javascript"
 		src="${path}/assets/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript"
 		src="${path}/assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="http://chancejs.com/chance.min.js"></script>
+	<script type="text/javascript" src="${path}/assets/js/modal-request.js"></script>
 		
-	<jsp:include page="../modal-add-edit.jsp"></jsp:include>
+	<jsp:include page="modal-add-edit.jsp"></jsp:include>
 
 </body>
 </html>

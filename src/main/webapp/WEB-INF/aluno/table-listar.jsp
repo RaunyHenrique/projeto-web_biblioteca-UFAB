@@ -17,7 +17,7 @@
 			<td colspan="6">
 
 				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#modal-add-edit">Inserir aluno</button>
+					data-target="#modal-add-edit" data-tipo="Inserir">Inserir aluno</button>
 
 			</td>
 
@@ -48,7 +48,7 @@
 				<td>${aluno.periodo}</td>
 				<td>${aluno.telefone}</td>
 				<td class="text-center">
-					<button type="button" class="btn btn-info btn-editar">Editar</button>
+					<button type="button" class="btn btn-info btn-editar" data-tipo="Editar">Editar</button>
 					<button type="button" class="btn btn-danger btn-deletar">Deletar</button>
 				</td>
 

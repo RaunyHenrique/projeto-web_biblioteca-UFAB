@@ -1,9 +1,7 @@
 package com.ufab.biblioteca_ufab.controllers;
 
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.ufab.biblioteca_ufab.excecoes.ItemInvalidoException;
 import com.ufab.biblioteca_ufab.models.entidades.Aluno;
 import com.ufab.biblioteca_ufab.models.entidades.Curso;
@@ -28,6 +25,7 @@ import com.ufab.biblioteca_ufab.models.repositorios.AlunoRepositorio;
 import com.ufab.biblioteca_ufab.models.repositorios.CursoRepositorio;
 import com.ufab.biblioteca_ufab.propertyeditors.CursoPropertyEditor;
 
+
 /**
  * Classe responsável por manipular as informações dos objetos tipo aluno.
  * 
@@ -35,7 +33,6 @@ import com.ufab.biblioteca_ufab.propertyeditors.CursoPropertyEditor;
  * @author Rauny Henrique
  */
 
-//RestController seta todos para RequestBody
 @Controller
 @RequestMapping("/alunos")
 public class AlunoController {
@@ -45,17 +42,15 @@ public class AlunoController {
 	@Autowired
 	private CursoPropertyEditor cursoPropertyEditor;
 
-	@Autowired
-	private AlunoRepositorio alunoRepositorio;
-	@Autowired
-	private CursoRepositorio cursosRepositorio;
+	@Autowired private AlunoRepositorio alunoRepositorio;
+	@Autowired private CursoRepositorio cursosRepositorio;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String listarAlunos(Model model) {
+	public String listar(Model model) {
 
 		Iterable<Aluno> alunos = alunoRepositorio.findAll();
 		Iterable<Curso> cursos = cursosRepositorio.findAll();
-
+				
 		model.addAttribute("titulo", "Listagem de alunos");
 		model.addAttribute("url", "alunos");
 		model.addAttribute("alunos", alunos);
@@ -67,7 +62,7 @@ public class AlunoController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String inserirAluno(@Valid @ModelAttribute Aluno aluno, BindingResult bindingResult, Model model) {
+	public String salvar(@Valid @ModelAttribute Aluno aluno, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			
@@ -80,21 +75,17 @@ public class AlunoController {
 			alunoRepositorio.save(aluno);
 		}
 
-		//retorna o ultimo registro v�lido
 		Iterable<Aluno> alunos = alunoRepositorio.findAll();
-		Iterable<Curso> cursos = cursosRepositorio.findAll();
 		
 		model.addAttribute("alunos", alunos);
-		model.addAttribute("cursos", cursos);
-		model.addAttribute("tipo_curso", TipoDeCurso.values());
 		
-		return "table-listar";
+		return "aluno/table-listar";
 
 	}
 	
 	//RequestMapping busca view's
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
-	@ResponseBody//retorna JSON OU XML
+	@ResponseBody//retorna JSON
 	public Aluno buscarById(@PathVariable Long id) {
 		
 		Optional<Aluno> aluno = alunoRepositorio.findById(id);
@@ -103,15 +94,8 @@ public class AlunoController {
 
 	}
 
-	@RequestMapping(method = RequestMethod.PUT)
-	public String alterarAluno() {
-
-		return "aluno/alterar";
-
-	}
-
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-	public ResponseEntity<String> deletarAluno(@PathVariable Long id) {
+	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		
 		try {
 			
@@ -126,7 +110,7 @@ public class AlunoController {
 
 	}
 	
-	//registra o PropertyEditor para o curso, logo transforma id's em Entidades de Curso
+	//registra o PropertyEditor para o curso, logo transforma id's em entidades de Curso
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
 		
