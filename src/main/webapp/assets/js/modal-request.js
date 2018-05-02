@@ -46,37 +46,37 @@ var aplicarListenersModal = function() {
 					console.log(cursoId);
 					switch (cursoId) {
 
-					case 0:
+					case 1:
 						curso = "ADMI";
 						break;
-					case 1:
+					case 2:
 						curso = "COMP";
 						break;
-					case 2:
+					case 3:
 						curso = "DIRE";
 						break;
-					case 3:
+					case 4:
 						curso = "EGEL";
 						break;
-					case 4:
+					case 5:
 						curso = "EGME";
 						break;
-					case 5:
+					case 6:
 						curso = "MATE";
 						break;
-					case 6:
+					case 7:
 						curso = "MEDI";
 						break;
-					case 7:
+					case 8:
 						curso = "NUTR";
 						break;
-					case 8:
+					case 9:
 						curso = "ODON";
 						break;
-					case 9:
+					case 10:
 						curso = "PSIC";
 						break;
-					case 10:
+					case 11:
 						curso = "VETR";
 						break;
 
@@ -185,7 +185,7 @@ var aplicarListenersTable = function() {
 		
 		// url
 		var url = $("#form-add-edit").data('url');
-		console.log("URL: " + url);
+		var csrf = $('#csrf').val();
 
 		var id = $(this).parents('tr').data('id');
 		var total = $('#total-items').text();
@@ -193,6 +193,7 @@ var aplicarListenersTable = function() {
 		$.ajax({
 			url : url + "/" + id,
 			type : 'DELETE',
+			headers: {'X-CSRF-TOKEN': csrf},
 		}).done(function(result) {
 
 			$('tr[data-id="' + id + '"]').remove();
@@ -207,15 +208,20 @@ var aplicarListenersTable = function() {
 		
 		// url
 		var url = $("#form-add-edit").data('url');
-		console.log("URL: " + url);
 
 		var id = $(this).parents('tr').data('id');
 
-		$.get(url + "/" + id).done(function(aluno) {
+		$.get(url + "/" + id).done(function(entity) {
 
-			$.each(aluno, function(key, value) {
+			$.each(entity, function(key, value) {
 
-				$('[name="' + key + '"]').val(value);
+				if (key == "curso") {
+										
+					$('[name="' + key + '"]').val(value["id"]);
+					
+				} else {
+					$('[name="' + key + '"]').val(value);
+				}
 
 			});
 

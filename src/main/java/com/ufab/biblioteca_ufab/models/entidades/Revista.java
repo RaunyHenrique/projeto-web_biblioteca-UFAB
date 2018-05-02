@@ -1,6 +1,6 @@
 package com.ufab.biblioteca_ufab.models.entidades;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +34,7 @@ public class Revista {
 	private String editora;
 
 	@NotNull
-	private Date dataDePublicacao;
+	private Calendar dataDePublicacao;
 
 	@NotNull
 	private int edicao;
@@ -115,7 +115,7 @@ public class Revista {
 	 * @author Luis Lancellote
 	 * @author Rauny Henrique
 	 */
-	public Date getDataDePublicacao() {
+	public Calendar getDataDePublicacao() {
 		return dataDePublicacao;
 	}
 
@@ -127,7 +127,7 @@ public class Revista {
 	 * @author Rauny Henrique
 	 */
 
-	public void setDataDePublicacao(Date dataDePublicacao) {
+	public void setDataDePublicacao(Calendar dataDePublicacao) {
 		this.dataDePublicacao = dataDePublicacao;
 	}
 

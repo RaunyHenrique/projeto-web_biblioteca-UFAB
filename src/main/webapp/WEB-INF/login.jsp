@@ -73,10 +73,10 @@
 				<div class="form-group">
 
 					<label for="email" class="control-label">Email:</label> <input
-						type="email" class="form-control" id="email" name="email" required="true">
+						type="email" class="form-control" id="email" name="email" required>
 
 					<label for="password" class="control-label">Senha:</label> <input
-						type="password" class="form-control" id="password" name="password" required="true">
+						type="password" class="form-control" id="password" name="password" required>
 
 
 				</div>

@@ -23,6 +23,7 @@ import com.ufab.biblioteca_ufab.models.entidades.Curso;
 import com.ufab.biblioteca_ufab.models.enums.TipoDeCurso;
 import com.ufab.biblioteca_ufab.models.repositorios.AlunoRepositorio;
 import com.ufab.biblioteca_ufab.models.repositorios.CursoRepositorio;
+import com.ufab.biblioteca_ufab.models.servicos.ServicoCurso;
 import com.ufab.biblioteca_ufab.propertyeditors.CursoPropertyEditor;
 
 
@@ -44,6 +45,8 @@ public class AlunoController {
 
 	@Autowired private AlunoRepositorio alunoRepositorio;
 	@Autowired private CursoRepositorio cursosRepositorio;
+	
+	@Autowired private ServicoCurso servicoCurso;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model) {
@@ -53,9 +56,11 @@ public class AlunoController {
 				
 		model.addAttribute("titulo", "Listagem de alunos");
 		model.addAttribute("url", "alunos");
-		model.addAttribute("alunos", alunos);
 		model.addAttribute("cursos", cursos);
+		model.addAttribute("alunos", alunos);
 		model.addAttribute("tipo_curso", TipoDeCurso.values());
+		
+		logger.info("Itens listados com sucesso.");
 
 		return "aluno/listar";
 
@@ -67,12 +72,14 @@ public class AlunoController {
 		if (bindingResult.hasErrors()) {
 			
 			System.out.println(bindingResult.getFieldErrors());
-									
+			
+			logger.info("Erro ao salvar item.");
 			throw new ItemInvalidoException();
 
 		} else {
 			
 			alunoRepositorio.save(aluno);
+			logger.info("Item salvo com sucesso.");
 		}
 
 		Iterable<Aluno> alunos = alunoRepositorio.findAll();
@@ -100,10 +107,13 @@ public class AlunoController {
 		try {
 			
 			alunoRepositorio.deleteById(id);
+			logger.info("Item deletado com sucesso.");
+
 			return new ResponseEntity<String>(HttpStatus.OK);
 			
 		} catch (Exception e) {
 			
+			logger.info("Erro ao deletar item.");
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 			
 		}	

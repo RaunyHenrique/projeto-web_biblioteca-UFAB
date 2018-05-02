@@ -1,6 +1,6 @@
 package com.ufab.biblioteca_ufab.models.entidades;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -38,7 +38,7 @@ public class MidiaEletronica {
 	private TipoDeMidiaEletronica tipo;
 
 	@NotNull
-	private Date dataDeGravacao;
+	private Calendar dataDeGravacao;
 
 	/**
 	 * Retorna o valor da variável id
@@ -113,7 +113,7 @@ public class MidiaEletronica {
 	 * @author Luis Lancellote
 	 * @author Rauny Henrique
 	 */
-	public Date getDataDeGravacao() {
+	public Calendar getDataDeGravacao() {
 		return dataDeGravacao;
 	}
 
@@ -124,7 +124,7 @@ public class MidiaEletronica {
 	 * @author Luis Lancellote
 	 * @author Rauny Henrique
 	 */
-	public void setDataDeGravacao(Date dataDeGravacao) {
+	public void setDataDeGravacao(Calendar dataDeGravacao) {
 		this.dataDeGravacao = dataDeGravacao;
 	}
 

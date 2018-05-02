@@ -25,16 +25,16 @@ public class Aplicacao implements WebApplicationInitializer {
 		AnnotationConfigWebApplicationContext webApplicationContext = new AnnotationConfigWebApplicationContext();
 		webApplicationContext.setConfigLocation("com.ufab.biblioteca_ufab.configuracoes");
 		
-		//DispatcherServlet.. observa todas as url's '/app/*'
+		//DispatcherServlet.. observa todas as url's '/*'
 		Dynamic appServlet = servletContext.addServlet("appServlet", new DispatcherServlet(webApplicationContext));
 		appServlet.setLoadOnStartup(1);
-		appServlet.addMapping("/app/*");
+		appServlet.addMapping("/");
 		
 		//Add observer as url's
 		servletContext.addListener(new ContextLoaderListener(webApplicationContext));
 		
 		FilterRegistration.Dynamic filter = servletContext.addFilter("openEntityManagerFilter", buildOpenEntityManagerFilter());
-		filter.addMappingForUrlPatterns(getDispatcherTypes(), false, "/app/*");
+		filter.addMappingForUrlPatterns(getDispatcherTypes(), false, "/*");
 		
 	}
 	

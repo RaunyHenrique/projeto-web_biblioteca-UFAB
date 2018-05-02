@@ -6,6 +6,14 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+
+<!DOCTYPE html>
+<style>
+	#btn-logout{
+		margin-top: 7px;
+	}
+</style>
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
   
@@ -23,8 +31,11 @@
       <ul class="nav navbar-nav">
       
       	<li><a href="alunos">Alunos</a></li>
-      	<li>2</li>
-      	<li>3</li>
+      	<li><a href="#">Livros</a></li>
+      	<li><a href="#">Jornais</a></li>
+      	<li><a href="#">Anais de congresso</a></li>
+      	<li><a href="#">Trabalhos de conclusão</a></li>
+      	<li><a href="#">Midias eletronicas</a></li>
       
       </ul>
 
@@ -34,8 +45,9 @@
 		
 			<form action="${path}/logout" method="post">
 				
-				<input type="hidden" name="_csrf" value="_csrf.token">
-				<button id="btn-logout" type="submit" class="btn btn-primary">Logout</button>
+				<input type="hidden" name="_csrf" value="${_csrf.token}">
+				<button id="btn-logout" type="submit" class="btn btn-danger">
+				<span class="glyphicon glyphicon-log-out"></span> Logout</button>
 			
 			</form>
 		
