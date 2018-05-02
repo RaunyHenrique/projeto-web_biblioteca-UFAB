@@ -10,7 +10,7 @@ import com.ufab.biblioteca_ufab.models.entidades.Curso;
 
 public interface CursoRepositorio extends CrudRepository<Curso, Long> {
 	
-	@Query("SELECT p FROM Curso p WHERE p.tipo = :tipo")
-	public List<Curso> findByTipo(@Param("tipo") String tipo);
+//	@Query("SELECT p FROM Curso p WHERE p.tipo = :tipo")
+//	public List<Curso> findByTipo(@Param("tipo") String tipo);
 
 }

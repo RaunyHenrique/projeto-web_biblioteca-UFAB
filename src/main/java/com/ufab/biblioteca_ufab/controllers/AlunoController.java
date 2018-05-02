@@ -61,6 +61,30 @@ public class AlunoController {
 		model.addAttribute("tipo_curso", TipoDeCurso.values());
 		
 		logger.info("Itens listados com sucesso.");
+		
+		//Seed de cursos
+//		if (cursos.spliterator().getExactSizeIfKnown() == 0) {
+//			
+//			System.out.println("Sem cursos :(");
+//			
+//			servicoCurso.setAllCursos();
+//			
+//			Iterable<Curso> cursosGraduacao = cursosRepositorio.findByTipo("GRADUAÇÃO");
+//			System.out.println("CURSOS: " + cursosGraduacao);
+//			
+//			model.addAttribute("cursosGraduacao", cursosGraduacao);
+//			
+//			for (Curso curso : cursosGraduacao) {
+//				System.out.println(curso.getNome());
+//			}
+//			
+//			Iterable<Curso> cursosPosGraduacao = cursosRepositorio.findByTipo("POSGRADUAÇÃO");
+//			model.addAttribute("cursosPosGraduacao", cursosPosGraduacao);
+//
+//		}
+		
+		
+		//agrupar por gruação... dai no jquery, ajustar
 
 		return "aluno/listar";
 
