@@ -20,6 +20,10 @@
 		
 		@import url("${path}/assets/bootstrap/css/bootstrap-theme.min.css");
 		
+		@import url("${path}/assets/bootstrap/css/bootstrap-toggle.min.css");
+		
+		@import url("${path}/assets/css/select2.min.css");
+		
 		#btn-inserir {
 			margin-bottom: 8px;
 		}
@@ -92,8 +96,11 @@
 		src="${path}/assets/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript"
 		src="${path}/assets/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="${path}/assets/bootstrap/js/bootstrap-toggle.min.js"></script>
 	<script src="http://chancejs.com/chance.min.js"></script>
 	<script type="text/javascript" src="${path}/assets/js/modal-request.js"></script>
+	<script type="text/javascript" src="${path}/assets/js/select2.full.min.js"></script>
 
 	<jsp:include page="modal-add-edit.jsp"></jsp:include>
 

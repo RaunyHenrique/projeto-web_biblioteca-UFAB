@@ -24,6 +24,9 @@ public class ItemDoAcervo {
 	private TipoDeItemDoAcervo tipo;
 	
 	@NotNull
+	private Long item_id;
+	
+	@NotNull
 	@NotEmpty
 	private String titulo;
 	

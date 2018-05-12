@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ufab.biblioteca_ufab.excecoes.ItemInvalidoException;
+import com.ufab.biblioteca_ufab.models.entidades.Aluno;
 import com.ufab.biblioteca_ufab.models.entidades.Emprestimo;
+import com.ufab.biblioteca_ufab.models.repositorios.AlunoRepositorio;
 import com.ufab.biblioteca_ufab.models.repositorios.EmprestimoRepositorio;
 import com.ufab.biblioteca_ufab.propertyeditors.CursoPropertyEditor;
 
@@ -36,14 +38,18 @@ public class EmprestimoController {
 
 	@Autowired private EmprestimoRepositorio emprestimoRepositorio;
 	
+	@Autowired private AlunoRepositorio alunoRepositorio;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model) {
 
 		Iterable<Emprestimo> emprestimos = emprestimoRepositorio.findAll();
+		Iterable<Aluno> alunos = alunoRepositorio.findAll();
 				
 		model.addAttribute("titulo", "Listagem de Emprestimos");
 		model.addAttribute("url", "emprestimos");
 		model.addAttribute("emprestimos", emprestimos);
+		model.addAttribute("alunos", alunos);
 		
 		logger.info("Itens listados com sucesso.");
 		

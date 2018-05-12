@@ -22,57 +22,43 @@
 	<div class="form-group">
 
 	<input type="hidden" class="form-control" id="id" name="id">
+	
+	<label for="aluno" class="control-label">Aluno:
+	
+		<select class="form-control" id="aluno" name="aluno" required>
 
-	<label hidden="true" for="matricula" class="control-label">Matricula:</label>
-	<input type="hidden" class="form-control" id="matricula"
-		name="matricula"> <label for="nome" class="control-label">Nome:</label>
-	<input type="text" class="form-control" id="nome" name="nome"
-		required> <label for="cpf" class="control-label">Cpf:</label>
-	<input type="number" class="form-control" id="cpf" name="cpf"
-		required> <label for="rg" class="control-label">Rg:</label>
-	<input type="number" class="form-control" id="rg" name="rg"
-		required> <label for="naturalidade" class="control-label">Naturalidade:</label>
-	<input type="text" class="form-control" id="naturalidade"
-		name="naturalidade" required> <label for="nomeDaMae"
-		class="control-label">Nome da mãe:</label> <input type="text"
-		class="form-control" id="nomeDaMae" name="nomeDaMae" required>
-	<label for="endereco" class="control-label">Endereço:</label> <input
-		type="text" class="form-control" id="endereco" name="endereco"
-		required> <label for="telefone" class="control-label">Telefone:</label>
-	<input type="number" class="form-control" id="telefone"
-		name="telefone" required> <label for="curso"
-		class="control-label">Curso:</label> <select class="form-control"
-		id="curso" name="curso" required>
+			<c:forEach items="${alunos}" var="aluno">
+	
+				<option value="${aluno.id}">${aluno.nome}</option>
+	
+			</c:forEach>
 
-		<c:forEach items="${cursosGraduacao}" var="curso">
+		</select>
+	
+	</label> 
 
-			<option class="cursos-graduacao" value="${curso.id}">${curso.nome}</option>
-
-		</c:forEach>
-
-		<c:forEach items="${cursosPosGraduacao}" var="curso">
-
-			<option class="cursos-posgraduacao" value="${curso.id}">${curso.nome}</option>
-
-		</c:forEach>
-
-	</select> <label for="tipo_curso" class="control-label">Tipo de
-		curso: </label> <select class="form-control" id="tipo_curso"
-		name="tipo_curso" required>
-
-		<c:forEach items="${tipo_curso}" var="tipo">
-
-			<option value="${tipo}">${tipo}</option>
-
-		</c:forEach>
-
-	</select> <label for="ano" class="control-label">Ano:</label> <input
-		type="number" class="form-control" id="ano" name="ano" required>
-	<label for="periodo" class="control-label">Periodo:</label> <input
-		type="number" class="form-control" id="periodo" name="periodo"
-		required>
+	<div style="margin-top: 16px;">
+	
+		<label for="isPedente" class="control-label">Emprestimo pendente?:</label>
+		<input type="checkbox" data-toggle="toggle" id="isPedente" name="isPedente" 
+		data-on="Sim" data-off="Não" data-onstyle="danger" data-offstyle="success">
+	
+	</div>
 
 	</div>
+	
+	<script>
+	
+		$(document).ready(function() {
+			
+		    $('#aluno').select2({
+		    	placeholder: 'Selecione...',
+		        width: 'resolve', // need to override the changed default
+		    });
+		    
+		});
+	
+	</script>
 	
 </jsp:attribute>
 
