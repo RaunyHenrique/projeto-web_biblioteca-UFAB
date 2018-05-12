@@ -1,9 +1,14 @@
 package com.ufab.biblioteca_ufab.models.entidades;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import javax.validation.constraints.NotEmpty;
@@ -31,13 +36,11 @@ public class Livro {
 	@NotEmpty
 	private String isbn;
 
-	@NotNull
-	@NotEmpty
-	private String autores;
+	@ManyToMany(fetch=FetchType.EAGER)
+	private Set<Autor> autores;
 
-	@NotNull
-	@NotEmpty
-	private String editora;
+	@ManyToOne
+	private Editora editora;
 
 	@NotNull
 	private int anoDePublicacao;
@@ -56,223 +59,82 @@ public class Livro {
 	@NotEmpty
 	private String tema;
 
-	/**
-	 * Retorna o valor da variável id
-	 * 
-	 * @return id
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public Long getId() {
 		return id;
 	}
 
-	/**
-	 * Inicializa a variável id com o valor recebido como parâmetro
-	 * 
-	 * @param id
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	/**
-	 * Retorna o valor da variável titulo
-	 * 
-	 * @return titulo
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public String getTitulo() {
 		return titulo;
 	}
 
-	/**
-	 * Inicializa a variável titulo com o valor recebido como parâmetro
-	 * 
-	 * @param titulo
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 
-	/**
-	 * Retorna o valor da variável isbn
-	 * 
-	 * @return isbn
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public String getIsbn() {
 		return isbn;
 	}
 
-	/**
-	 * Inicializa a variável isbn com o valor recebido como parâmetro
-	 * 
-	 * @param isbn
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 
-	/**
-	 * Retorna o valor da variável autores
-	 * 
-	 * @return autores
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	public String getAutores() {
+	public Set<Autor> getAutores() {
 		return autores;
 	}
 
-	/**
-	 * Inicializa a variável autores com o valor recebido como parâmetro
-	 * 
-	 * @param autores
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-
-	public void setAutores(String autores) {
+	public void setAutores(Set<Autor> autores) {
 		this.autores = autores;
 	}
 
-	/**
-	 * Retorna o valor da variável editora
-	 * 
-	 * @return editora
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	public String getEditora() {
+	public Editora getEditora() {
 		return editora;
 	}
 
-	/**
-	 * Inicializa a variável editora com o valor recebido como parâmetro
-	 * 
-	 * @param editora
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
-	public void setEditora(String editora) {
+	public void setEditora(Editora editora) {
 		this.editora = editora;
 	}
 
-	/**
-	 * Retorna o valor da variável anoDePublicacao
-	 * 
-	 * @return anoDePublicacao
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public int getAnoDePublicacao() {
 		return anoDePublicacao;
 	}
 
-	/**
-	 * Inicializa a variável anoDePublicacao com o valor recebido como parâmetro
-	 * 
-	 * @param anoDePublicacao
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public void setAnoDePublicacao(int anoDePublicacao) {
 		this.anoDePublicacao = anoDePublicacao;
 	}
 
-	/**
-	 * Retorna o valor da variável edicao
-	 * 
-	 * @return edicao
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public int getEdicao() {
 		return edicao;
 	}
 
-	/**
-	 * Inicializa a variável edicao com o valor recebido como parâmetro
-	 * 
-	 * @param edicao
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public void setEdicao(int edicao) {
 		this.edicao = edicao;
 	}
 
-	/**
-	 * Retorna o valor da variável numeroDePaginas
-	 * 
-	 * @return numeroDePaginas
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public int getNumeroDePaginas() {
 		return numeroDePaginas;
 	}
 
-	/**
-	 * Inicializa a variável numeroDePaginas com o valor recebido como parâmetro
-	 * 
-	 * @param numeroDePaginas
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public void setNumeroDePaginas(int numeroDePaginas) {
 		this.numeroDePaginas = numeroDePaginas;
 	}
 
-	/**
-	 * Retorna o valor da variável area
-	 * 
-	 * @return area
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public String getArea() {
 		return area;
 	}
 
-	/**
-	 * Inicializa a variável area com o valor recebido como parâmetro
-	 * 
-	 * @param area
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public void setArea(String area) {
 		this.area = area;
 	}
 
-	/**
-	 * Retorna o valor da variável tema
-	 * 
-	 * @return tema
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public String getTema() {
 		return tema;
 	}
 
-	/**
-	 * Inicializa a variável tema com o valor recebido como parâmetro
-	 * 
-	 * @param tema
-	 * @author Luis Lancellote
-	 * @author Rauny Henrique
-	 */
 	public void setTema(String tema) {
 		this.tema = tema;
 	}

@@ -7,10 +7,70 @@ $(document).ready(function() {
 	setFocus();
 
 	setTitleModal();
+	
+	selectTipoCursoOnChange();
 
 	limparCampos();
 
 });
+
+var selectTipoCursoOnChange = function() {
+	
+	// url
+	var url = $("#form-add-edit").data('url');
+	
+	console.log("URL: " + url);
+					
+	if (url == "alunos") {
+		
+		$('#tipo_curso').change(function(select) {
+			
+			var value = select.target.value;
+			
+			if (value == "GRADUAÇÃO") {
+				
+				$('.cursos-graduacao').show();
+				$('.cursos-posgraduacao').hide();
+				
+			} else {
+				
+				$('.cursos-graduacao').hide();
+				$('.cursos-posgraduacao').show();
+				
+			}
+
+		});
+		
+	}
+	
+};
+
+var setSelectedTipoCurso = function() {
+	
+	// url
+	var url = $("#form-add-edit").data('url');
+	
+	console.log("URL: " + url);
+	
+	if (url == "alunos") {
+		
+		var value = $('#tipo_curso').val();
+		
+		if (value == "GRADUAÇÃO") {
+			
+			$('.cursos-graduacao').show();
+			$('.cursos-posgraduacao').hide();
+			
+		} else {
+			
+			$('.cursos-graduacao').hide();
+			$('.cursos-posgraduacao').show();
+			
+		}
+		
+	}
+	
+};
 
 var aplicarListenersModal = function() {
 	
@@ -133,7 +193,16 @@ var limparCampos = function() {
 
 		$.each(fields, function(index, value) {
 
-			$('#' + fields[index]['name']).val('');
+			var campoName = $('#' + fields[index]['name']).attr('id');
+						
+			if (campoName == "tipo_curso") {
+				
+				//faz nada
+				
+			} else {
+				$('#' + fields[index]['name']).val('');
+			}
+			
 
 		});
 
@@ -147,6 +216,8 @@ var setFocus = function() {
 			.on(
 					'shown.bs.modal',
 					function() {
+						
+						setSelectedTipoCurso();
 
 						$('#form-add-edit')
 								.find(

@@ -52,40 +52,39 @@ public class AlunoController {
 	public String listar(Model model) {
 
 		Iterable<Aluno> alunos = alunoRepositorio.findAll();
-		Iterable<Curso> cursos = cursosRepositorio.findAll();
 				
 		model.addAttribute("titulo", "Listagem de alunos");
 		model.addAttribute("url", "alunos");
-		model.addAttribute("cursos", cursos);
 		model.addAttribute("alunos", alunos);
 		model.addAttribute("tipo_curso", TipoDeCurso.values());
+				
+		long cursosCount = cursosRepositorio.count();
+		
+		//Seed de cursos
+		if (cursosCount == 0) {
+			
+			System.out.println("Sem cursos :(");
+			
+		    new Thread() {
+		         
+		        @Override
+		        public void run() {
+
+					servicoCurso.setAllCursos();
+		             
+		        }
+		    }.start();
+			
+		}
+		
+		Iterable<Curso> cursosGraduacao = cursosRepositorio.findByTipo(TipoDeCurso.GRADUAÇÃO);		
+		model.addAttribute("cursosGraduacao", cursosGraduacao);
+		
+		Iterable<Curso> cursosPosGraduacao = cursosRepositorio.findByTipo(TipoDeCurso.POSGRADUAÇÃO);
+		model.addAttribute("cursosPosGraduacao", cursosPosGraduacao);
 		
 		logger.info("Itens listados com sucesso.");
 		
-		//Seed de cursos
-//		if (cursos.spliterator().getExactSizeIfKnown() == 0) {
-//			
-//			System.out.println("Sem cursos :(");
-//			
-//			servicoCurso.setAllCursos();
-//			
-//			Iterable<Curso> cursosGraduacao = cursosRepositorio.findByTipo("GRADUAÇÃO");
-//			System.out.println("CURSOS: " + cursosGraduacao);
-//			
-//			model.addAttribute("cursosGraduacao", cursosGraduacao);
-//			
-//			for (Curso curso : cursosGraduacao) {
-//				System.out.println(curso.getNome());
-//			}
-//			
-//			Iterable<Curso> cursosPosGraduacao = cursosRepositorio.findByTipo("POSGRADUAÇÃO");
-//			model.addAttribute("cursosPosGraduacao", cursosPosGraduacao);
-//
-//		}
-		
-		
-		//agrupar por gruação... dai no jquery, ajustar
-
 		return "aluno/listar";
 
 	}
@@ -144,7 +143,7 @@ public class AlunoController {
 
 	}
 	
-	//registra o PropertyEditor para o curso, logo transforma id's em entidades de Curso
+	//Registra o PropertyEditor para o curso, logo transforma id's em entidades de Curso
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
 		

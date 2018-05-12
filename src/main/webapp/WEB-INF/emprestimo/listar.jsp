@@ -6,7 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 
 <tag:layout title="${titulo}">
  
@@ -73,7 +73,7 @@
 
 		<button type="button" id="btn-inserir" class="btn btn-primary"
 			data-toggle="modal" data-target="#modal-add-edit" data-tipo="Inserir">
-			<span class="glyphicon glyphicon-plus"></span> Inserir aluno
+			<span class="glyphicon glyphicon-plus"></span> Realizar novo emprestimo
 		</button>
 
 		<section id="section-table">

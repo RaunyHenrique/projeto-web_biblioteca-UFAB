@@ -7,7 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!-- Modal -->
-<%@ taglib prefix="tagModal" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="tagModal" tagdir="/WEB-INF/tags" %>
 
 <tagModal:modal url="${url}">
 
@@ -16,7 +16,7 @@
 	<input type="hidden" id="csrf" name="_csrf" value="${_csrf.token}">
 
 </jsp:attribute>
-
+ 
 <jsp:attribute name="modal_body">
 
 	<div class="form-group">
