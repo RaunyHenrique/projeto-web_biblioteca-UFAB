@@ -25,11 +25,10 @@ public class Emprestimo {
 	@ManyToMany(fetch=FetchType.EAGER)
 	private Set<ItemDoAcervo> items_emprestados;
 	
-	@ManyToOne
+	@OneToOne
 	private Aluno aluno;
 	
 	@Type(type="boolean")
-	@Column(name = "is_pedente", nullable = false, columnDefinition = "bigint(20) default 0")
 	private Boolean is_pedente;
 
 	public Long getId() {
