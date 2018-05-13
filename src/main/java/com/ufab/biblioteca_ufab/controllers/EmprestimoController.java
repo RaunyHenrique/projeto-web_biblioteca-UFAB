@@ -51,7 +51,7 @@ public class EmprestimoController {
 	public String listar(Model model) {
 
 		Iterable<Emprestimo> emprestimos = emprestimoRepositorio.findAll();
-		Iterable<Aluno> alunos = alunoRepositorio.findAll();
+		Iterable<Aluno> alunos = alunoRepositorio.findByNaoPendentes();
 		Iterable<ItemDoAcervo> itensDoAcervo = itemDoAcervoRepositorio.findAll();
 				
 		model.addAttribute("titulo", "Listagem de Emprestimos");
@@ -78,6 +78,7 @@ public class EmprestimoController {
 
 		} else {
 			
+			//antes de salvar, verificar se há alguma pendencia!
 			emprestimoRepositorio.save(emprestimo);
 			logger.info("Item salvo com sucesso.");
 		}

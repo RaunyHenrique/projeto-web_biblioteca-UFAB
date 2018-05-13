@@ -44,13 +44,19 @@
 		</c:forEach>
 
 	</select>
+	
+	<label for="data_emprestimo" class="control-label">Data do emprestimo:</label>
+	<input type="date"  class="form-control" id="data_emprestimo" name="data_emprestimo" required> 
+	
+	<label for="data_devolucao" class="control-label">Data da devolução:</label>
+	<input type="date" class="form-control" id="data_devolucao" name="data_devolucao" required> 
 
 	<div style="margin-top: 16px;">
 	
 		<div class="checkbox-nice">
 		                 
-		   <input class="checkbox-nice" type="checkbox" value="false" id="is_pedente" name="is_pedente">
-		   <label for="is_pedente"> Emprestimo pendente? </label>
+		   <input class="checkbox-nice" type="checkbox" value="false" id="is_pendente" name="is_pendente">
+		   <label for="is_pendente"> Emprestimo pendente? </label>
 		   
 		</div>
 		

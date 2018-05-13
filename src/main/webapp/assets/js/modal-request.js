@@ -1,3 +1,5 @@
+var isAddIndex = 0;
+
 $(document).ready(function() {
 	
 	aplicarListenersModal();
@@ -11,6 +13,25 @@ $(document).ready(function() {
 	selectTipoCursoOnChange();
 
 	//limparCampos();
+	
+	
+	$('#modal-add-edit').on('hidden.bs.modal', function (e) {
+		
+		console.log("VA: " + isAddIndex);
+
+		if (isAddIndex != 0) {
+			
+			if ($('#aluno').find("option[value='" + isAddIndex + "']").length) {
+				
+				$('#aluno').find("option[value='" + isAddIndex + "']").remove();
+			    
+			}
+			
+			isAddIndex = 0;
+			
+		}
+		
+	});
 
 });
 
@@ -318,27 +339,53 @@ var setTitleModal = function() {
 
 };
 
+var handlerDeletar = function(itemEvt) {
+	
+	// url
+	var url = $("#form-add-edit").data('url');
+	var csrf = $('#csrf').val();
+
+	var id = $(itemEvt).parents('tr').data('id');
+	var total = $('#total-items').text();
+
+	$.ajax({
+		url : url + "/" + id,
+		type : 'DELETE',
+		headers: {'X-CSRF-TOKEN': csrf},
+	}).done(function(result) {
+
+		$('tr[data-id="' + id + '"]').remove();
+		$('#total-items').text(total - 1);
+
+	});
+	
+};
+
 var aplicarListenersTable = function() {
 
 	// btn-deletar
 	$('.btn-deletar').on('click', function() {
 		
-		// url
-		var url = $("#form-add-edit").data('url');
-		var csrf = $('#csrf').val();
-
-		var id = $(this).parents('tr').data('id');
-		var total = $('#total-items').text();
-
-		$.ajax({
-			url : url + "/" + id,
-			type : 'DELETE',
-			headers: {'X-CSRF-TOKEN': csrf},
-		}).done(function(result) {
-
-			$('tr[data-id="' + id + '"]').remove();
-			$('#total-items').text(total - 1);
-
+		var itemEvt = this;
+		$.confirm({
+		    title: 'Deletar',
+		    content: 'Você tem certeza que deseja deletar este item?',
+		    type: 'red',
+		    typeAnimated: true,
+		    buttons: {
+		        cancelar: function () {
+		            
+		        },
+		        ok: {
+		        	btnClass: 'btn-red',
+		            action: function () {
+		            	
+		            	handlerDeletar(itemEvt);
+		                
+		            }
+		        	
+		        },
+		    }
 		});
 
 	});
@@ -357,10 +404,54 @@ var aplicarListenersTable = function() {
 
 			$.each(entity, function(key, value) {
 				
-				if (key == "curso") {
+				if (key == "curso" || key == "aluno") {
 										
-					$('[name="' + key + '"]').val(value["id"]);
+					if (key == "aluno") {
+									
+						var itemEntityValue = value["id"];
+						var itemEntityNome = value["matricula"] + " - " + value["nome"];
+						
+						if ($('#aluno').find("option[value='" + itemEntityValue + "']").length) {
+							
+						    $('#aluno').val(itemEntityValue).trigger('change');
+						    
+						} else { 
+							
+							//guarda value para excluir depois!
+							isAddIndex = itemEntityValue;
+							
+						    var newOption = new Option(itemEntityNome, itemEntityValue, true, true);
+						    // Append it to the select
+						    $('#aluno').append(newOption).trigger('change');
+						    
+						} 
+						
+					} else {
+						
+						$('[name="' + key + '"]').val(value["id"]).change();
+						
+					}
+						
+				} else if (key == "items_emprestados") {
 					
+					var item = value;
+					var itemName = key;
+						
+					var array = [];
+					$.each(item, function(key, value) {
+						
+//						console.log("ITEM: " + key, value);
+						array.push(value["id"]);
+						
+					});
+					
+					$('[name="' + itemName + '"]').val(array).change();
+					
+				} else if (key == "data_emprestimo" || key == "data_devolucao") {
+					
+					var date = new Date(value);
+					$('[name="' + key + '"]').val(date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getDate());
+				
 				} else {
 					$('[name="' + key + '"]').val(value);
 				}
