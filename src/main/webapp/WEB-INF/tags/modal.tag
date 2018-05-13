@@ -4,7 +4,7 @@
 <%@attribute name="modal_csrf_token" fragment="true" %>
 <%@attribute name="modal_body" fragment="true" %>
 
-<div class="modal fade" id="modal-add-edit" tabindex="-1" role="dialog"
+<div class="modal fade" id="modal-add-edit" role="dialog"
 	aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

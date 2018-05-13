@@ -23,26 +23,37 @@
 
 	<input type="hidden" class="form-control" id="id" name="id">
 	
-	<label for="aluno" class="control-label">Aluno:
-	
-		<select class="form-control" id="aluno" name="aluno" required>
+	<label for="aluno" class="control-label">Aluno:</label> 
+	<select class="form-control" id="aluno" name="aluno" required>
 
-			<c:forEach items="${alunos}" var="aluno">
-	
-				<option value="${aluno.id}">${aluno.nome}</option>
-	
-			</c:forEach>
+		<c:forEach items="${alunos}" var="aluno">
 
-		</select>
+			<option value="${aluno.id}">${aluno.matricula} - ${aluno.nome}</option>
+
+		</c:forEach>
+
+	</select>
 	
-	</label> 
+	<label for="items_emprestados" class="control-label">Itens do emprestimo (*disponiveis):</label> 
+	<select class="form-control" id="items_emprestados" name="items_emprestados" required multiple="multiple">
+
+		<c:forEach items="${itensDoAcervo}" var="item">
+
+			<option value="${item.id}">${item.tipo} - ${item.titulo}</option>
+
+		</c:forEach>
+
+	</select>
 
 	<div style="margin-top: 16px;">
 	
-		<label for="isPedente" class="control-label">Emprestimo pendente?:</label>
-		<input type="checkbox" data-toggle="toggle" id="isPedente" name="isPedente" 
-		data-on="Sim" data-off="Não" data-onstyle="danger" data-offstyle="success">
-	
+		<div class="checkbox-nice">
+		                 
+		   <input class="checkbox-nice" type="checkbox" value="false" id="is_pedente" name="is_pedente">
+		   <label for="is_pedente"> Emprestimo pendente? </label>
+		   
+		</div>
+		
 	</div>
 
 	</div>
@@ -51,9 +62,29 @@
 	
 		$(document).ready(function() {
 			
+			// url
+			var url = "emprestimos/alunos";
+			
 		    $('#aluno').select2({
+		    	
 		    	placeholder: 'Selecione...',
-		        width: 'resolve', // need to override the changed default
+		    	
+// 				ajax: {
+// 					url : url,
+// 					dataType: 'json',
+// 				    processResults: function (data) {
+				    	
+// 				        return {
+// 				            results: data
+// 				          };
+						
+// 				    }
+// 				},
+						    
+		    });
+		    
+		    $('#items_emprestados').select2({
+		    							    
 		    });
 		    
 		});

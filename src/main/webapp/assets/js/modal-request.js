@@ -10,7 +10,7 @@ $(document).ready(function() {
 	
 	selectTipoCursoOnChange();
 
-	limparCampos();
+	//limparCampos();
 
 });
 
@@ -162,9 +162,78 @@ var aplicarListenersModal = function() {
 				}
 
 				// Get some values from elements on the page:
-				var dadosForm = $(this).serialize();
-
+				var dadosForm = $(this).serializeArray();
+				
 				console.log(dadosForm);
+				
+				var result = {};
+				$.each(dadosForm, function() {
+					
+					//verifica se já existe a key
+					if(result.hasOwnProperty(this.name)){
+						
+						//verifica se é array
+						if ($.isArray(result[this.name])) {
+														
+							result[this.name].push(parseInt(this.value));
+							
+						} else {
+							
+							var array = [];
+							array.push(parseInt(result[this.name]));
+							
+							array.push(parseInt(this.value));
+							
+							result[this.name] = array;
+							
+						}
+						
+					} else {
+					    result[this.name] = this.value;
+					}
+					
+				});
+
+				console.log(result);
+				
+				var strParse = "";
+				var count = 0;
+				
+				$.each(result, function(key, value) {
+					
+					//console.log(key, value);
+					
+					if ($.isArray(value)) {
+						
+						$.each(value, function(index, element) {
+							
+							if (count == 0) {
+								
+								strParse += key + "["+ index +"]" + "=" + element;
+								
+							} else {
+								strParse += "&" + key + "["+ index +"]" + "=" + element;
+							}
+							
+						});
+						
+					} else {
+						
+						if (count == 0) {
+							
+							strParse += key + "=" + value;
+							
+						} else {
+							strParse += "&" + key + "=" + value;
+						}
+	
+					}
+					
+					count++;
+					
+				});
+				
+				console.log(strParse);
 
 				$.post(url, dadosForm).done(function(pagina) {
 
@@ -283,9 +352,11 @@ var aplicarListenersTable = function() {
 		var id = $(this).parents('tr').data('id');
 
 		$.get(url + "/" + id).done(function(entity) {
+			
+			console.log(entity);
 
 			$.each(entity, function(key, value) {
-
+				
 				if (key == "curso") {
 										
 					$('[name="' + key + '"]').val(value["id"]);

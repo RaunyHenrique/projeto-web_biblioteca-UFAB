@@ -24,13 +24,18 @@
 
 						<tbody>
 
-							<c:forEach items="${emprestimos}" var="item">
+							<c:forEach items="${emprestimos}" var="emprestimo">
 
-								<tr data-id="${item.id}">
+								<tr data-id="${emprestimo.id}">
 
-									<td>${item.aluno}</td>
-									<td>${item.items_emprestados}</td>
-									<td>${item.isPedente}</td>
+									<td>${emprestimo.aluno.nome}</td>
+									<td>
+										<c:forEach items="${item.items_emprestados}" var="item_emprestado">
+											${item_emprestado.titulo}
+										</c:forEach>
+										
+									</td>
+									<td>${emprestimo.is_pedente}</td>
 									<td class="text-center">
 										<button type="button" class="btn btn-info btn-editar" data-tipo="Editar">
 										<span class="glyphicon glyphicon-edit"></span> Editar</button>

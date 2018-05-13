@@ -23,9 +23,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ufab.biblioteca_ufab.excecoes.ItemInvalidoException;
 import com.ufab.biblioteca_ufab.models.entidades.Aluno;
 import com.ufab.biblioteca_ufab.models.entidades.Emprestimo;
+import com.ufab.biblioteca_ufab.models.entidades.ItemDoAcervo;
 import com.ufab.biblioteca_ufab.models.repositorios.AlunoRepositorio;
 import com.ufab.biblioteca_ufab.models.repositorios.EmprestimoRepositorio;
+import com.ufab.biblioteca_ufab.models.repositorios.ItemDoAcervoRepositorio;
+import com.ufab.biblioteca_ufab.propertyeditors.AlunoPropertyEditor;
 import com.ufab.biblioteca_ufab.propertyeditors.CursoPropertyEditor;
+import com.ufab.biblioteca_ufab.propertyeditors.ItemDoAcervoPropertyEditor;
 
 @Controller
 @RequestMapping("/emprestimos")
@@ -33,23 +37,28 @@ public class EmprestimoController {
 
 	static final Logger logger = LoggerFactory.getLogger(EmprestimoController.class);
 	
-	@Autowired
-	private CursoPropertyEditor cursoPropertyEditor;
+	@Autowired private AlunoPropertyEditor alunoPropertyEditor;
+	
+	@Autowired private ItemDoAcervoPropertyEditor itemDoAcervoPropertyEditor;
 
 	@Autowired private EmprestimoRepositorio emprestimoRepositorio;
 	
 	@Autowired private AlunoRepositorio alunoRepositorio;
+	
+	@Autowired private ItemDoAcervoRepositorio itemDoAcervoRepositorio;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model) {
 
 		Iterable<Emprestimo> emprestimos = emprestimoRepositorio.findAll();
 		Iterable<Aluno> alunos = alunoRepositorio.findAll();
+		Iterable<ItemDoAcervo> itensDoAcervo = itemDoAcervoRepositorio.findAll();
 				
 		model.addAttribute("titulo", "Listagem de Emprestimos");
 		model.addAttribute("url", "emprestimos");
 		model.addAttribute("emprestimos", emprestimos);
 		model.addAttribute("alunos", alunos);
+		model.addAttribute("itensDoAcervo", itensDoAcervo);
 		
 		logger.info("Itens listados com sucesso.");
 		
@@ -91,6 +100,29 @@ public class EmprestimoController {
 		return emprestimo.get();
 
 	}
+	
+//	@RequestMapping(method = RequestMethod.GET, value = "/alunos")
+//	@ResponseBody//retorna JSON
+//	public List<SelectItem> getAlunos() {
+//		
+//		List<SelectItem> selectItems = new ArrayList<SelectItem>();
+//		Iterable<Aluno> alunos = alunoRepositorio.findAll();
+//				
+//		for (Iterator<Aluno> iterator = alunos.iterator(); iterator.hasNext();) {
+//			
+//			Aluno aluno = (Aluno) iterator.next();
+//			
+//			SelectItem si = new SelectItem();
+//			si.id = aluno.getId();
+//			si.text = aluno.getMatricula() + " - " + aluno.getNome();
+//			
+//			selectItems.add(si);
+//						
+//		}
+//
+//		return selectItems;
+//
+//	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
@@ -111,11 +143,12 @@ public class EmprestimoController {
 
 	}
 	
-	//Registra o PropertyEditor para o curso, logo transforma id's em entidades de Curso
+	//Registra o PropertyEditor para o aluno, logo transforma id's em entidades de Aluno
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
 		
-		//webDataBinder.registerCustomEditor(Curso.class, cursoPropertyEditor);
+		webDataBinder.registerCustomEditor(Aluno.class, alunoPropertyEditor);
+		webDataBinder.registerCustomEditor(ItemDoAcervo.class, itemDoAcervoPropertyEditor);
 		
 	}
 

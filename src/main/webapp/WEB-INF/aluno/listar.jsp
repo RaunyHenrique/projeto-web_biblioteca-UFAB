@@ -24,6 +24,10 @@
 			margin-bottom: 8px;
 		}
 		
+		.select2 {
+			width:100%!important;
+		}
+		
 	</style>
 
 </jsp:attribute>

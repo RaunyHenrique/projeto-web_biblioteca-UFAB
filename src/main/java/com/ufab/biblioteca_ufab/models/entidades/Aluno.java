@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -68,6 +69,9 @@ public class Aluno {
 	@JoinColumn(name = "curso_id")
 	private Curso curso;
 	
+	@OneToOne
+	private Emprestimo emprestimo;
+	
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoDeCurso tipo_curso;
@@ -78,14 +82,6 @@ public class Aluno {
 
 	@NotNull
 	private int periodo;
-
-	public TipoDeCurso getTipo_curso() {
-		return tipo_curso;
-	}
-
-	public void setTipo_curso(TipoDeCurso tipo_curso) {
-		this.tipo_curso = tipo_curso;
-	}
 
 	public Long getId() {
 		return id;
@@ -165,6 +161,22 @@ public class Aluno {
 
 	public void setCurso(Curso curso) {
 		this.curso = curso;
+	}
+
+	public Emprestimo getEmprestimo() {
+		return emprestimo;
+	}
+
+	public void setEmprestimo(Emprestimo emprestimo) {
+		this.emprestimo = emprestimo;
+	}
+
+	public TipoDeCurso getTipo_curso() {
+		return tipo_curso;
+	}
+
+	public void setTipo_curso(TipoDeCurso tipo_curso) {
+		this.tipo_curso = tipo_curso;
 	}
 
 	public String getAno() {
@@ -273,5 +285,5 @@ public class Aluno {
 			return false;
 		return true;
 	}
-	
+
 }

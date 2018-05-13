@@ -77,6 +77,7 @@ public class AlunoController {
 			
 		}
 		
+		//colocar dentro da thred????
 		Iterable<Curso> cursosGraduacao = cursosRepositorio.findByTipo(TipoDeCurso.GRADUAÇÃO);		
 		model.addAttribute("cursosGraduacao", cursosGraduacao);
 		
