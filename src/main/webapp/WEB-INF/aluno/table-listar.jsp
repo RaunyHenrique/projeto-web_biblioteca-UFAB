@@ -7,7 +7,7 @@
 				<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 					<!-- Table -->
-					<table class="table table-hover table-condensed table-striped table-bordered">
+					<table id="table-listar-datatable" class="table table-hover table-condensed table-striped table-bordered" style="width:100%">
 
 						<thead>
 
@@ -47,17 +47,5 @@
 							</c:forEach>
 
 						</tbody>
-
-						<tfoot>
-
-							<tr>
-
-								<td colspan="6">Total de alunos cadastrados:
-									<span id="total-items">${alunos.size()}</span>
-								</td>
-
-							</tr>
-
-						</tfoot>
 
 					</table>

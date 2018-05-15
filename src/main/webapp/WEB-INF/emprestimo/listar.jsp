@@ -12,19 +12,10 @@
  
 <jsp:attribute name="header">
 
-	<c:set var="path" value="${pageContext.request.contextPath}" scope="request" />
+	<link href="<c:url value="/assets/css/checkbox-nice.css" />" rel="stylesheet">
+	<link href="<c:url value="/assets/css/select2.min.css" />" rel="stylesheet">
 	
 	<style type="text/css">
-	
-		@import url("${path}/assets/bootstrap/css/bootstrap.min.css");
-		
-		@import url("${path}/assets/bootstrap/css/bootstrap-theme.min.css");
-		
-		@import url("${path}/assets/bootstrap/css/bootstrap-toggle.min.css");
-		
-		@import url("${path}/assets/css/jquery-confirm.min.css");
-		
-		@import url("${path}/assets/css/select2.min.css");
 		
 		#btn-inserir {
 			margin-bottom: 8px;
@@ -33,56 +24,6 @@
 		.select2 {
 			width:100%!important;
 		}
-		
-		.checkbox-nice {
-    position: relative;
-    padding-left: 15px;
-    
-	}
-	.checkbox-nice input[type=checkbox] {
-	    visibility: hidden;
-	}
-	.checkbox-nice label {
-	    padding-top: 3px;
-	}
-	.checkbox-nice.checkbox-inline>label {
-	    margin-left: 16px;
-	}
-	.checkbox-nice label:before {
-	    cursor: pointer;
-	    position: absolute;
-	    width: 22px;
-	    height: 22px;
-	    left: 1px;
-	    top: 1px;
-	    background: #ffffff;
-	    content: "";
-	    border: 1px solid #a62b32;
-	    border-radius: 3px;
-	    background-clip: padding-box;
-	}
-	.checkbox-nice label:after {
-	    opacity: 0;
-	    content: '';
-	    position: absolute;
-	    width: 12px;
-	    height: 7px;
-	    background: transparent;
-	    top: 7px;
-	    left: 6px;
-	    border: 3px solid #a62b32;
-	    border-top: none;
-	    border-right: none;
-	    -webkit-transform: rotate(-45deg);
-	    -ms-transform: rotate(-45deg);
-	    transform: rotate(-45deg);
-	}
-	.checkbox-nice label:hover::after {
-	    opacity: 0.3;
-	}
-	.checkbox-nice input[type=checkbox]:checked+label:after {
-	    opacity: 1;
-	}
 		
 	</style>
 
@@ -148,16 +89,9 @@
 
 <jsp:attribute name="footer">
 
-	<script type="text/javascript"
-		src="${path}/assets/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript"
-		src="${path}/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${path}/assets/bootstrap/js/bootstrap-toggle.min.js"></script>
-	<script src="http://chancejs.com/chance.min.js"></script>
-	<script type="text/javascript" src="${path}/assets/js/select2.full.min.js"></script>
-	<script type="text/javascript" src="${path}/assets/js/jquery-confirm.min.js"></script>
-	<script type="text/javascript" src="${path}/assets/js/modal-request.js"></script>
+	<script type="text/javascript" src="<c:url value="/assets/js/select2.full.min.js" />"></script>
+	<script type="text/javascript" src="<c:url value="/assets/js/data-table-config.js" />"></script>
+	<script type="text/javascript" src="<c:url value="/assets/js/modal-request.js" />"></script>
 
 	<jsp:include page="modal-add-edit.jsp"></jsp:include>
 

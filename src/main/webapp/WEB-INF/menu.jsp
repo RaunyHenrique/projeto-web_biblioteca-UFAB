@@ -6,6 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<c:set var="path" value="${pageContext.request.contextPath}" scope="request" />
 
 <!DOCTYPE html>
 <style>
@@ -63,6 +64,6 @@
 		</li>
 			
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>

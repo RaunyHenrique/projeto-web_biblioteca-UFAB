@@ -12,8 +12,7 @@ $(document).ready(function() {
 	
 	selectTipoCursoOnChange();
 
-	//limparCampos();
-	
+	limparCampos();
 	
 	$('#modal-add-edit').on('hidden.bs.modal', function (e) {
 		
@@ -31,6 +30,12 @@ $(document).ready(function() {
 			
 		}
 		
+	});
+	
+	$('#modal-add-edit').on('hide.bs.modal', function() {
+
+		limparCampos();
+
 	});
 
 });
@@ -260,6 +265,8 @@ var aplicarListenersModal = function() {
 
 					$('#section-table').html(pagina);
 					aplicarListenersTable();
+					
+					aplicarDataTable();
 
 				}).fail(function(errror) {
 
@@ -277,24 +284,22 @@ var aplicarListenersModal = function() {
 
 var limparCampos = function() {
 
-	$('#modal-add-edit').on('hide.bs.modal', function() {
+	var fields = $('#form-add-edit').serializeArray();
 
-		var fields = $('#form-add-edit').serializeArray();
+	$.each(fields, function(index, value) {
 
-		$.each(fields, function(index, value) {
-
-			var campoName = $('#' + fields[index]['name']).attr('id');
-						
-			if (campoName == "tipo_curso") {
-				
-				//faz nada
-				
-			} else {
-				$('#' + fields[index]['name']).val('');
-			}
+		var campoName = $('#' + fields[index]['name']).attr('id');
+					
+		if (campoName == "tipo_curso") {
 			
-
-		});
+			//faz nada
+			
+		} else {
+							
+			$('#' + fields[index]['name']).val('').change();
+			
+		}
+		
 
 	});
 
@@ -325,8 +330,13 @@ var setTitleModal = function() {
 					'show.bs.modal',
 					function(event) {
 
-						var button = $(event.relatedTarget)
-						var recipient = button.data('tipo')
+						var button = $(event.relatedTarget);
+						var recipient = button.data('tipo');
+						
+						if (recipient == "Inserir") {
+							limparCampos();
+						}
+						
 						var modal = $(this).find('.modal-title')
 								.text(recipient)
 

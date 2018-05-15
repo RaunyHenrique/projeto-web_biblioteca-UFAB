@@ -11,17 +11,9 @@
 <tag:layout title="${titulo}">
  
 <jsp:attribute name="header">
-
-	<c:set var="path" value="${pageContext.request.contextPath}" scope="request" />
 	
 	<style type="text/css">
 	
-		@import url("${path}/assets/bootstrap/css/bootstrap.min.css");
-		
-		@import url("${path}/assets/bootstrap/css/bootstrap-theme.min.css");
-		
-		@import url("${path}/assets/css/jquery-confirm.min.css");
-				
 		#btn-inserir {
 			margin-bottom: 8px;
 		}
@@ -89,14 +81,10 @@
 </jsp:attribute>
 
 <jsp:attribute name="footer">
-
-	<script type="text/javascript"
-		src="${path}/assets/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript"
-		src="${path}/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="http://chancejs.com/chance.min.js"></script>
-	<script type="text/javascript" src="${path}/assets/js/jquery-confirm.min.js"></script>
-	<script type="text/javascript" src="${path}/assets/js/modal-request.js"></script>
+		
+	<script type="text/javascript" src="<c:url value="/assets/js/chance.min.js" />"></script>
+	<script type="text/javascript" src="<c:url value="/assets/js/data-table-config.js" />"></script>
+	<script type="text/javascript" src="<c:url value="/assets/js/modal-request.js" />"></script>
 	
 	<jsp:include page="modal-add-edit.jsp"></jsp:include>
 

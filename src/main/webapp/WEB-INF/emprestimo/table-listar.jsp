@@ -8,7 +8,7 @@
 					<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 					
 					<!-- Table -->
-					<table class="table table-hover table-condensed table-striped table-bordered">
+					<table id="table-listar-datatable" class="table table-hover table-condensed table-striped table-bordered" style="width:100%">
 
 						<thead>
 
@@ -61,17 +61,5 @@
 							</c:forEach>
 
 						</tbody>
-
-						<tfoot>
-
-							<tr>
-
-								<td colspan="7">Total de emprestimos cadastrados:
-									<span id="total-items">${emprestimos.size()}</span>
-								</td>
-
-							</tr>
-
-						</tfoot>
 
 					</table>
