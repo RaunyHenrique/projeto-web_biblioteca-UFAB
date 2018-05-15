@@ -30,13 +30,13 @@ public class ConfiguracaoAutenticacao extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/alunos/**").hasRole("ADMIN")
+				.antMatchers("/home/**").hasRole("ADMIN")
 				.anyRequest().permitAll()
 		.and()
 			.formLogin()
 				.loginPage("/login")
 				.loginProcessingUrl("/autenticar")
-				.defaultSuccessUrl("/alunos")
+				.defaultSuccessUrl("/home")
 				.failureUrl("/login?error=true")
 				.usernameParameter("email")
 				.passwordParameter("password")

@@ -18,63 +18,55 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ufab.biblioteca_ufab.excecoes.ItemInvalidoException;
 import com.ufab.biblioteca_ufab.models.entidades.Aluno;
-import com.ufab.biblioteca_ufab.models.entidades.Emprestimo;
 import com.ufab.biblioteca_ufab.models.entidades.ItemDoAcervo;
+import com.ufab.biblioteca_ufab.models.entidades.Reserva;
 import com.ufab.biblioteca_ufab.models.repositorios.AlunoRepositorio;
-import com.ufab.biblioteca_ufab.models.repositorios.EmprestimoRepositorio;
 import com.ufab.biblioteca_ufab.models.repositorios.ItemDoAcervoRepositorio;
+import com.ufab.biblioteca_ufab.models.repositorios.ReservaRepositorio;
 import com.ufab.biblioteca_ufab.propertyeditors.AlunoPropertyEditor;
 import com.ufab.biblioteca_ufab.propertyeditors.ItemDoAcervoPropertyEditor;
 
 @Controller
-@RequestMapping("/home")
-public class EmprestimoController {
+@RequestMapping("/reservas")
+public class ReservaController {
 
 	static final Logger logger = LoggerFactory.getLogger(EmprestimoController.class);
 	
 	@Autowired private AlunoPropertyEditor alunoPropertyEditor;
 	
 	@Autowired private ItemDoAcervoPropertyEditor itemDoAcervoPropertyEditor;
-
-	@Autowired private EmprestimoRepositorio emprestimoRepositorio;
 	
 	@Autowired private AlunoRepositorio alunoRepositorio;
 	
 	@Autowired private ItemDoAcervoRepositorio itemDoAcervoRepositorio;
 	
+	@Autowired private ReservaRepositorio reservaRepositorio;
+	
 	@RequestMapping(method = RequestMethod.GET)
-	public String listar(Model model, @RequestParam(value = "get_table", required = false)
-    Boolean get_table) {
+	public String listar(Model model) {
 
-		Iterable<Emprestimo> emprestimos = emprestimoRepositorio.findAll();
+		Iterable<Reserva> reservas = reservaRepositorio.findAll();
 		Iterable<Aluno> alunos = alunoRepositorio.findByNaoPendentes();
-		Iterable<ItemDoAcervo> itensDoAcervo = itemDoAcervoRepositorio.findAllItensDisponiveis();
+		Iterable<ItemDoAcervo> itensDoAcervo = itemDoAcervoRepositorio.findAllItensReservados();
 				
-		model.addAttribute("titulo", "Listagem de Emprestimos");
-		model.addAttribute("url", "home");
-		model.addAttribute("emprestimos", emprestimos);
+		model.addAttribute("titulo", "Listagem de Reservas");
+		model.addAttribute("url", "reservas");
+		model.addAttribute("reservas", reservas);
 		model.addAttribute("alunos", alunos);
 		model.addAttribute("itensDoAcervo", itensDoAcervo);
 		
 		logger.info("Itens listados com sucesso.");
 		
-		if (get_table != null) {
-						
-			return "emprestimo/table-listar";
-			
-		}
-		
-		return "emprestimo/listar";
-		
+		return "reserva/listar";
+
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Valid @ModelAttribute Emprestimo emprestimo, BindingResult bindingResult, Model model) {
+	public String salvar(@Valid @ModelAttribute Reserva reserva, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			
@@ -85,59 +77,35 @@ public class EmprestimoController {
 
 		} else {
 			
-			//antes de salvar, verificar se há alguma pendencia!
-			emprestimoRepositorio.save(emprestimo);
+			reservaRepositorio.save(reserva);
 			logger.info("Item salvo com sucesso.");
 		}
 
-		Iterable<Emprestimo> emprestimoAll = emprestimoRepositorio.findAll();
+		Iterable<Reserva> reservaAll = reservaRepositorio.findAll();
 		
-		model.addAttribute("emprestimos", emprestimoAll);
+		model.addAttribute("reservas", reservaAll);
 		
-		return "emprestimo/table-listar";
+		return "reserva/table-listar";
 
 	}
 	
 	//RequestMapping busca view's
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@ResponseBody//retorna JSON
-	public Emprestimo buscarById(@PathVariable Long id) {
+	public Reserva buscarById(@PathVariable Long id) {
 		
-		Optional<Emprestimo> emprestimo = emprestimoRepositorio.findById(id);
+		Optional<Reserva> reserva = reservaRepositorio.findById(id);
 
-		return emprestimo.get();
+		return reserva.get();
 
 	}
 	
-//	@RequestMapping(method = RequestMethod.GET, value = "/alunos")
-//	@ResponseBody//retorna JSON
-//	public List<SelectItem> getAlunos() {
-//		
-//		List<SelectItem> selectItems = new ArrayList<SelectItem>();
-//		Iterable<Aluno> alunos = alunoRepositorio.findAll();
-//				
-//		for (Iterator<Aluno> iterator = alunos.iterator(); iterator.hasNext();) {
-//			
-//			Aluno aluno = (Aluno) iterator.next();
-//			
-//			SelectItem si = new SelectItem();
-//			si.id = aluno.getId();
-//			si.text = aluno.getMatricula() + " - " + aluno.getNome();
-//			
-//			selectItems.add(si);
-//						
-//		}
-//
-//		return selectItems;
-//
-//	}
-
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		
 		try {
 			
-			emprestimoRepositorio.deleteById(id);
+			reservaRepositorio.deleteById(id);
 			logger.info("Item deletado com sucesso.");
 
 			return new ResponseEntity<String>(HttpStatus.OK);

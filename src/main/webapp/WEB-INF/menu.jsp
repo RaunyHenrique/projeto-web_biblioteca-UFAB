@@ -31,8 +31,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       
+<!--       	home => emprestimos -->
+      	<li><a href="home">Home</a></li>
       	<li><a href="alunos">Alunos</a></li>
-      	<li><a href="emprestimos">Emprestimos</a></li>
       	<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Itens do acervo <span class="caret"></span></a>
           <ul class="dropdown-menu">

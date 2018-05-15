@@ -35,6 +35,7 @@
 									<td>${emprestimo.aluno.matricula}</td>
 									<td>${emprestimo.aluno.nome}</td>
 									<td>
+									
 										<c:forEach items="${emprestimo.items_emprestados}" var="item_emprestado">
 											${item_emprestado.titulo}
 										</c:forEach>
@@ -50,7 +51,7 @@
 									
 									</td>
 									<td class="text-center">
-										<button type="button" class="btn btn-info btn-editar" data-tipo="Editar">
+										<button type="button" class="btn btn-info btn-editar" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Editar">
 										<span class="glyphicon glyphicon-edit"></span> Editar</button>
 										<button type="button" class="btn btn-danger btn-deletar">
 										<span class="glyphicon glyphicon-trash"></span> Deletar</button>

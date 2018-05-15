@@ -264,6 +264,7 @@ var aplicarListenersModal = function() {
 				$.post(url, dadosForm).done(function(pagina) {
 
 					$('#section-table').html(pagina);
+					
 					aplicarListenersTable();
 					
 					aplicarDataTable();
@@ -332,6 +333,8 @@ var setTitleModal = function() {
 
 						var button = $(event.relatedTarget);
 						var recipient = button.data('tipo');
+						
+						console.log("P:" + recipient);
 						
 						if (recipient == "Inserir") {
 							limparCampos();

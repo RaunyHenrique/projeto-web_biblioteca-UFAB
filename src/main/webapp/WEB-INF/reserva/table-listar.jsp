@@ -13,11 +13,9 @@
 
 							<tr class="text-center">
 
-								<td style="width: 10%">Matricula</td>
-								<td style="width: 30%">Nome</td>
-								<td style="width: 20%">Curso</td>
-								<td style="width: 5%">Periodo</td>
-								<td style="width: 5%">Telefone</td>
+								<td style="width: 10%">Data</td>
+								<td style="width: 40%">Aluno</td>
+								<td style="width: 20%">Item do emprestimo</td>
 								<td style="width: 30%">Ações</td>
 
 							</tr>
@@ -25,16 +23,16 @@
 						</thead>
 
 						<tbody>
+						
+<!-- 						OBS: a data de devolução mais proxima e igual a data da reserva.. setar a data como hidden -->
 
-							<c:forEach items="${alunos}" var="aluno">
+							<c:forEach items="${reservas}" var="reserva">
 
-								<tr data-id="${aluno.id}">
+								<tr data-id="${reserva.id}">
 
-									<td>${aluno.matricula}</td>
-									<td>${aluno.nome}</td>
-									<td>${aluno.curso.nome}</td>
-									<td>${aluno.periodo}</td>
-									<td>${aluno.telefone}</td>
+									<td><fmt:formatDate value="${reserva.data_reserva_entrega}" pattern="dd/MM/yyyy"/></td>
+									<td>${reserva.aluno.nome}</td>
+									<td>${reserva.item.titulo}</td>
 									<td class="text-center">
 										<button type="button" class="btn btn-info btn-editar" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Editar">
 										<span class="glyphicon glyphicon-edit"></span> Editar</button>
