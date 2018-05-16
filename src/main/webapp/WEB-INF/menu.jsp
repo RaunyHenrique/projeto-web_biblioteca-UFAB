@@ -37,11 +37,11 @@
       	<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Itens do acervo <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Livros</a></li>
-            <li><a href="#">Jornais</a></li>
-            <li><a href="#">Anais de congresso</a></li>
-            <li><a href="#">Trabalhos de conclusão</a></li>
-            <li><a href="#">Midias eletronicas</a></li>
+            <li><a href="livros">Livros</a></li>
+            <li><a href="jornais">Jornais</a></li>
+            <li><a href="anais">Anais de congresso</a></li>
+            <li><a href="trabalhos">Trabalhos de conclusão</a></li>
+            <li><a href="midias">Midias eletronicas</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Adicionar autores</a></li>
             <li><a href="#">Adicionar editoras</a></li>

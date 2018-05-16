@@ -6,11 +6,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ufab.biblioteca_ufab.excecoes.ItemInvalidoException;
+import com.ufab.biblioteca_ufab.models.entidades.MidiaEletronica;
+import com.ufab.biblioteca_ufab.models.entidades.TrabalhoDeConclusao;
+import com.ufab.biblioteca_ufab.models.enums.TipoDeMidiaEletronica;
+import com.ufab.biblioteca_ufab.models.enums.TipoDeTrabalhoDeConclusao;
 import com.ufab.biblioteca_ufab.models.repositorios.LivroRepositorio;
 import com.ufab.biblioteca_ufab.models.repositorios.MidiaEletronicaRepositorio;
 
@@ -22,10 +40,80 @@ import com.ufab.biblioteca_ufab.models.repositorios.MidiaEletronicaRepositorio;
  * @author Rauny Henrique
  */
 
+@Controller
+@RequestMapping("/midias")
 public class MidiaEletronicaController {
 
 	static final Logger logger = LoggerFactory.getLogger(MidiaEletronicaController.class);
 
 	@Autowired private MidiaEletronicaRepositorio midiaEletronicaRepositorio;
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String listar(Model model) {
+				
+		Iterable<MidiaEletronica> midias = midiaEletronicaRepositorio.findAll();
+		
+		model.addAttribute("titulo", "Listagem de midias eletronicas");
+		model.addAttribute("url", "midias");
+		
+		model.addAttribute("tipos",TipoDeMidiaEletronica.values());
+		model.addAttribute("midias", midias);
+		
+		logger.info("Itens listados com sucesso.");			
+		return "midia/listar";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String salvar(@Valid @ModelAttribute MidiaEletronica midia, BindingResult bindingResult, Model model) {
+
+		if (bindingResult.hasErrors()) {
+			
+			System.out.println(bindingResult.getFieldErrors());
+			
+			logger.info("Erro ao salvar item.");
+			throw new ItemInvalidoException();
+
+		} else {
+			
+			midiaEletronicaRepositorio.save(midia);
+			logger.info("Item salvo com sucesso.");
+		}
+
+		Iterable<MidiaEletronica> midias = midiaEletronicaRepositorio.findAll();
+		
+		model.addAttribute("midias", midias);
+		
+		return "midia/table-listar";
+
+	}	
+
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
+	@ResponseBody//retorna JSON
+	public MidiaEletronica buscarById(@PathVariable Long id) {
+		
+		Optional<MidiaEletronica> midia = midiaEletronicaRepositorio.findById(id);
+
+		return midia.get();
+
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+	public ResponseEntity<String> deletar(@PathVariable Long id) {
+				
+		try {
+			midiaEletronicaRepositorio.deleteById(id);
+			logger.info("Item deletado com sucesso.");
+
+			return new ResponseEntity<String>(HttpStatus.OK);
+			
+		} catch (Exception e) {
+			
+			logger.info("Erro ao deletar item.");
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			
+		}	
+
+	}
 
 }

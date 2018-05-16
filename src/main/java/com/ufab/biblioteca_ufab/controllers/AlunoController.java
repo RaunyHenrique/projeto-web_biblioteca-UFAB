@@ -78,10 +78,10 @@ public class AlunoController {
 		}
 		
 		//colocar dentro da thred????
-		Iterable<Curso> cursosGraduacao = cursosRepositorio.findByTipo(TipoDeCurso.GRADUAÇÃO);		
+		Iterable<Curso> cursosGraduacao = cursosRepositorio.findByTipo(TipoDeCurso.GRADUACAO);		
 		model.addAttribute("cursosGraduacao", cursosGraduacao);
 		
-		Iterable<Curso> cursosPosGraduacao = cursosRepositorio.findByTipo(TipoDeCurso.POSGRADUAÇÃO);
+		Iterable<Curso> cursosPosGraduacao = cursosRepositorio.findByTipo(TipoDeCurso.POSGRADUACAO);
 		model.addAttribute("cursosPosGraduacao", cursosPosGraduacao);
 		
 		logger.info("Itens listados com sucesso.");
