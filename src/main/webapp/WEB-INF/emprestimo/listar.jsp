@@ -80,7 +80,6 @@
 		    <li role="presentation" class="active"><a href="home" id="home" aria-controls="home" role="tab" data-url="/biblioteca_ufab/home">Emprestimos</a></li>
 		    <li role="presentation"><a href="reservas" id="reservas" aria-controls="profile" role="tab" data-url="/biblioteca_ufab/reservas">Reservas</a></li>
 		    <li role="presentation"><a href="#devolucoes" id="devolucoes" aria-controls="messages" role="tab">Devoluções</a></li>
-		    <li role="presentation"><a href="#pendencias" id="pendencias" aria-controls="settings" role="tab">Pendências</a></li>
 		  </ul>
 		
 			<button type="button" id="btn-inserir" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Inserir">

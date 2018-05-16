@@ -1,5 +1,7 @@
 package com.ufab.biblioteca_ufab.controllers;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -85,6 +87,21 @@ public class EmprestimoController {
 
 		} else {
 			
+			//data atual
+			java.util.Date data = new java.util.Date();  
+			java.sql.Date dataAtual = new java.sql.Date(data.getTime());
+			
+			emprestimo.setData_emprestimo(dataAtual);
+			
+			//data de devolução, baseada na graduação
+			Calendar c = Calendar.getInstance();
+			c.setTime(data);
+			c.add(Calendar.DATE, +15);//GRADUAÇÂO!!!.. ver aluno q esta associado nesse obj (emprestimo)
+			
+			java.sql.Date dataDevolucao = new java.sql.Date(c.getTimeInMillis());
+			
+			emprestimo.setData_devolucao(dataDevolucao);
+						
 			//antes de salvar, verificar se há alguma pendencia!
 			emprestimoRepositorio.save(emprestimo);
 			logger.info("Item salvo com sucesso.");

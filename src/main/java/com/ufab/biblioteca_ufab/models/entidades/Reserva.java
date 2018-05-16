@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 public class Reserva {
 
@@ -25,8 +27,8 @@ public class Reserva {
 	@NotNull
 	private Date data_reserva_entrega;
 
-	@NotNull
-	private boolean receber_notificacao;
+	@Type(type="boolean")
+	private Boolean receber_notificacao = false;
 
 	public Long getId() {
 		return id;

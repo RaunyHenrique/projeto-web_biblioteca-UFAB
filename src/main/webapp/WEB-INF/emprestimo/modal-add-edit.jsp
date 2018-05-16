@@ -68,29 +68,12 @@
 	
 		$(document).ready(function() {
 			
-			// url
-			var url = "emprestimos/alunos";
-			
 		    $('#aluno').select2({
-		    	
-		    	placeholder: 'Selecione...',
-		    	
-// 				ajax: {
-// 					url : url,
-// 					dataType: 'json',
-// 				    processResults: function (data) {
-				    	
-// 				        return {
-// 				            results: data
-// 				          };
-						
-// 				    }
-// 				},
-						    
+		    	placeholder: 'Selecione...',		    
 		    });
 		    
 		    $('#items_emprestados').select2({
-		    							    
+		    	placeholder: 'Selecione...',		    
 		    });
 		    
 		});

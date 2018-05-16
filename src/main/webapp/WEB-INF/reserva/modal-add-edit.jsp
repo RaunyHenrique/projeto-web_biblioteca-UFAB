@@ -37,8 +37,8 @@
 
 	</select>
 		
-	<label for="item" class="control-label">Itens do emprestimo (*disponiveis para reserva):</label> 
-	<select class="form-control" id="item" name="item" required multiple="multiple">
+	<label for="item" class="control-label">Item do emprestimo (*disponiveis para reserva):</label> 
+	<select class="form-control" id="item" name="item" required>
 
 		<c:forEach items="${itensDoAcervo}" var="item">
 
@@ -60,6 +60,22 @@
 	</div>
 
 	</div>
+	
+	<script>
+	
+		$(document).ready(function() {
+			
+		    $('#aluno').select2({
+		    	placeholder: 'Selecione...',	    
+		    });
+		    
+		    $('#item').select2({
+		    	placeholder: 'Selecione...',			    
+		    });
+		    
+		});
+	
+	</script>
 	
 </jsp:attribute>
 

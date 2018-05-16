@@ -81,7 +81,7 @@ var setSelectedTipoCurso = function() {
 	if (url == "alunos") {
 		
 		var value = $('#tipo_curso').val();
-		
+				
 		if (value == "GRADUAÇÃO") {
 			
 			$('.cursos-graduacao').show();
@@ -93,7 +93,7 @@ var setSelectedTipoCurso = function() {
 			$('.cursos-posgraduacao').show();
 			
 		}
-		
+				
 	}
 	
 };
@@ -417,56 +417,83 @@ var aplicarListenersTable = function() {
 
 			$.each(entity, function(key, value) {
 				
-				if (key == "curso" || key == "aluno") {
-										
-					if (key == "aluno") {
-									
-						var itemEntityValue = value["id"];
-						var itemEntityNome = value["matricula"] + " - " + value["nome"];
-						
-						if ($('#aluno').find("option[value='" + itemEntityValue + "']").length) {
-							
-						    $('#aluno').val(itemEntityValue).trigger('change');
-						    
-						} else { 
-							
-							//guarda value para excluir depois!
-							isAddIndex = itemEntityValue;
-							
-						    var newOption = new Option(itemEntityNome, itemEntityValue, true, true);
-						    // Append it to the select
-						    $('#aluno').append(newOption).trigger('change');
-						    
-						} 
-						
-					} else {
-						
-						$('[name="' + key + '"]').val(value["id"]).change();
-						
-					}
-						
-				} else if (key == "items_emprestados") {
-					
-					var item = value;
-					var itemName = key;
-						
-					var array = [];
-					$.each(item, function(key, value) {
-						
-//						console.log("ITEM: " + key, value);
-						array.push(value["id"]);
-						
-					});
-					
-					$('[name="' + itemName + '"]').val(array).change();
-					
-				} else if (key == "data_emprestimo" || key == "data_devolucao") {
-					
-					var date = new Date(value);
-					$('[name="' + key + '"]').val(date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getDate());
+				//Tipo do campo
+				var field = $('[name="' + key + '"]');
+				var fieldType = field.prop('nodeName');
+				var fieldTypeName = field.prop('type');
 				
-				} else {
-					$('[name="' + key + '"]').val(value);
+				console.log(fieldTypeName, fieldType);
+				
+				switch (fieldType) {
+				
+					case "INPUT":
+						
+						if (fieldTypeName == "date") {
+							
+							var date = new Date(value);
+							field.val(date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getDate());
+							
+						} else {
+							
+							field.val(value);
+
+						}
+						
+						break;
+	
+					case "SELECT":
+						//multiplo
+						if (fieldTypeName == "select-multiple") {
+							
+							var item = value;
+							var itemName = key;
+								
+							var array = [];
+							$.each(item, function(key, value) {
+								
+								array.push(value["id"]);
+								
+							});
+							
+							$('[name="' + itemName + '"]').val(array).change();
+							
+						} else {//normal
+							
+							//casos especiais
+							if (key == "aluno") {
+							
+								var itemEntityValue = value["id"];
+								var itemEntityNome = value["matricula"] + " - " + value["nome"];
+								
+								if ($('#aluno').find("option[value='" + itemEntityValue + "']").length) {
+									
+								    $('#aluno').val(itemEntityValue).trigger('change');
+								    
+								} else { 
+									
+									//guarda value para excluir depois!
+									isAddIndex = itemEntityValue;
+									
+								    var newOption = new Option(itemEntityNome, itemEntityValue, true, true);
+								    // Append it to the select
+								    $('#aluno').append(newOption).trigger('change');
+								    
+								} 
+								
+							} else if(key == "tipo_curso") {
+								
+								field.val(value);
+								
+							} else {
+								
+								field.val(value["id"]).change();
+								
+							}
+
+						}
+						
+						break;
+						
 				}
 
 			});

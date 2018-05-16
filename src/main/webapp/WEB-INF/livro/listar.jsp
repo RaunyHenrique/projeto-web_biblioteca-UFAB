@@ -12,14 +12,12 @@
  
 <jsp:attribute name="header">
 
-	<link href="<c:url value="/assets/css/checkbox-nice.css" />" rel="stylesheet">
 	<link href="<c:url value="/assets/css/select2.min.css" />" rel="stylesheet">
 	
 	<style type="text/css">
 	
 		#btn-inserir {
-			margin-top: 8px;
-			margin-bottom: 16px;
+			margin-bottom: 8px;
 		}
 		
 		.select2 {
@@ -72,27 +70,17 @@
 			</div>
 
 		</c:if>
-		
-		<div id="tabs">
 
-		  <!-- Nav tabs -->
-		  <ul class="nav nav-tabs" role="tablist" id="tabs-links">
-		    <li role="presentation"><a href="home" id="home" aria-controls="home" role="tab" data-url="/biblioteca_ufab/home">Emprestimos</a></li>
-		    <li role="presentation" class="active"><a href="reservas" id="reservas" aria-controls="profile" role="tab" data-url="/biblioteca_ufab/reservas">Reservas</a></li>
-		    <li role="presentation"><a href="#devolucoes" id="devolucoes" aria-controls="messages" role="tab">Devoluções</a></li>
-		  </ul>
-		
-			<button type="button" id="btn-inserir" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Inserir">
-				<span class="glyphicon glyphicon-plus"></span> Nova reserva
-			</button>
-	
-			<section id="section-table">
-	
-				<jsp:include page="table-listar.jsp"></jsp:include>
-	
-			</section>
-		
-		</div>
+		<button type="button" id="btn-inserir" class="btn btn-primary"
+			data-toggle="modal" data-target="#modal-add-edit" data-tipo="Inserir">
+			<span class="glyphicon glyphicon-plus"></span> Inserir livro
+		</button>
+
+		<section id="section-table">
+
+			<jsp:include page="table-listar.jsp"></jsp:include>
+
+		</section>
 
 	</div>
 
