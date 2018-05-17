@@ -11,8 +11,6 @@ $(document).ready(function() {
 	setTitleModal();
 	
 	selectTipoCursoOnChange();
-
-	limparCampos();
 	
 	$('#modal-add-edit').on('hidden.bs.modal', function (e) {
 		
@@ -32,10 +30,12 @@ $(document).ready(function() {
 		
 	});
 	
-	$('#modal-add-edit').on('hide.bs.modal', function() {
-
-		limparCampos();
-
+	$('#modal-add-edit').on('hide.bs.modal', function(e) {
+        
+        if (e.namespace === 'bs.modal') {
+    		limparCampos();
+        }
+        
 	});
 
 });
@@ -333,12 +333,10 @@ var setTitleModal = function() {
 
 						var button = $(event.relatedTarget);
 						var recipient = button.data('tipo');
-						
-						console.log("P:" + recipient);
-						
-						if (recipient == "Inserir") {
-							limparCampos();
-						}
+												
+//						if (recipient == "Inserir") {
+//							limparCampos();
+//						}
 						
 						var modal = $(this).find('.modal-title')
 								.text(recipient)
@@ -480,7 +478,7 @@ var aplicarListenersTable = function() {
 								    
 								} 
 								
-							} else if(key == "tipo_curso") {
+							} else if(key == "tipo_curso" || key == "tipo") {
 								
 								field.val(value);
 								

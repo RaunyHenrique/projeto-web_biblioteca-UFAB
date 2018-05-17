@@ -1,7 +1,10 @@
 package com.ufab.biblioteca_ufab.controllers;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -75,6 +78,7 @@ public class EmprestimoController {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Valid @ModelAttribute Emprestimo emprestimo, BindingResult bindingResult, Model model) {
 
@@ -86,21 +90,53 @@ public class EmprestimoController {
 			throw new ItemInvalidoException();
 
 		} else {
+						
+			if (emprestimo.getData_devolucao().before(emprestimo.getData_emprestimo())) {
+				
+				throw new ItemInvalidoException();
+				
+			}
 			
-			//data atual
-			java.util.Date data = new java.util.Date();  
-			java.sql.Date dataAtual = new java.sql.Date(data.getTime());
+			long totalDeDiasDoEmprestimo = diferencaDeDias(emprestimo);
 			
-			emprestimo.setData_emprestimo(dataAtual);
+			long MAX_DIAS_EMPRESTIMO_GRADUACAO = 15;
+			long MAX_DIAS_EMPRESTIMO_POSGRADUACAO = 30;
 			
-			//data de devolução, baseada na graduação
-			Calendar c = Calendar.getInstance();
-			c.setTime(data);
-			c.add(Calendar.DATE, +15);//GRADUAÇÂO!!!.. ver aluno q esta associado nesse obj (emprestimo)
+			switch (emprestimo.getAluno().getTipo_curso()) {
 			
-			java.sql.Date dataDevolucao = new java.sql.Date(c.getTimeInMillis());
+				case GRADUACAO:
+					
+					if (totalDeDiasDoEmprestimo > MAX_DIAS_EMPRESTIMO_GRADUACAO) {
+						
+						throw new ItemInvalidoException();
+						
+					}
+					
+					break;
+	
+				case POSGRADUACAO:
+					
+					if (totalDeDiasDoEmprestimo > MAX_DIAS_EMPRESTIMO_POSGRADUACAO) {
+						
+						throw new ItemInvalidoException();
+						
+					}
+					
+					break;
+				
+			}
 			
-			emprestimo.setData_devolucao(dataDevolucao);
+			for (ItemDoAcervo item : emprestimo.getItems_emprestados()) {
+				
+				if (item.getQuantidade_emprestada() < item.getQuantidade()) {
+					
+					item.setQuantidade_emprestada(item.getQuantidade_emprestada() + 1);
+
+				}
+				
+			}
+			
+			itemDoAcervoRepositorio.saveAll(emprestimo.getItems_emprestados());
 						
 			//antes de salvar, verificar se há alguma pendencia!
 			emprestimoRepositorio.save(emprestimo);
@@ -112,6 +148,34 @@ public class EmprestimoController {
 		model.addAttribute("emprestimos", emprestimoAll);
 		
 		return "emprestimo/table-listar";
+
+	}
+	
+	private long diferencaDeDias(Emprestimo emprestimo) {
+
+		try {
+			
+	        Calendar dataAtual = Calendar.getInstance();
+	        Integer ano = dataAtual.get(Calendar.YEAR);
+	        Integer mes = dataAtual.get(Calendar.MONTH);
+	        Integer dia = dataAtual.get(Calendar.DAY_OF_MONTH);
+	        mes += 1;
+			
+		     DateFormat df = new SimpleDateFormat ("yyyy-MM-dd");
+		        df.setLenient(false);
+		        java.util.Date d1 = (java.util.Date) df.parse(ano + "-" + mes + "-" + dia);
+		        System.out.println (d1);
+		        
+		        java.util.Date d2 = (java.util.Date) df.parse("" + emprestimo.getData_devolucao());
+		        System.out.println (d2);
+		        long dt = (d2.getTime() - d1.getTime());
+		        System.out.println (dt / 86400000L);
+
+		        return (dt / 86400000L);
+			
+		} catch (Exception e) {
+			throw new ItemInvalidoException();
+		}
 
 	}
 	

@@ -30,16 +30,18 @@ public class ItemDoAcervo {
 	@NotEmpty
 	private String titulo;
 	
-	@Null
+	@NotNull
+	@NotEmpty
 	private String autor;
 	
 	@NotNull
-	private int quantidade;
+	private int quantidade = 0;
 	
-	@Null
-	private int quantidade_emprestada;
+	@NotNull
+	private int quantidade_emprestada = 0;
 	
-	@Null
+	@NotNull
+	@NotEmpty
 	private String palavra_chave;
 	
 	@NotNull

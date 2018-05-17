@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Null;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
 
@@ -30,10 +30,10 @@ public class Emprestimo {
 	@Type(type="boolean")
 	private Boolean is_pendente = false;
 	
-	@Null
+	@NotNull
 	private Date data_emprestimo;
 	
-	@Null
+	@NotNull
 	private Date data_devolucao;
 
 	public Long getId() {

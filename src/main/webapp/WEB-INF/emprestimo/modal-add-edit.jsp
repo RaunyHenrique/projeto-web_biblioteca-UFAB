@@ -51,16 +51,16 @@
 	<label for="data_devolucao" class="control-label">Data da devolução:</label>
 	<input type="date" class="form-control" id="data_devolucao" name="data_devolucao" required> 
 
-	<div style="margin-top: 16px;">
+<!-- 	<div style="margin-top: 16px;"> -->
 	
-		<div class="checkbox-nice">
+<!-- 		<div class="checkbox-nice"> -->
 		                 
-		   <input class="checkbox-nice" type="checkbox" value="false" id="is_pendente" name="is_pendente">
-		   <label for="is_pendente"> Emprestimo pendente? </label>
+<!-- 		   <input class="checkbox-nice" type="checkbox" value="false" id="is_pendente" name="is_pendente"> -->
+<!-- 		   <label for="is_pendente"> Emprestimo pendente? </label> -->
 		   
-		</div>
+<!-- 		</div> -->
 		
-	</div>
+<!-- 	</div> -->
 
 	</div>
 	
