@@ -39,6 +39,15 @@ public class TrabalhoDeConclusaoController {
 
 	@Autowired private TrabalhoDeConclusaoRepositorio trabalhoDeConclusaoRepositorio;
 
+	/**
+	 * Atribui um título, url e uma lista de trabalhos de conclusão e tipos de trabalho cadastrados no banco ao modelo que será
+	 * redirecionado à view de trabalhos de conclusão
+	 * 
+	 * @param model
+	 * @return "trabalho/listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model) {
 				
@@ -54,6 +63,14 @@ public class TrabalhoDeConclusaoController {
 		return "trabalho/listar";
 	}
 	
+	/**
+	 * Persiste um objeto do tipo TrabalhoDeConclusao recebido como parâmetro
+	 * 
+	 * @param trabalho, bindingResult, model
+	 * @return "trabalho/table-listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Valid @ModelAttribute TrabalhoDeConclusao trabalho, BindingResult bindingResult, Model model) {
 
@@ -78,7 +95,15 @@ public class TrabalhoDeConclusaoController {
 
 	}	
 
-	
+	/**
+	 * Realiza uma busca na tabela de trabalhos de conclusão com base no id recebido como parâmetro
+	 * e retorna um objeto que possua o id buscado
+	 * 
+	 * @param id
+	 * @return trabalho
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@ResponseBody//retorna JSON
 	public TrabalhoDeConclusao buscarById(@PathVariable Long id) {
@@ -89,6 +114,14 @@ public class TrabalhoDeConclusaoController {
 
 	}
 
+	/**
+	 * Exclui do banco, um objeto do tipo TrabalhoDeConclusao que possua o id recebido como parâmetro
+	 * 
+	 * @param id
+	 * @return ResponseEntity
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 				

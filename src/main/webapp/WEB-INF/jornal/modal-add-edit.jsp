@@ -31,7 +31,6 @@
 			
 	<label for="data" class="control-label">Data de publicação:</label>
 	<input type="date"  class="form-control" id="data" name="data" required> 
-	
 		
 	</div>
 	

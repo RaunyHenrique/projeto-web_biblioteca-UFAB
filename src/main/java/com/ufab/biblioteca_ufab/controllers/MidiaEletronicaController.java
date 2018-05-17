@@ -48,6 +48,15 @@ public class MidiaEletronicaController {
 
 	@Autowired private MidiaEletronicaRepositorio midiaEletronicaRepositorio;
 
+	/**
+	 * Atribui um título, url e uma lista de midias e tipos de midia cadastrados no banco ao modelo que será
+	 * redirecionado à view de midia
+	 * 
+	 * @param model
+	 * @return "midia/listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model) {
 				
@@ -63,6 +72,14 @@ public class MidiaEletronicaController {
 		return "midia/listar";
 	}
 	
+	/**
+	 * Persiste um objeto do tipo MidiaEletronica recebido como parâmetro
+	 * 
+	 * @param midia, bindingResult, model
+	 * @return "midia/table-listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Valid @ModelAttribute MidiaEletronica midia, BindingResult bindingResult, Model model) {
 
@@ -87,7 +104,15 @@ public class MidiaEletronicaController {
 
 	}	
 
-	
+	/**
+	 * Realiza uma busca na tabela de midia eletronica com base no id recebido como parâmetro
+	 * e retorna um objeto que possua o id buscado
+	 * 
+	 * @param id
+	 * @return "midia"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@ResponseBody//retorna JSON
 	public MidiaEletronica buscarById(@PathVariable Long id) {
@@ -95,9 +120,16 @@ public class MidiaEletronicaController {
 		Optional<MidiaEletronica> midia = midiaEletronicaRepositorio.findById(id);
 
 		return midia.get();
-
 	}
 	
+	/**
+	 * Exclui do banco, um objeto do tipo MidiaEletronica que possua o id recebido como parâmetro
+	 * 
+	 * @param id
+	 * @return ResponseEntity
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 				

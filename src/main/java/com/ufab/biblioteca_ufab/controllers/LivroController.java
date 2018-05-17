@@ -31,7 +31,7 @@ import com.ufab.biblioteca_ufab.propertyeditors.AutorPropertyEditor;
 import com.ufab.biblioteca_ufab.propertyeditors.EditoraPropertyEditor;
 
 /**
- * Classe respons�vel por manipular as informa��es dos objetos tipo Livro.
+ * Classe responsável por manipular as informações dos objetos tipo Livro.
  * 
  * @author Luis Lancellote
  * @author Rauny Henrique
@@ -51,6 +51,15 @@ public class LivroController {
 	
 	static final Logger logger = LoggerFactory.getLogger(LivroController.class);
 
+	/**
+	 * Atribui um título, url e uma lista de livros, autores e editoras cadastrados no banco ao modelo que será
+	 * redirecionado à view de livros
+	 * 
+	 * @param model
+	 * @return "livro/listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model) {
 		
@@ -69,6 +78,14 @@ public class LivroController {
 		return "livro/listar";
 	}
 	
+	/**
+	 * Persiste um objeto do tipo Livro recebido como parâmetro
+	 * 
+	 * @param livro, bindingResult, model
+	 * @return "livro/table-listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Valid @ModelAttribute Livro livro, BindingResult bindingResult, Model model) {
 
@@ -93,7 +110,15 @@ public class LivroController {
 
 	}
 
-	
+	/**
+	 * Realiza uma busca na tabela de livros com base no id recebido como parâmetro
+	 * e retorna um objeto que possua o id buscado
+	 * 
+	 * @param id
+	 * @return livro
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@ResponseBody//retorna JSON
 	public Livro buscarById(@PathVariable Long id) {
@@ -104,6 +129,14 @@ public class LivroController {
 
 	}
 	
+	/**
+	 * Exclui do banco, um objeto do tipo Livro que possua o id recebido como parâmetro
+	 * 
+	 * @param id
+	 * @return ResponseEntity
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		
@@ -123,7 +156,13 @@ public class LivroController {
 
 	}
 	
-	//Registra o PropertyEditor para o curso, logo transforma id's em entidades de Curso
+	/**
+	 * Registra o PropertyEditor para Autor e Editora, transformando seus id's em entidades
+	 * 
+	 * @param webDataBinder
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
 		

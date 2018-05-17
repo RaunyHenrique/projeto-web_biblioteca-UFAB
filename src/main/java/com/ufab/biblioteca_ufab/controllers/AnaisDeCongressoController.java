@@ -48,6 +48,15 @@ public class AnaisDeCongressoController {
 
 	@Autowired private AnaisDeCongressoRepositorio anaisDeCongressoRepositorio;
 
+	/**
+	 * Atribui um título, url e uma lista de anais de congresso e tipos de anais ao modelo que será
+	 * redirecionado à view de anais de congresso
+	 * 
+	 * @param model
+	 * @return "anais/listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model) {
 				
@@ -63,6 +72,14 @@ public class AnaisDeCongressoController {
 		return "anais/listar";
 	}
 	
+	/**
+	 * Persiste um objeto do tipo AnaisDeCongresso recebido como parâmetro
+	 * 
+	 * @param anaisDeCongresso, bindingResult, model
+	 * @return "anais/table-listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Valid @ModelAttribute AnaisDeCongresso anaisDeCongresso, BindingResult bindingResult, Model model) {
 
@@ -87,7 +104,16 @@ public class AnaisDeCongressoController {
 
 	}	
 
-	
+	/**
+	 * Realiza uma busca na tabela de anais de congresso com base no id recebido como parâmetro
+	 * e retorna um objeto que possua o id buscado
+	 * 
+	 * @param id
+	 * @return "anais"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
+
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@ResponseBody//retorna JSON
 	public AnaisDeCongresso buscarById(@PathVariable Long id) {
@@ -98,6 +124,15 @@ public class AnaisDeCongressoController {
 
 	}
 	
+	/**
+	 * Exclui do banco, um objeto do tipo anaisDeCongresso que possua o id recebido como parâmetro
+	 * 
+	 * @param id
+	 * @return ResponseEntity
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
+
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		

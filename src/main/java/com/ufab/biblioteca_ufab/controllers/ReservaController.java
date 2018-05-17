@@ -30,6 +30,13 @@ import com.ufab.biblioteca_ufab.models.repositorios.ReservaRepositorio;
 import com.ufab.biblioteca_ufab.propertyeditors.AlunoPropertyEditor;
 import com.ufab.biblioteca_ufab.propertyeditors.ItemDoAcervoPropertyEditor;
 
+/**
+ * Classe respons�vel por manipular as informações dos objetos tipo Reserva.
+ * 
+ * @author Luis Lancellote
+ * @author Rauny Henrique
+ */
+
 @Controller
 @RequestMapping("/reservas")
 public class ReservaController {
@@ -46,6 +53,15 @@ public class ReservaController {
 	
 	@Autowired private ReservaRepositorio reservaRepositorio;
 	
+	/**
+	 * Atribui um título, url e uma lista de reservas, alunos e itens do acervo cadastrados no banco ao modelo que será
+	 * redirecionado à view de reservas
+	 * 
+	 * @param model
+	 * @return "reserva/listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model) {
 
@@ -64,6 +80,15 @@ public class ReservaController {
 		return "reserva/listar";
 
 	}
+
+	/**
+	 * Persiste um objeto do tipo Reserva recebido como parâmetro
+	 * 
+	 * @param reserva, bindingResult, model
+	 * @return "reserva/table-listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Valid @ModelAttribute Reserva reserva, BindingResult bindingResult, Model model) {
@@ -89,7 +114,15 @@ public class ReservaController {
 
 	}
 	
-	//RequestMapping busca view's
+	/**
+	 * Realiza uma busca na tabela de reservas com base no id recebido como parâmetro
+	 * e retorna um objeto que possua o id buscado
+	 * 
+	 * @param id
+	 * @return "reserva"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@ResponseBody//retorna JSON
 	public Reserva buscarById(@PathVariable Long id) {
@@ -100,6 +133,14 @@ public class ReservaController {
 
 	}
 	
+	/**
+	 * Exclui do banco, um objeto do tipo Reserva que possua o id recebido como parâmetro
+	 * 
+	 * @param id
+	 * @return ResponseEntity
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		
@@ -119,7 +160,13 @@ public class ReservaController {
 
 	}
 	
-	//Registra o PropertyEditor para o aluno, logo transforma id's em entidades de Aluno
+	/**
+	 * Registra o PropertyEditor para Aluno e ItemDoAcervo, transformando seus id's em entidades
+	 * 
+	 * @param webDataBinder
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
 		
