@@ -190,6 +190,19 @@ public class EmprestimoController {
 
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, value = "/pendencias")
+	public String listarPendencias(Model model) {
+		
+		Iterable<Emprestimo> pendencias = emprestimoRepositorio.findAllPendencias();
+		
+		model.addAttribute("titulo", "Listagem de Pendências");
+		model.addAttribute("url", "home/pendencias");
+		model.addAttribute("pendencias", pendencias);
+
+		return "pendencia/listar";
+
+	}
+	
 //	@RequestMapping(method = RequestMethod.GET, value = "/alunos")
 //	@ResponseBody//retorna JSON
 //	public List<SelectItem> getAlunos() {
