@@ -190,16 +190,32 @@ public class EmprestimoController {
 
 	}
 	
+	//PENDENCIAS
 	@RequestMapping(method = RequestMethod.GET, value = "/pendencias")
 	public String listarPendencias(Model model) {
 		
 		Iterable<Emprestimo> pendencias = emprestimoRepositorio.findAllPendencias();
+		Iterable<ItemDoAcervo> itensDoAcervo = itemDoAcervoRepositorio.findAll();
+		Double VALOR_MULTA = 0.50;
 		
 		model.addAttribute("titulo", "Listagem de Pendências");
-		model.addAttribute("url", "home/pendencias");
+		model.addAttribute("url", "pendencias");
 		model.addAttribute("pendencias", pendencias);
+		model.addAttribute("itensDoAcervo", itensDoAcervo);
+		model.addAttribute("multa", VALOR_MULTA);
 
 		return "pendencia/listar";
+
+	}
+	
+	//RequestMapping busca view's
+	@RequestMapping(method = RequestMethod.GET, value = "/pendencias/{id}")
+	@ResponseBody//retorna JSON
+	public Emprestimo buscarPendenciaById(@PathVariable Long id) {
+		
+		Optional<Emprestimo> emprestimo = emprestimoRepositorio.findById(id);
+
+		return emprestimo.get();
 
 	}
 	
