@@ -45,9 +45,9 @@
 									<td><fmt:formatDate value="${emprestimo.data_devolucao}" pattern="dd/MM/yyyy"/></td>
 									<td class="text-center">
 									
-										<c:if test="${emprestimo.is_pendente == true}">Pendente</c:if>
+										<c:if test="${emprestimo.is_pendente == false}">Pendente</c:if>
 										
-										<c:if test="${emprestimo.is_pendente == false}">OK</c:if>
+										<c:if test="${emprestimo.is_pendente == true}">OK</c:if>
 									
 									</td>
 									<td class="text-center">
@@ -55,6 +55,8 @@
 										<span class="glyphicon glyphicon-edit"></span> Editar</button>
 										<button type="button" class="btn btn-danger btn-deletar">
 										<span class="glyphicon glyphicon-trash"></span> Deletar</button>
+										<button type="button" class="btn btn-primary btn-finalizar" data-urlfinalizar="${url}">
+										<span class="glyphicon glyphicon-ok"></span> Finalizar</button>
 									</td>
 
 								</tr>

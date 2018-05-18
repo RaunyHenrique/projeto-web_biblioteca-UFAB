@@ -28,7 +28,7 @@ public class Emprestimo {
 	private Aluno aluno;
 	
 	@Type(type="boolean")
-	private Boolean is_pendente = false;
+	private Boolean is_pendente = true;
 	
 	@NotNull
 	private Date data_emprestimo;

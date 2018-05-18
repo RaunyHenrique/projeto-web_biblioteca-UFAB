@@ -22,9 +22,13 @@
 	<div class="form-group">
 
 	<input type="hidden" class="form-control" id="id" name="id">
+	
+	<jsp:useBean id="now" class="java.util.Date" scope="request"/>
+	
+	<fmt:formatDate value="${now}" var="dataAtual" pattern="yyyy-MM-dd"/>
 
 	<label for="data_reserva_entrega" class="control-label">Data para reserva:</label>
-	<input type="date"  class="form-control" id="data_reserva_entrega" name="data_reserva_entrega" required> 
+	<input type="date" min="${dataAtual}" class="form-control" id="data_reserva_entrega" name="data_reserva_entrega" required> 
 		
 	<label for="aluno" class="control-label">Aluno:</label> 
 	<select class="form-control" id="aluno" name="aluno" required>

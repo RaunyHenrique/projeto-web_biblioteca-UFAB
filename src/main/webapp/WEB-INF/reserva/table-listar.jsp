@@ -13,8 +13,9 @@
 
 							<tr class="text-center">
 
-								<td style="width: 10%">Data</td>
-								<td style="width: 40%">Aluno</td>
+								<td style="width: 20%">Data da reserva</td>
+								<td style="width: 10%">Matricula</td>
+								<td style="width: 20%">Aluno</td>
 								<td style="width: 20%">Item do emprestimo</td>
 								<td style="width: 30%">Ações</td>
 
@@ -31,6 +32,7 @@
 								<tr data-id="${reserva.id}">
 
 									<td><fmt:formatDate value="${reserva.data_reserva_entrega}" pattern="dd/MM/yyyy"/></td>
+									<td>${reserva.aluno.matricula}</td>
 									<td>${reserva.aluno.nome}</td>
 									<td>${reserva.item.titulo}</td>
 									<td class="text-center">
@@ -38,6 +40,8 @@
 										<span class="glyphicon glyphicon-edit"></span> Editar</button>
 										<button type="button" class="btn btn-danger btn-deletar">
 										<span class="glyphicon glyphicon-trash"></span> Deletar</button>
+										<button type="button" class="btn btn-primary btn-emprestimo" data-toggle="modal" data-target="#modal-emprestimo">
+										<span class="glyphicon glyphicon-ok"></span> Realizar emprestimo</button>
 									</td>
 
 								</tr>

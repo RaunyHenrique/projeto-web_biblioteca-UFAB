@@ -110,82 +110,7 @@ var aplicarListenersModal = function() {
 				// url
 				var url = $(this).data('url');
 				
-				console.log("URL: " + url);
-								
-				if (url == "alunos") {
-
-					// gera matricula
-					var graduacaoCurso = $(this).find(
-							"select[name='tipo_curso']").val();
-
-					if (graduacaoCurso) {
-
-						graduacaoCurso = graduacaoCurso.charAt(0);
-
-					}
-
-					var curso = "";
-
-					// curso
-					var cursoId = parseInt($(this).find("select[name='curso']")
-							.val());
-					console.log(cursoId);
-					switch (cursoId) {
-
-					case 1:
-						curso = "ADMI";
-						break;
-					case 2:
-						curso = "COMP";
-						break;
-					case 3:
-						curso = "DIRE";
-						break;
-					case 4:
-						curso = "EGEL";
-						break;
-					case 5:
-						curso = "EGME";
-						break;
-					case 6:
-						curso = "MATE";
-						break;
-					case 7:
-						curso = "MEDI";
-						break;
-					case 8:
-						curso = "NUTR";
-						break;
-					case 9:
-						curso = "ODON";
-						break;
-					case 10:
-						curso = "PSIC";
-						break;
-					case 11:
-						curso = "VETR";
-						break;
-
-					}
-
-					var anoDeIngresso = $(this).find("input[name='ano']").val()
-							.substring(2, 4);
-					var periodoDeIngresso = $(this).find(
-							"input[name='periodo']").val();
-
-					var codigo = chance.unique(chance.natural, 1, {
-						min : 1,
-						max : 10000
-					});
-
-					var matriculaGerada = graduacaoCurso + curso
-							+ anoDeIngresso + periodoDeIngresso + codigo;
-
-					// seta o valor da matricula
-					$(this).find("input[name='matricula']")
-							.val(matriculaGerada);
-
-				}
+				console.log("URL: " + url);	
 
 				// Get some values from elements on the page:
 				var dadosForm = $(this).serializeArray();
@@ -373,6 +298,100 @@ var handlerDeletar = function(itemEvt) {
 };
 
 var aplicarListenersTable = function() {
+	
+	// btn-finalizar (emprestimo)
+	$('.btn-finalizar').on('click', function() {
+		
+		var itemEvt = this;
+		
+		var csrf = $('#csrf').val();
+						
+		$.confirm({
+		    title: 'Finalizar emprestimo',
+		    content: 'Você tem certeza que deseja finalizar este emprestimo?',
+		    type: 'blue',
+		    typeAnimated: true,
+		    buttons: {
+		        cancelar: function () {
+		            
+		        },
+		        ok: {
+		        	btnClass: 'btn-green',
+		            action: function () {
+
+		            	var id = $(itemEvt).parents('tr').data('id');
+
+		            	$.ajax({
+		            		url : "/biblioteca_ufab/home/" + id + "/finalizar",
+		            		type : 'POST',
+		            		headers: {'X-CSRF-TOKEN': csrf},
+		            	}).done(function(pagina) {
+
+							$('#section-table').html(pagina);
+							
+							aplicarListenersTable();
+							
+							aplicarDataTable();
+
+		            	});
+		                
+		            }
+		        	
+		        },
+		    }
+		});
+
+	});
+	
+	// btn-quitar-divida
+	$('.btn-quitar-divida').on('click', function() {
+		
+		var itemEvt = this;
+		
+		var csrf = $('#csrf').val();
+				
+		var url = $(this).data('urlquitar');
+		
+		var nomeAluno = $(this).data('nome');
+		
+		var valor = $(this).data('valor');
+		
+		$.confirm({
+		    title: 'Quitar divida',
+		    content: 'Você tem certeza que deseja quitar a divida no valor de <strong>'+valor+'</strong> de '+nomeAluno+'?',
+		    type: 'blue',
+		    typeAnimated: true,
+		    buttons: {
+		        cancelar: function () {
+		            
+		        },
+		        ok: {
+		        	btnClass: 'btn-green',
+		            action: function () {
+
+		            	var id = $(itemEvt).parents('tr').data('id');
+
+		            	$.ajax({
+		            		url : url + "/" + id + "/quitar",
+		            		type : 'POST',
+		            		headers: {'X-CSRF-TOKEN': csrf},
+		            	}).done(function(pagina) {
+
+							$('#section-table').html(pagina);
+							
+							aplicarListenersTable();
+							
+							aplicarDataTable();
+
+		            	});
+		                
+		            }
+		        	
+		        },
+		    }
+		});
+
+	});
 
 	// btn-deletar
 	$('.btn-deletar').on('click', function() {

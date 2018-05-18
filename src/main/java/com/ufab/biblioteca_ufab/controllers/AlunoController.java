@@ -1,6 +1,12 @@
 package com.ufab.biblioteca_ufab.controllers;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
+
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,8 +56,8 @@ public class AlunoController {
 	private ServicoCurso servicoCurso;
 
 	/**
-	 * Atribui um t√≠tulo, url e uma lista de alunos e cursos cadastrados no banco ao modelo que ser√°
-	 * redirecionado √† view de aluno
+	 * Atribui um t√≠tulo, url e uma lista de alunos e cursos cadastrados no banco
+	 * ao modelo que ser√° redirecionado √† view de aluno
 	 * 
 	 * @param model
 	 * @return "aluno/listar"
@@ -103,7 +109,8 @@ public class AlunoController {
 	/**
 	 * Persiste um objeto do tipo Aluno recebido como par√¢metro
 	 * 
-	 * @param aluno, bindingResult, model
+	 * @param aluno,
+	 *            bindingResult, model
 	 * @return "aluno/table-listar"
 	 * @author Luis Lancellote
 	 * @author Rauny Henrique
@@ -120,6 +127,76 @@ public class AlunoController {
 
 		} else {
 
+			if (aluno.getId() == null) {
+
+				// gera matricula
+				TipoDeCurso graduacaoCurso = aluno.getTipo_curso();
+
+				String graduacaoCursoString = "";
+
+				if (graduacaoCurso == TipoDeCurso.GRADUACAO) {
+
+					graduacaoCursoString = "G";
+
+				} else {
+					graduacaoCursoString = "P";
+				}
+
+				String curso = "";
+
+				// curso
+				String cursoNome = aluno.getCurso().getNome();
+
+				switch (cursoNome) {
+
+				case "AdministraÁ„o":
+					curso = "ADMI";
+					break;
+				case "CiÍncia da ComputaÁ„o":
+					curso = "COMP";
+					break;
+				case "Direito":
+					curso = "DIRE";
+					break;
+				case "Engenharia Eletrica":
+					curso = "EGEL";
+					break;
+				case "Engenharia Mecatonica":
+					curso = "EGME";
+					break;
+				case "Matematica":
+					curso = "MATE";
+					break;
+				case "Medicina":
+					curso = "MEDI";
+					break;
+				case "NutriÁ„o":
+					curso = "NUTR";
+					break;
+				case "Odontologia":
+					curso = "ODON";
+					break;
+				case "Psicologia":
+					curso = "PSIC";
+					break;
+				case "Veterinaria":
+					curso = "VETR";
+					break;
+
+				}
+
+				String anoDeIngresso = aluno.getAno().substring(2, 4);
+				int periodoDeIngresso = aluno.getPeriodo();
+
+				String codigo = randomNumbers();
+
+				String matriculaGerada = graduacaoCursoString + curso + anoDeIngresso + periodoDeIngresso + codigo;
+
+				// seta o valor da matricula
+				aluno.setMatricula(matriculaGerada);
+
+			}
+
 			alunoRepositorio.save(aluno);
 			logger.info("Item salvo com sucesso.");
 		}
@@ -130,6 +207,23 @@ public class AlunoController {
 
 		return "aluno/table-listar";
 
+	}
+
+	public String randomNumbers() {
+		
+		String number = "";
+		
+		ArrayList<Integer> numbers = new ArrayList<Integer>();
+		for (int i = 0; i < 100; i++) {
+			numbers.add(i + 1);
+		}
+		
+		Collections.shuffle(numbers);
+		for (int j = 0; j < 4; j++) {
+			number += numbers.get(j);
+		}
+		
+		return number;
 	}
 
 	/**
@@ -179,7 +273,8 @@ public class AlunoController {
 	}
 
 	/**
-	 * Registra o PropertyEditor para o curso, transformando id's em entidades de curso
+	 * Registra o PropertyEditor para o curso, transformando id's em entidades de
+	 * curso
 	 * 
 	 * @param webDataBinder
 	 * @author Luis Lancellote

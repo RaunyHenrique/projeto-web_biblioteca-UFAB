@@ -45,8 +45,8 @@
 									
 										<jsp:useBean id="now" class="java.util.Date" scope="request"/>
 										
-										<fmt:formatDate value="${pendencia.data_emprestimo}" var="dataEmprestimo" pattern="yyyy-MM-dd"/>
-										<fmt:parseDate value="${dataEmprestimo}" var="pd1" pattern="yyyy-MM-dd" />
+										<fmt:formatDate value="${pendencia.data_devolucao}" var="dataDevolucao" pattern="yyyy-MM-dd"/>
+										<fmt:parseDate value="${dataDevolucao}" var="pd1" pattern="yyyy-MM-dd" />
 										
 										<fmt:formatDate value="${now}" var="dataAtual" pattern="yyyy-MM-dd"/>
 										<fmt:parseDate value="${dataAtual}" var="pd2" pattern="yyyy-MM-dd" />
@@ -69,7 +69,8 @@
 									
 									<td>
 										<fmt:setLocale value="pt_BR"/>
-										<fmt:formatNumber value="${pendencia.items_emprestados.size() * multa * dateDiff}" type="currency"/>
+										<fmt:formatNumber value="${pendencia.items_emprestados.size() * multa * dateDiff}" var="valorMulta" type="currency"/>
+										${valorMulta}
 									</td>
 
 									<td class="text-center">
@@ -77,7 +78,7 @@
 										<span class="glyphicon glyphicon-edit"></span> Editar</button>
 										<button type="button" class="btn btn-danger btn-deletar">
 										<span class="glyphicon glyphicon-trash"></span> Deletar</button>
-										<button type="button" class="btn btn-primary">
+										<button type="button" class="btn btn-primary btn-quitar-divida" data-nome="${pendencia.aluno.nome}" data-valor="${valorMulta}" data-urlquitar="${url}">
 										<span class="glyphicon glyphicon-ok"></span> Quitar pendência</button>
 									</td>
 

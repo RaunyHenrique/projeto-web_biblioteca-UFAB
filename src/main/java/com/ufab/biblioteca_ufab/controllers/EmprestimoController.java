@@ -219,6 +219,78 @@ public class EmprestimoController {
 
 	}
 	
+	@RequestMapping(method = RequestMethod.POST, value = "/{id}/finalizar")
+	public String finalizarEmprestimo(@PathVariable Long id, Model model) {
+		
+		try {
+			
+			Optional<Emprestimo> emprestimo = emprestimoRepositorio.findById(id);
+
+			if (emprestimo.isPresent()) {
+				
+				//quita emprestimo
+				emprestimo.get().setIs_pendente(false);
+				
+				emprestimoRepositorio.save(emprestimo.get());
+				logger.info("Emprestimo finalizado com sucesso.");
+
+				Iterable<Emprestimo> emprestimos = emprestimoRepositorio.findAll();
+				model.addAttribute("emprestimos", emprestimos);
+				
+				return "emprestimo/table-listar";
+				
+			} else {
+
+				logger.error("Erro: Item não encontrado.");
+				throw new ItemInvalidoException();
+				
+			}
+			
+		} catch (Exception e) {
+			
+			logger.error("Erro ao finalizar emprestimo.");
+			throw new ItemInvalidoException();
+			
+		}	
+		
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/pendencias/{id}/quitar")
+	public String quitarPendencia(@PathVariable Long id, Model model) {
+		
+		try {
+			
+			Optional<Emprestimo> emprestimo = emprestimoRepositorio.findById(id);
+
+			if (emprestimo.isPresent()) {
+				
+				//quita emprestimo
+				emprestimo.get().setIs_pendente(false);
+				
+				emprestimoRepositorio.save(emprestimo.get());
+				logger.info("Pendência quitada com sucesso.");
+
+				Iterable<Emprestimo> pendencias = emprestimoRepositorio.findAllPendencias();
+				model.addAttribute("pendencias", pendencias);
+				
+				return "pendencia/table-listar";
+				
+			} else {
+
+				logger.error("Erro: Item não encontrado.");
+				throw new ItemInvalidoException();
+				
+			}
+			
+		} catch (Exception e) {
+			
+			logger.error("Erro ao quitar item.");
+			throw new ItemInvalidoException();
+			
+		}	
+		
+	}
+	
 //	@RequestMapping(method = RequestMethod.GET, value = "/alunos")
 //	@ResponseBody//retorna JSON
 //	public List<SelectItem> getAlunos() {
@@ -244,6 +316,25 @@ public class EmprestimoController {
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
+		
+		try {
+			
+			emprestimoRepositorio.deleteById(id);
+			logger.info("Item deletado com sucesso.");
+
+			return new ResponseEntity<String>(HttpStatus.OK);
+			
+		} catch (Exception e) {
+			
+			logger.error("Erro ao deletar item.");
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			
+		}	
+
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = "/pendencias/{id}")
+	public ResponseEntity<String> deletarPendencia(@PathVariable Long id) {
 		
 		try {
 			

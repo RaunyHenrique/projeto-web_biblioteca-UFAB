@@ -31,8 +31,7 @@ public class Aluno {
 	private Long id;
 
 	@NotNull
-	@NotEmpty
-	private String matricula;
+	private String matricula = "";
 
 	@NotNull
 	@NotEmpty
