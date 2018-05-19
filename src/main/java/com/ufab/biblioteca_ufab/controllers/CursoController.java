@@ -62,9 +62,6 @@ public class CursoController {
 				public void run() {
 
 					servicoCurso.setAllCursos();
-					
-					Iterable<Curso> cursos = cursoRepositorio.findAll();
-					model.addAttribute("cursos", cursos);
 
 				}
 			}.start();
