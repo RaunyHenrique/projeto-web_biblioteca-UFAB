@@ -26,7 +26,6 @@ import com.ufab.biblioteca_ufab.models.entidades.Curso;
 import com.ufab.biblioteca_ufab.models.enums.TipoDeCurso;
 import com.ufab.biblioteca_ufab.models.repositorios.AlunoRepositorio;
 import com.ufab.biblioteca_ufab.models.repositorios.CursoRepositorio;
-import com.ufab.biblioteca_ufab.models.servicos.ServicoCurso;
 import com.ufab.biblioteca_ufab.propertyeditors.CursoPropertyEditor;
 
 /**
@@ -49,9 +48,6 @@ public class AlunoController {
 	@Autowired
 	private CursoRepositorio cursosRepositorio;
 
-	@Autowired
-	private ServicoCurso servicoCurso;
-
 	/**
 	 * Atribui um título, url e uma lista de alunos e cursos cadastrados no banco
 	 * ao modelo que será redirecionado à view de aluno
@@ -71,26 +67,6 @@ public class AlunoController {
 		model.addAttribute("alunos", alunos);
 		model.addAttribute("tipo_curso", TipoDeCurso.values());
 
-		long cursosCount = cursosRepositorio.count();
-
-		// Seed de cursos
-		if (cursosCount == 0) {
-
-			System.out.println("Sem cursos :(");
-
-			new Thread() {
-
-				@Override
-				public void run() {
-
-					servicoCurso.setAllCursos();
-
-				}
-			}.start();
-
-		}
-
-		// colocar dentro da thred????
 		Iterable<Curso> cursosGraduacao = cursosRepositorio.findByTipo(TipoDeCurso.GRADUACAO);
 		model.addAttribute("cursosGraduacao", cursosGraduacao);
 

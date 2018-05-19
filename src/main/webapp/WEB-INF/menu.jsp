@@ -36,10 +36,9 @@
 <!--       	home => emprestimos -->
       	<li><a href="/biblioteca_ufab/home">Home</a></li>
       	<li><a href="/biblioteca_ufab/alunos">Alunos</a></li>
+      	<li><a href="/biblioteca_ufab/cursos">Cursos</a></li>
 		<security:authorize access="hasRole('ADMIN')">
-     			<li><a href="/biblioteca_ufab/funcionarios">Funcionários</a></li>
-		</security:authorize>
-      	<security:authorize access="hasRole('ADMIN')">
+     		<li><a href="/biblioteca_ufab/funcionarios">Funcionários</a></li>
 	      	<li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Itens do acervo <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
@@ -51,7 +50,6 @@
 	          </ul>
 	        </li>
 		</security:authorize>
-      
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

@@ -5,9 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- Table -->
 <table id="table-listar-datatable"
@@ -18,11 +16,9 @@
 
 		<tr class="text-center">
 
-			<td style="width: 10%">Matricula</td>
 			<td style="width: 30%">Nome</td>
-			<td style="width: 20%">Curso</td>
-			<td style="width: 5%">Periodo</td>
-			<td style="width: 5%">Telefone</td>
+			<td style="width: 20%">Área</td>
+			<td style="width: 5%">Tipo de curso</td>
 			<td style="width: 30%">Ações</td>
 
 		</tr>
@@ -31,17 +27,15 @@
 
 	<tbody>
 
-		<c:forEach items="${alunos}" var="aluno">
+		<c:forEach items="${cursos}" var="curso">
 
-			<tr data-id="${aluno.id}">
+			<tr data-id="${curso.id}">
 
-				<td>${aluno.matricula}</td>
-				<td>${aluno.nome}</td>
-				<td>${aluno.curso.nome}</td>
-				<td>${aluno.periodo}</td>
-				<td>${aluno.telefone}</td>
+				<td>${curso.nome}</td>
+				<td>${curso.area}</td>
+				<td>${curso.tipo}</td>
+
 				<td class="text-center">
-
 					<div class="btn-group">
 						<button type="button" class="btn btn-info btn-editar"
 							data-toggle="modal" data-target="#modal-add-edit"
@@ -49,13 +43,10 @@
 							<span class="glyphicon glyphicon-pencil"></span>
 						</button>
 
-						<security:authorize access="hasRole('ADMIN')">
-							<button type="button" class="btn btn-danger btn-deletar">
-								<span class="glyphicon glyphicon-trash"></span>
-							</button>
-						</security:authorize>
+						<button type="button" class="btn btn-danger btn-deletar">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
 					</div>
-
 				</td>
 
 			</tr>

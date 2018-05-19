@@ -280,17 +280,24 @@ var handlerDeletar = function(itemEvt) {
 	var csrf = $('#csrf').val();
 
 	var id = $(itemEvt).parents('tr').data('id');
-	var total = $('#total-items').text();
 
 	$.ajax({
 		url : url + "/" + id,
 		type : 'DELETE',
 		headers: {'X-CSRF-TOKEN': csrf},
 	}).done(function(result) {
-
+				
+		//remove a row
+		var dt = $('#table-listar-datatable').DataTable();
+		dt.row($('tr[data-id="' + id + '"]')).remove().draw();
 		$('tr[data-id="' + id + '"]').remove();
-		$('#total-items').text(total - 1);
-
+			
+		//remove os listeners dos botões (evita eventos duplicados)
+		$('td button').off("click");
+		
+		//reaplica listeners
+		aplicarListenersTable();
+		
 	});
 	
 };
