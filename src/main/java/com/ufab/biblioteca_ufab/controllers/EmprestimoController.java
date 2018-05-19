@@ -2,8 +2,12 @@ package com.ufab.biblioteca_ufab.controllers;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -28,9 +32,11 @@ import com.ufab.biblioteca_ufab.excecoes.ItemInvalidoException;
 import com.ufab.biblioteca_ufab.models.entidades.Aluno;
 import com.ufab.biblioteca_ufab.models.entidades.Emprestimo;
 import com.ufab.biblioteca_ufab.models.entidades.ItemDoAcervo;
+import com.ufab.biblioteca_ufab.models.entidades.Reserva;
 import com.ufab.biblioteca_ufab.models.repositorios.AlunoRepositorio;
 import com.ufab.biblioteca_ufab.models.repositorios.EmprestimoRepositorio;
 import com.ufab.biblioteca_ufab.models.repositorios.ItemDoAcervoRepositorio;
+import com.ufab.biblioteca_ufab.models.repositorios.ReservaRepositorio;
 import com.ufab.biblioteca_ufab.propertyeditors.AlunoPropertyEditor;
 import com.ufab.biblioteca_ufab.propertyeditors.ItemDoAcervoPropertyEditor;
 
@@ -49,6 +55,8 @@ public class EmprestimoController {
 	@Autowired private AlunoRepositorio alunoRepositorio;
 	
 	@Autowired private ItemDoAcervoRepositorio itemDoAcervoRepositorio;
+	
+	@Autowired private ReservaRepositorio reservaRepositorio;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model, @RequestParam(value = "get_table", required = false)
@@ -88,7 +96,16 @@ public class EmprestimoController {
 			throw new ItemInvalidoException();
 
 		} else {
-						
+			
+			System.out.println(emprestimo.getItems_emprestados());
+			
+			for (ItemDoAcervo item : emprestimo.getItems_emprestados()) {
+				
+				System.out.println(item.getTitulo());
+				
+			}
+					
+			//checa data
 			if (emprestimo.getData_devolucao().before(emprestimo.getData_emprestimo())) {
 				
 				throw new ItemInvalidoException();
@@ -100,6 +117,7 @@ public class EmprestimoController {
 			long MAX_DIAS_EMPRESTIMO_GRADUACAO = 15;
 			long MAX_DIAS_EMPRESTIMO_POSGRADUACAO = 30;
 			
+			//checa graduação do aluno
 			switch (emprestimo.getAluno().getTipo_curso()) {
 			
 				case GRADUACAO:
@@ -124,17 +142,30 @@ public class EmprestimoController {
 				
 			}
 			
-			for (ItemDoAcervo item : emprestimo.getItems_emprestados()) {
+			//subtrai do acervo
+			if (emprestimo.getId() == null) {//remover???
 				
-				if (item.getQuantidade_emprestada() < item.getQuantidade()) {
+				if (emprestimo.getItems_emprestados() != null) {
 					
-					item.setQuantidade_emprestada(item.getQuantidade_emprestada() + 1);
+					for (ItemDoAcervo item : emprestimo.getItems_emprestados()) {
+						
+						if (item.getQuantidade_emprestada() < item.getQuantidade()) {
+							
+							item.setQuantidade_emprestada(item.getQuantidade_emprestada() + 1);
+
+						}
+						
+					}
+					
+					itemDoAcervoRepositorio.saveAll(emprestimo.getItems_emprestados());
+					
+				} else {
+					
+					throw new ItemInvalidoException();
 
 				}
 				
-			}
-			
-			itemDoAcervoRepositorio.saveAll(emprestimo.getItems_emprestados());
+			} 
 						
 			//antes de salvar, verificar se há alguma pendencia!
 			emprestimoRepositorio.save(emprestimo);
@@ -261,6 +292,45 @@ public class EmprestimoController {
 		
 	}
 	
+	@RequestMapping(method = RequestMethod.POST, value = "/{id}/renovar")
+	public ResponseEntity<String> renovarEmprestimo(@PathVariable Long id) {
+		
+		try {
+			
+			Optional<Emprestimo> emprestimo = emprestimoRepositorio.findById(id);
+			
+			if (emprestimo.isPresent()) {
+				
+				for (ItemDoAcervo item : emprestimo.get().getItems_emprestados()) {
+					
+					//verifica disponibilidade, se houver uma reserva do item, não podera efetuar renovação
+					Optional<Reserva> is_indisponivel = reservaRepositorio.findByIdItemReserva(item.getId());
+					
+					if (is_indisponivel.isPresent()) {//is_indisponivel != null
+						
+						throw new Exception();
+						
+					}
+					
+				}
+				
+				logger.info("É possivel renovar o emprestimo.");
+
+				return new ResponseEntity<String>(HttpStatus.OK);
+				
+			} else {
+				throw new Exception();
+			}
+			
+		} catch (Exception e) {
+			
+			logger.error("Não é possivel renovar o emprestimo.");
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			
+		}	
+
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, value = "/pendencias/{id}/quitar")
 	public String quitarPendencia(@PathVariable Long id, Model model) {
 		
@@ -272,6 +342,15 @@ public class EmprestimoController {
 				
 				//quita emprestimo
 				emprestimo.get().setIs_pendente(false);
+				
+				//atualiza acervo
+				for (ItemDoAcervo item : emprestimo.get().getItems_emprestados()) {
+					
+					item.setQuantidade_emprestada(item.getQuantidade_emprestada() - 1);
+					
+				}
+				
+				itemDoAcervoRepositorio.saveAll(emprestimo.get().getItems_emprestados());
 				
 				emprestimoRepositorio.save(emprestimo.get());
 				logger.info("Pendência quitada com sucesso.");
@@ -325,10 +404,26 @@ public class EmprestimoController {
 		
 		try {
 			
-			emprestimoRepositorio.deleteById(id);
-			logger.info("Item deletado com sucesso.");
+			Optional<Emprestimo> emprestimo = emprestimoRepositorio.findById(id);
+			
+			if (emprestimo.isPresent()) {
+				
+				for (ItemDoAcervo item : emprestimo.get().getItems_emprestados()) {
+					
+					item.setQuantidade_emprestada(item.getQuantidade_emprestada() - 1);
+					
+				}
+				
+				itemDoAcervoRepositorio.saveAll(emprestimo.get().getItems_emprestados());
+				
+				emprestimoRepositorio.deleteById(id);
+				logger.info("Item deletado com sucesso.");
 
-			return new ResponseEntity<String>(HttpStatus.OK);
+				return new ResponseEntity<String>(HttpStatus.OK);
+				
+			} else {
+				throw new Exception();
+			}
 			
 		} catch (Exception e) {
 			
@@ -344,10 +439,26 @@ public class EmprestimoController {
 		
 		try {
 			
-			emprestimoRepositorio.deleteById(id);
-			logger.info("Item deletado com sucesso.");
+			Optional<Emprestimo> emprestimo = emprestimoRepositorio.findById(id);
+			
+			if (emprestimo.isPresent()) {
+				
+				for (ItemDoAcervo item : emprestimo.get().getItems_emprestados()) {
+					
+					item.setQuantidade_emprestada(item.getQuantidade_emprestada() - 1);
+					
+				}
+				
+				itemDoAcervoRepositorio.saveAll(emprestimo.get().getItems_emprestados());
+				
+				emprestimoRepositorio.deleteById(id);
+				logger.info("Item deletado com sucesso.");
 
-			return new ResponseEntity<String>(HttpStatus.OK);
+				return new ResponseEntity<String>(HttpStatus.OK);
+				
+			} else {
+				throw new Exception();
+			}
 			
 		} catch (Exception e) {
 			

@@ -44,6 +44,7 @@
 	          <ul class="dropdown-menu">
 	            <li><a href="/biblioteca_ufab/livros">Livros</a></li>
 	            <li><a href="/biblioteca_ufab/jornais">Jornais</a></li>
+	            <li><a href="/biblioteca_ufab/revistas">Revistas</a></li>
 	            <li><a href="/biblioteca_ufab/anais">Anais de congresso</a></li>
 	            <li><a href="/biblioteca_ufab/trabalhos">Trabalhos de conclusão</a></li>
 	            <li><a href="/biblioteca_ufab/midias">Midias eletronicas</a></li>

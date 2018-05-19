@@ -52,14 +52,14 @@
 									</td>
 									<td class="text-center">
 									
-									<div class="btn-group">
-									  	<button type="button" class="btn btn-info btn-editar" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Editar">
-										<span class="glyphicon glyphicon-pencil"></span></button>
-										
+									<div class="btn-group">	
 										<button type="button" class="btn btn-danger btn-deletar">
 										<span class="glyphicon glyphicon-trash"></span></button>
 									</div>
 							
+									  	<button type="button" class="btn btn-info btn-renovar" data-tipo="Editar">
+										<span class="glyphicon glyphicon-repeat"></span> Verificar renovação</button>
+										
 										<button type="button" class="btn btn-primary btn-finalizar" data-urlfinalizar="${url}">
 										<span class="glyphicon glyphicon-ok"></span> Finalizar</button>
 									

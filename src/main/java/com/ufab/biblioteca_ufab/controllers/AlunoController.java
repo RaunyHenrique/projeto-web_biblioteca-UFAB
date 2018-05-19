@@ -230,11 +230,20 @@ public class AlunoController {
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 
 		try {
-
-			alunoRepositorio.deleteById(id);
-			logger.info("Item deletado com sucesso.");
-
-			return new ResponseEntity<String>(HttpStatus.OK);
+			
+			Optional<Aluno> aluno = alunoRepositorio.findByIdAndPendente(id);
+			
+			if (aluno.isPresent()) {
+				
+				throw new Exception();
+				
+			} else {
+				
+				alunoRepositorio.deleteById(id);
+				logger.info("Item deletado com sucesso.");
+				
+				return new ResponseEntity<String>(HttpStatus.OK);
+			}
 
 		} catch (Exception e) {
 

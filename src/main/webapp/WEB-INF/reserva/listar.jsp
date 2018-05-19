@@ -146,7 +146,7 @@
 					
 							<c:forEach items="${itensDoAcervo}" var="item">
 					
-								<option value="${item.id}">${item.tipo} - ${item.titulo}</option>
+								<option value="${item.id}">${item.item_tipo} - ${item.titulo}</option>
 					
 							</c:forEach>
 					
@@ -184,10 +184,19 @@
 		    	placeholder: 'Selecione...',	
 		    	containerCssClass : "show-hide"
 		    });
+		    
+			$('#modal-emprestimo')
+			.on(
+					'show.bs.modal',
+					function() {
+						
+						$(".show-hide").parent().parent().hide();
+
+					});
 
 			// btn-emprestimo
 			$('.btn-emprestimo').on('click', function() {
-				
+								
 				// url
 				var url = "/biblioteca_ufab/reservas";
 
@@ -286,10 +295,8 @@
 								
 						}
 						
-						$(".show-hide").parent().parent().hide();
-
 					});
-
+					
 				});
 
 			});

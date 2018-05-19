@@ -7,9 +7,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
-
 <!-- Table -->
 <table id="table-listar-datatable"
 	class="table table-hover table-condensed table-striped table-bordered"
@@ -19,10 +16,12 @@
 
 		<tr class="text-center">
 
-			<td style="width: 30%">Nome</td>
-			<td style="width: 20%">Área</td>
-			<td style="width: 5%">Tipo de curso</td>
-			<td style="width: 30%">Ações</td>
+			<td style="width: 10%">Título</td>
+			<td style="width: 10%">Data de publicacao</td>
+			<td style="width: 20%">Edição</td>
+			<td style="width: 10%">Numero de paginas</td>
+			<td style="width: 10%">Quantidade</td>
+			<td style="width: 40%">Ações</td>
 
 		</tr>
 
@@ -30,13 +29,15 @@
 
 	<tbody>
 
-		<c:forEach items="${cursos}" var="curso">
+		<c:forEach items="${revistas}" var="revista">
 
-			<tr data-id="${curso.id}">
+			<tr data-id="${revista.id}">
 
-				<td>${curso.nome}</td>
-				<td>${curso.area}</td>
-				<td>${curso.tipo}</td>
+				<td>${revista.titulo}</td>
+				<td><fmt:formatDate value="${revista.dataDePublicacao}" pattern="dd/MM/yyyy"/></td>
+				<td>${revista.edicao}</td>
+				<td>${revista.numeroDePaginas}</td>
+				<td>${revista.quantidade}</td>
 
 				<td class="text-center">
 					<div class="btn-group">
@@ -46,11 +47,9 @@
 							<span class="glyphicon glyphicon-pencil"></span>
 						</button>
 
-						<security:authorize access="hasRole('ADMIN')">
-							<button type="button" class="btn btn-danger btn-deletar">
-								<span class="glyphicon glyphicon-trash"></span>
-							</button>
-						</security:authorize>
+						<button type="button" class="btn btn-danger btn-deletar">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
 					</div>
 				</td>
 

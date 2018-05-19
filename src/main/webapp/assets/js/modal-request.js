@@ -298,11 +298,214 @@ var handlerDeletar = function(itemEvt) {
 		//reaplica listeners
 		aplicarListenersTable();
 		
+	}).fail(function(errror) {
+
+		alert(errror);
+
 	});
 	
 };
 
 var aplicarListenersTable = function() {
+	
+	// btn-renovar (emprestimo)
+	$('.btn-renovar').on('click', function() {
+		
+		var itemEvt = this;
+		
+		var csrf = $('#csrf').val();
+		
+		var id = $(itemEvt).parents('tr').data('id');
+		
+		$.confirm({
+		    type: 'blue',
+		    typeAnimated: true,
+		    buttons: {
+	        cancelar: function () {
+	            
+	        },
+	        renovar: {
+	        	btnClass: 'btn-green',
+	            action: function () {
+
+	                var emprestimo = this.$content.find('.data-emprestimo').val();
+	                var devolucao = this.$content.find('.data-devolucao').val();
+	                
+	                if(!emprestimo || !devolucao){//validar datas..
+	                    $.alert('Campos requeridos');
+	                    return false;
+	                }
+	                
+	        		$.get("/biblioteca_ufab/home/" + id).done(function(entity) {
+	        			
+	        			console.log(entity);
+	        			
+	        			//ajusta datas
+	        			var obgResult = {};
+	        			//obgResult['_csrf'] = csrf
+
+	        			$.each(entity, function(key, value) {
+	        				
+	        				if (key == "data_emprestimo") {
+	        					
+	        					obgResult[key] = emprestimo;
+	        					
+							} else if(key == "data_devolucao") {
+								
+								obgResult[key] = devolucao;
+								
+							} else {
+								
+								obgResult[key] = value;
+
+							}
+	        				
+	        			});
+	        				        			
+	        			console.log(obgResult);
+	        			
+	        			//ajusta obj para enviar request
+	    				var result = {};
+	    				$.each(obgResult, function(key, value) {
+	    					
+	    					if(key == "items_emprestados"){
+	    							    						
+	    						var array = [];
+	    						$.each(value, function(k, v) {
+	    							
+	    							array.push(parseInt(v['id']));
+	    							
+	    						});
+    							
+    							result[key] = array;
+	    						
+	    					} else if(key == "aluno") {
+	    						
+	    						result[key] = value['id'];
+	    						
+	    					} else {
+	    					    result[key] = value;
+	    					}
+	    					
+	    				});
+	    				
+	    				console.log(result);
+	    				
+	    				var strParse = "";
+	    				var count = 0;
+	    				
+	    				$.each(result, function(key, value) {
+	    					
+	    					//console.log(key, value);
+	    					
+	    					if ($.isArray(value)) {
+	    						
+	    						$.each(value, function(index, element) {
+	    							
+	    							if (count == 0) {
+	    								
+	    								strParse += key + "=" + element;
+	    								
+	    							} else {
+	    								strParse += "&" + key + "=" + element;
+	    							}
+	    							
+	    						});
+	    						
+	    					} else {
+	    						
+	    						if (count == 0) {
+	    							
+	    							strParse += key + "=" + value;
+	    							
+	    						} else {
+	    							strParse += "&" + key + "=" + value;
+	    						}
+	    	
+	    					}
+	    					
+	    					count++;
+	    					
+	    				});
+	    				
+	    				console.log(strParse);
+	    				
+	    				$.ajax({
+	    					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+	    		            url: '/biblioteca_ufab/home',
+	    		            method: 'POST',
+	    		            headers: {'X-CSRF-TOKEN': csrf},
+	    		            data: strParse,
+	    		        }).done(function (pagina) {
+	    		        	
+	    	                $.alert('Renovação realizada com sucesso!');
+
+	    					$('#section-table').html(pagina);
+	    					
+	    					aplicarListenersTable();
+	    					
+	    					aplicarDataTable();
+	    		            
+	    		        }).fail(function(){
+
+	    		        	$.alert('Ops, ocorreu algum erro na renovação do emprestimo.');
+	    		            
+	    		        });
+	        				        			
+	        		}).fail(function(){
+
+	        			 $.alert('Ops, ocorreu algum erro na renovação do emprestimo.');
+	        			 
+			        });;
+	                	        	
+	            }
+	        }
+		    },
+		    content: function () {
+		        var self = this;
+		        return $.ajax({
+		            url: '/biblioteca_ufab/home/'+id+'/renovar',
+		            //dataType: 'json',
+		            method: 'POST',
+		            headers: {'X-CSRF-TOKEN': csrf},
+		        }).done(function () {
+		        	
+		            self.setTitle('Renovação de emprestimo');
+		            self.setContent(
+		            		'<form method="post"' +
+		            		
+		            	    '<div class="form-group">' +
+		            	    
+		            		'<label for="data_emprestimo" class="control-label">Data do emprestimo:</label>' + 
+		            		'<input type="date" class="data-emprestimo form-control" id="data_emprestimo" name="data_emprestimo" required>' + 
+		            		
+		            		'<label for="data_devolucao" class="control-label">Data da devolução:</label>' + 
+		            		'<input type="date" class="data-devolucao form-control" id="data_devolucao" name="data_devolucao" required>' +
+	
+		            	    '</div>' +
+		            	    '</form>');
+		            
+		        }).fail(function(){
+
+		            self.setTitle('Status');
+		            self.setContent('Não é possivel realizar a renovação deste emprestimo.');
+		            self.setType('red');
+		            self.buttons.cancelar.setText('ok')
+		            self.buttons.renovar.hide();
+		        });
+		    },
+		    onContentReady: function () {
+		        // bind to events
+		        var jc = this;
+		        this.$content.find('form').on('submit', function (e) {
+		            // if the user submits the form by pressing enter in the field.
+		            e.preventDefault();
+		            jc.$$formSubmit.trigger('click'); // reference the button and click it
+		        });
+		    }
+		});
+
+	});
 	
 	// btn-finalizar (emprestimo)
 	$('.btn-finalizar').on('click', function() {
