@@ -5,6 +5,8 @@
 		<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 			<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 				<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+				
+					<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 					<!-- Table -->
 					<table id="table-listar-datatable" class="table table-hover table-condensed table-striped table-bordered" style="width:100%">
@@ -36,10 +38,17 @@
 									<td>${aluno.periodo}</td>
 									<td>${aluno.telefone}</td>
 									<td class="text-center">
-										<button type="button" class="btn btn-info btn-editar" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Editar">
-										<span class="glyphicon glyphicon-edit"></span> Editar</button>
-										<button type="button" class="btn btn-danger btn-deletar">
-										<span class="glyphicon glyphicon-trash"></span> Deletar</button>
+									
+										<div class="btn-group">
+										  	<button type="button" class="btn btn-info btn-editar" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Editar">
+											<span class="glyphicon glyphicon-pencil"></span></button>
+											
+											<security:authorize access="hasRole('ADMIN')">
+												<button type="button" class="btn btn-danger btn-deletar">
+												<span class="glyphicon glyphicon-trash"></span></button>
+											</security:authorize>
+										</div>
+
 									</td>
 
 								</tr>

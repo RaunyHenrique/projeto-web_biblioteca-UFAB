@@ -3,9 +3,11 @@ package com.ufab.biblioteca_ufab.models.repositorios;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ufab.biblioteca_ufab.models.entidades.Autor;
+import com.ufab.biblioteca_ufab.models.entidades.Permissao;
 
 @Repository
-public interface AutorRepositorio extends CrudRepository<Autor, Long> {
-
+public interface PermissaoRepositorio extends CrudRepository<Permissao, Long> {
+	
+	
+	
 }

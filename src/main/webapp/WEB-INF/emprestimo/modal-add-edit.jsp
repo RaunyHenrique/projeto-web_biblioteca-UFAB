@@ -39,7 +39,7 @@
 
 		<c:forEach items="${itensDoAcervo}" var="item">
 
-			<option value="${item.id}">${item.tipo} - ${item.titulo}</option>
+			<option value="${item.id}">${item.item_tipo} - ${item.titulo}</option>
 
 		</c:forEach>
 

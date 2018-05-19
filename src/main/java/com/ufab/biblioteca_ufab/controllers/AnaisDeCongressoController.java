@@ -1,15 +1,9 @@
 package com.ufab.biblioteca_ufab.controllers;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ufab.biblioteca_ufab.excecoes.ItemInvalidoException;
 import com.ufab.biblioteca_ufab.models.entidades.AnaisDeCongresso;
-import com.ufab.biblioteca_ufab.models.entidades.Jornal;
-import com.ufab.biblioteca_ufab.models.entidades.Livro;
 import com.ufab.biblioteca_ufab.models.enums.TipoDeAnaisDoCongresso;
-import com.ufab.biblioteca_ufab.models.repositorios.AlunoRepositorio;
+import com.ufab.biblioteca_ufab.models.enums.TipoDeItemDoAcervo;
 import com.ufab.biblioteca_ufab.models.repositorios.AnaisDeCongressoRepositorio;
 
 /**
@@ -83,6 +75,8 @@ public class AnaisDeCongressoController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Valid @ModelAttribute AnaisDeCongresso anaisDeCongresso, BindingResult bindingResult, Model model) {
 
+		//item_tipo e item_id
+		
 		if (bindingResult.hasErrors()) {
 			
 			System.out.println(bindingResult.getFieldErrors());
@@ -91,6 +85,8 @@ public class AnaisDeCongressoController {
 			throw new ItemInvalidoException();
 
 		} else {
+			
+			anaisDeCongresso.setItem_tipo(TipoDeItemDoAcervo.ANAISDECONGRESSO);
 			
 			anaisDeCongressoRepositorio.save(anaisDeCongresso);
 			logger.info("Item salvo com sucesso.");

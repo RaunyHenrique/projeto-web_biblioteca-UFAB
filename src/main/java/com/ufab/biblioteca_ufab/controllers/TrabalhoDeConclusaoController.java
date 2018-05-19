@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ufab.biblioteca_ufab.excecoes.ItemInvalidoException;
 import com.ufab.biblioteca_ufab.models.entidades.TrabalhoDeConclusao;
+import com.ufab.biblioteca_ufab.models.enums.TipoDeItemDoAcervo;
 import com.ufab.biblioteca_ufab.models.enums.TipoDeTrabalhoDeConclusao;
 import com.ufab.biblioteca_ufab.models.repositorios.TrabalhoDeConclusaoRepositorio;
 
@@ -82,6 +83,8 @@ public class TrabalhoDeConclusaoController {
 			throw new ItemInvalidoException();
 
 		} else {
+			
+			trabalho.setItem_tipo(TipoDeItemDoAcervo.TRABALHOSDECONCLUSAO);
 			
 			trabalhoDeConclusaoRepositorio.save(trabalho);
 			logger.info("Item salvo com sucesso.");

@@ -81,6 +81,10 @@
 					<label for="password" class="control-label">Senha:</label> <input
 						type="password" class="form-control" id="password" name="password" required>
 
+					 <div class="form-check">
+					   <input type="checkbox" class="form-check-input" id="remember-me" name="remember-me">
+					   <label class="form-check-label" for="remember-me">Lembrar-me?</label>
+					 </div>
 
 				</div>
 

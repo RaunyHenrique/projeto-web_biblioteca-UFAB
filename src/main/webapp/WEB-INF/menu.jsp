@@ -8,6 +8,8 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}" scope="request" />
 
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <style>
 	#btn-logout{
@@ -30,23 +32,25 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      
+            
 <!--       	home => emprestimos -->
-      	<li><a href="home">Home</a></li>
-      	<li><a href="alunos">Alunos</a></li>
-      	<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Itens do acervo <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="livros">Livros</a></li>
-            <li><a href="jornais">Jornais</a></li>
-            <li><a href="anais">Anais de congresso</a></li>
-            <li><a href="trabalhos">Trabalhos de conclusão</a></li>
-            <li><a href="midias">Midias eletronicas</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Adicionar autores</a></li>
-            <li><a href="#">Adicionar editoras</a></li>
-          </ul>
-        </li>
+      	<li><a href="/biblioteca_ufab/home">Home</a></li>
+      	<li><a href="/biblioteca_ufab/alunos">Alunos</a></li>
+		<security:authorize access="hasRole('ADMIN')">
+     			<li><a href="/biblioteca_ufab/funcionarios">Funcionários</a></li>
+		</security:authorize>
+      	<security:authorize access="hasRole('ADMIN')">
+	      	<li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Itens do acervo <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="/biblioteca_ufab/livros">Livros</a></li>
+	            <li><a href="/biblioteca_ufab/jornais">Jornais</a></li>
+	            <li><a href="/biblioteca_ufab/anais">Anais de congresso</a></li>
+	            <li><a href="/biblioteca_ufab/trabalhos">Trabalhos de conclusão</a></li>
+	            <li><a href="/biblioteca_ufab/midias">Midias eletronicas</a></li>
+	          </ul>
+	        </li>
+		</security:authorize>
       
       </ul>
 

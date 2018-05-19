@@ -2,10 +2,7 @@ package com.ufab.biblioteca_ufab.controllers;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
 
 import javax.validation.Valid;
 import org.slf4j.Logger;

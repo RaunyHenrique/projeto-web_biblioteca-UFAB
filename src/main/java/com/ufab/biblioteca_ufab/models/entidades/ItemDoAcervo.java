@@ -6,33 +6,33 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+
+import org.springframework.lang.Nullable;
 
 import com.ufab.biblioteca_ufab.models.enums.TipoDeItemDoAcervo;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class ItemDoAcervo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
+	@Nullable
 	@Enumerated(EnumType.STRING)
-	private TipoDeItemDoAcervo tipo;
-	
-	@NotNull
-	private Long item_id;
+	private TipoDeItemDoAcervo item_tipo;
 	
 	@NotNull
 	@NotEmpty
 	private String titulo;
 	
-	@NotNull
-	@NotEmpty
-	private String autor;
+	@Nullable
+	private String autores;
 	
 	@NotNull
 	private int quantidade = 0;
@@ -64,12 +64,12 @@ public class ItemDoAcervo {
 		this.id = id;
 	}
 
-	public TipoDeItemDoAcervo getTipo() {
-		return tipo;
+	public TipoDeItemDoAcervo getItem_tipo() {
+		return item_tipo;
 	}
 
-	public void setTipo(TipoDeItemDoAcervo tipo) {
-		this.tipo = tipo;
+	public void setItem_tipo(TipoDeItemDoAcervo item_tipo) {
+		this.item_tipo = item_tipo;
 	}
 
 	public String getTitulo() {
@@ -80,12 +80,12 @@ public class ItemDoAcervo {
 		this.titulo = titulo;
 	}
 
-	public String getAutor() {
-		return autor;
+	public String getAutores() {
+		return autores;
 	}
 
-	public void setAutor(String autor) {
-		this.autor = autor;
+	public void setAutores(String autores) {
+		this.autores = autores;
 	}
 
 	public int getQuantidade() {
@@ -140,15 +140,15 @@ public class ItemDoAcervo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
+		result = prime * result + ((autores == null) ? 0 : autores.hashCode());
 		result = prime * result + ((corredor == null) ? 0 : corredor.hashCode());
 		result = prime * result + ((estante == null) ? 0 : estante.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((item_tipo == null) ? 0 : item_tipo.hashCode());
 		result = prime * result + ((palavra_chave == null) ? 0 : palavra_chave.hashCode());
 		result = prime * result + ((prateleira == null) ? 0 : prateleira.hashCode());
 		result = prime * result + quantidade;
 		result = prime * result + quantidade_emprestada;
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
@@ -162,10 +162,10 @@ public class ItemDoAcervo {
 		if (getClass() != obj.getClass())
 			return false;
 		ItemDoAcervo other = (ItemDoAcervo) obj;
-		if (autor == null) {
-			if (other.autor != null)
+		if (autores == null) {
+			if (other.autores != null)
 				return false;
-		} else if (!autor.equals(other.autor))
+		} else if (!autores.equals(other.autores))
 			return false;
 		if (corredor == null) {
 			if (other.corredor != null)
@@ -182,6 +182,8 @@ public class ItemDoAcervo {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (item_tipo != other.item_tipo)
+			return false;
 		if (palavra_chave == null) {
 			if (other.palavra_chave != null)
 				return false;
@@ -195,8 +197,6 @@ public class ItemDoAcervo {
 		if (quantidade != other.quantidade)
 			return false;
 		if (quantidade_emprestada != other.quantidade_emprestada)
-			return false;
-		if (tipo != other.tipo)
 			return false;
 		if (titulo == null) {
 			if (other.titulo != null)

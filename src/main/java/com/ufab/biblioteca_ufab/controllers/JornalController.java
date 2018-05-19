@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ufab.biblioteca_ufab.excecoes.ItemInvalidoException;
 import com.ufab.biblioteca_ufab.models.entidades.Jornal;
+import com.ufab.biblioteca_ufab.models.enums.TipoDeItemDoAcervo;
 import com.ufab.biblioteca_ufab.models.repositorios.JornalRepositorio;
 
 /**
@@ -92,7 +93,7 @@ public class JornalController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Valid @ModelAttribute Jornal jornal, BindingResult bindingResult, Model model) {
-
+				
 		if (bindingResult.hasErrors()) {
 
 			System.out.println(bindingResult.getFieldErrors());
@@ -101,6 +102,8 @@ public class JornalController {
 			throw new ItemInvalidoException();
 
 		} else {
+			
+			jornal.setItem_tipo(TipoDeItemDoAcervo.JORNAL);
 
 			jornalRepositorio.save(jornal);
 			logger.info("Item salvo com sucesso.");

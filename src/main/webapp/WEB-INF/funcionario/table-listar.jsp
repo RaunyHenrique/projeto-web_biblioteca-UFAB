@@ -14,12 +14,12 @@
 
 							<tr class="text-center">
 
-								<td style="width: 5%">Matricula</td>
-								<td style="width: 20%">Aluno</td>
-								<td style="width: 30%">Itens</td>
-								<td style="width: 5%">Data do emprestimo</td>
-								<td style="width: 5%">Data da devolução</td>
-								<td style="width: 5%">Status</td>
+								<td style="width: 10%">Nome</td>
+								<td style="width: 10%">Email</td>
+								<td style="width: 10%">Cpf</td>
+								<td style="width: 10%">Rg</td>
+								<td style="width: 10%">Telefone</td>
+								<td style="width: 20%">Permissões</td>
 								<td style="width: 30%">Ações</td>
 
 							</tr>
@@ -28,27 +28,21 @@
 
 						<tbody>
 
-							<c:forEach items="${emprestimos}" var="emprestimo">
+							<c:forEach items="${funcionarios}" var="funcionario">
 
-								<tr data-id="${emprestimo.id}">
+								<tr data-id="${funcionario.id}">
 
-									<td>${emprestimo.aluno.matricula}</td>
-									<td>${emprestimo.aluno.nome}</td>
+									<td>${funcionario.nome}</td>
+									<td>${funcionario.email}</td>
+									<td>${funcionario.cpf}</td>
+									<td>${funcionario.rg}</td>
+									<td>${funcionario.telefone}</td>
 									<td>
 									
-										<c:forEach items="${emprestimo.items_emprestados}" var="item_emprestado">
-											${item_emprestado.titulo}
+										<c:forEach items="${funcionario.permissoes}" var="permissao">
+											${(permissao.nome == 'ROLE_ADMIN') ? 'Administrador' : 'Operador'}
 										</c:forEach>
 										
-									</td>
-									<td><fmt:formatDate value="${emprestimo.data_emprestimo}" pattern="dd/MM/yyyy"/></td>
-									<td><fmt:formatDate value="${emprestimo.data_devolucao}" pattern="dd/MM/yyyy"/></td>
-									<td class="text-center">
-									
-										<c:if test="${emprestimo.is_pendente == false}">Pendente</c:if>
-										
-										<c:if test="${emprestimo.is_pendente == true}">OK</c:if>
-									
 									</td>
 									<td class="text-center">
 									
@@ -59,9 +53,6 @@
 										<button type="button" class="btn btn-danger btn-deletar">
 										<span class="glyphicon glyphicon-trash"></span></button>
 									</div>
-							
-										<button type="button" class="btn btn-primary btn-finalizar" data-urlfinalizar="${url}">
-										<span class="glyphicon glyphicon-ok"></span> Finalizar</button>
 									
 									</td>
 

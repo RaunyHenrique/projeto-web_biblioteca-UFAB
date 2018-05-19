@@ -22,6 +22,10 @@ public class ServicoAutenticacao implements UserDetailsService {
 
 		User emailUser = userRepositorio.findByEmail(email);
 		
+	    if (emailUser == null) {
+	        throw new UsernameNotFoundException("Usuário não encontrado!");
+	    }
+		
 		//System.out.println("EMAIL: " + emailUser.getEmail());
 		
 		return emailUser;

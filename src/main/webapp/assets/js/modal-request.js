@@ -14,8 +14,6 @@ $(document).ready(function() {
 	
 	$('#modal-add-edit').on('hidden.bs.modal', function (e) {
 		
-		console.log("VA: " + isAddIndex);
-
 		if (isAddIndex != 0) {
 			
 			if ($('#aluno').find("option[value='" + isAddIndex + "']").length) {
@@ -503,8 +501,16 @@ var aplicarListenersTable = function() {
 								
 							} else {
 								
-								field.val(value["id"]).change();
-								
+								if ($.isArray(value)) {
+									
+									field.val(value[0]["id"]).change();
+									
+								} else {
+									
+									field.val(value["id"]).change();
+									
+								}
+																
 							}
 
 						}

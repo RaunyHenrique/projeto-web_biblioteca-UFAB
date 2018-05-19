@@ -33,23 +33,20 @@
 
 									<td>${livro.titulo}</td>
 									<td>${livro.edicao}</td>
-									<td>
-									
-										<c:forEach items="${livro.autores}" var="autor">
-											${autor.nome}
-										</c:forEach>
-									
-									</td>
-									<td>${livro.editora.nome}</td>
+									<td>${livro.autores}</td>
+									<td>${livro.editora}</td>
 									<td>${livro.anoDePublicacao}</td>
 									<td>${livro.area}</td>
 									<td>${livro.tema}</td>
 									
 									<td class="text-center">
-										<button type="button" class="btn btn-info btn-editar" data-tipo="Editar">
-										<span class="glyphicon glyphicon-edit"></span> Editar</button>
-										<button type="button" class="btn btn-danger btn-deletar">
-										<span class="glyphicon glyphicon-trash"></span> Deletar</button>
+										<div class="btn-group">
+										  	<button type="button" class="btn btn-info btn-editar" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Editar">
+											<span class="glyphicon glyphicon-pencil"></span></button>
+											
+											<button type="button" class="btn btn-danger btn-deletar">
+											<span class="glyphicon glyphicon-trash"></span></button>
+										</div>
 									</td>
 
 								</tr>

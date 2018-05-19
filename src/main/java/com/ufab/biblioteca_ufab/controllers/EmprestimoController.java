@@ -1,10 +1,8 @@
 package com.ufab.biblioteca_ufab.controllers;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -230,6 +228,14 @@ public class EmprestimoController {
 				
 				//quita emprestimo
 				emprestimo.get().setIs_pendente(false);
+				
+				for (ItemDoAcervo item : emprestimo.get().getItems_emprestados()) {
+					
+					item.setQuantidade_emprestada(item.getQuantidade_emprestada() - 1);
+					
+				}
+				
+				itemDoAcervoRepositorio.saveAll(emprestimo.get().getItems_emprestados());
 				
 				emprestimoRepositorio.save(emprestimo.get());
 				logger.info("Emprestimo finalizado com sucesso.");

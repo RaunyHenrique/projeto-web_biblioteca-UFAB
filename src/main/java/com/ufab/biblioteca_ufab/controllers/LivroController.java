@@ -21,17 +21,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ufab.biblioteca_ufab.excecoes.ItemInvalidoException;
-import com.ufab.biblioteca_ufab.models.entidades.Autor;
-import com.ufab.biblioteca_ufab.models.entidades.Editora;
 import com.ufab.biblioteca_ufab.models.entidades.Livro;
-import com.ufab.biblioteca_ufab.models.repositorios.AutorRepositorio;
-import com.ufab.biblioteca_ufab.models.repositorios.EditoraRepositorio;
+import com.ufab.biblioteca_ufab.models.enums.TipoDeItemDoAcervo;
 import com.ufab.biblioteca_ufab.models.repositorios.LivroRepositorio;
-import com.ufab.biblioteca_ufab.propertyeditors.AutorPropertyEditor;
-import com.ufab.biblioteca_ufab.propertyeditors.EditoraPropertyEditor;
 
 /**
- * Classe respons√°vel por manipular as informa√ß√µes dos objetos tipo Livro.
+ * Classe respons·vel por manipular as informaÁıes dos objetos tipo Livro.
  * 
  * @author Luis Lancellote
  * @author Rauny Henrique
@@ -41,19 +36,14 @@ import com.ufab.biblioteca_ufab.propertyeditors.EditoraPropertyEditor;
 @RequestMapping("/livros")
 
 public class LivroController {
-	
-	@Autowired private AutorPropertyEditor autorPropertyEditor;
-	@Autowired private EditoraPropertyEditor editoraPropertyEditor;
-
-	@Autowired private LivroRepositorio livroRepositorio;
-	@Autowired private AutorRepositorio autorRepositorio;
-	@Autowired private EditoraRepositorio editoraRepositorio;
-	
+		
 	static final Logger logger = LoggerFactory.getLogger(LivroController.class);
+	
+	@Autowired private LivroRepositorio livroRepositorio;
 
 	/**
-	 * Atribui um t√≠tulo, url e uma lista de livros, autores e editoras cadastrados no banco ao modelo que ser√°
-	 * redirecionado √† view de livros
+	 * Atribui um tÌtulo, url e uma lista de livros, autores e editoras cadastrados no banco ao modelo que ser·
+	 * redirecionado ‡ view de livros
 	 * 
 	 * @param model
 	 * @return "livro/listar"
@@ -64,22 +54,18 @@ public class LivroController {
 	public String listar(Model model) {
 		
 		Iterable<Livro> livros = livroRepositorio.findAll();
-		Iterable<Autor> autores = autorRepositorio.findAll();
-		Iterable<Editora> editoras = editoraRepositorio.findAll();
 		
 		model.addAttribute("titulo", "Listagem de livros");
 		model.addAttribute("url", "livros");
 		
 		model.addAttribute("livros", livros);
-		model.addAttribute("autores", autores);
-		model.addAttribute("editoras", editoras);		
 		
 		logger.info("Itens listados com sucesso.");			
 		return "livro/listar";
 	}
 	
 	/**
-	 * Persiste um objeto do tipo Livro recebido como par√¢metro
+	 * Persiste um objeto do tipo Livro recebido como par‚metro
 	 * 
 	 * @param livro, bindingResult, model
 	 * @return "livro/table-listar"
@@ -98,6 +84,8 @@ public class LivroController {
 
 		} else {
 			
+			livro.setItem_tipo(TipoDeItemDoAcervo.LIVRO);
+			
 			livroRepositorio.save(livro);
 			logger.info("Item salvo com sucesso.");
 		}
@@ -111,7 +99,7 @@ public class LivroController {
 	}
 
 	/**
-	 * Realiza uma busca na tabela de livros com base no id recebido como par√¢metro
+	 * Realiza uma busca na tabela de livros com base no id recebido como par‚metro
 	 * e retorna um objeto que possua o id buscado
 	 * 
 	 * @param id
@@ -130,7 +118,7 @@ public class LivroController {
 	}
 	
 	/**
-	 * Exclui do banco, um objeto do tipo Livro que possua o id recebido como par√¢metro
+	 * Exclui do banco, um objeto do tipo Livro que possua o id recebido como par‚metro
 	 * 
 	 * @param id
 	 * @return ResponseEntity
@@ -166,8 +154,7 @@ public class LivroController {
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
 		
-		webDataBinder.registerCustomEditor(Autor.class, autorPropertyEditor);
-		webDataBinder.registerCustomEditor(Editora.class, editoraPropertyEditor);
+		
 		
 	}
 

@@ -30,11 +30,17 @@ public class ConfiguracaoAutenticacao extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/home/**").hasRole("ADMIN")
-				.anyRequest().permitAll()
+				.antMatchers("/assets/**").permitAll()
+				.antMatchers("/livros/**").hasRole("ADMIN")
+				.antMatchers("/jornais/**").hasRole("ADMIN")
+				.antMatchers("/anais/**").hasRole("ADMIN")
+				.antMatchers("/trabalhos/**").hasRole("ADMIN")
+				.antMatchers("/midias/**").hasRole("ADMIN")
+				.anyRequest().authenticated()
 		.and()
 			.formLogin()
 				.loginPage("/login")
+				.permitAll()
 				.loginProcessingUrl("/autenticar")
 				.defaultSuccessUrl("/home")
 				.failureUrl("/login?error=true")
@@ -44,7 +50,10 @@ public class ConfiguracaoAutenticacao extends WebSecurityConfigurerAdapter {
 			.and()
 				.logout()
 					.logoutUrl("/logout")
-					.logoutSuccessUrl("/login?logout=true");
+					.logoutSuccessUrl("/login?logout=true")
+					
+			.and()
+			.rememberMe();
 	}
 	
 	@Bean

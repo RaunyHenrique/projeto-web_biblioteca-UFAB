@@ -1,11 +1,5 @@
 package com.ufab.biblioteca_ufab.controllers;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -23,13 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.ufab.biblioteca_ufab.excecoes.ItemInvalidoException;
 import com.ufab.biblioteca_ufab.models.entidades.MidiaEletronica;
-import com.ufab.biblioteca_ufab.models.entidades.TrabalhoDeConclusao;
+import com.ufab.biblioteca_ufab.models.enums.TipoDeItemDoAcervo;
 import com.ufab.biblioteca_ufab.models.enums.TipoDeMidiaEletronica;
-import com.ufab.biblioteca_ufab.models.enums.TipoDeTrabalhoDeConclusao;
-import com.ufab.biblioteca_ufab.models.repositorios.LivroRepositorio;
 import com.ufab.biblioteca_ufab.models.repositorios.MidiaEletronicaRepositorio;
 
 /**
@@ -91,6 +82,8 @@ public class MidiaEletronicaController {
 			throw new ItemInvalidoException();
 
 		} else {
+			
+			midia.setItem_tipo(TipoDeItemDoAcervo.MIDIAELETRONICA);
 			
 			midiaEletronicaRepositorio.save(midia);
 			logger.info("Item salvo com sucesso.");
