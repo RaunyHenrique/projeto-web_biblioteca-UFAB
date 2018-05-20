@@ -12,7 +12,6 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 @EnableWebMvc
 
-//Configurações basicas para web
 @Configuration
 
 //Diz ao Spring quais pacotes escaniar a procura de classes
@@ -23,7 +22,8 @@ public class ConfiguracoesApp implements WebMvcConfigurer {
 	
 	public ConfiguracoesApp() {}
 	
-	//ViewResolvers - Transforma url's em view's que estão na pasta WEB-INF
+	
+	//ViewResolvers - Transforma url's em view's que estï¿½o na pasta WEB-INF
 	//ex: WEB-INF/alunos.jsp
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {

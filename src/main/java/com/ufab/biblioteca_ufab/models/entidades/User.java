@@ -78,7 +78,7 @@ public class User implements UserDetails {
 	@Column(unique = true)
 	private String telefone;
 
-	//UserDetails
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
@@ -93,120 +93,315 @@ public class User implements UserDetails {
 		return permissoes;
 	}
 
+	/**
+	 * Retorna a variavel senha da entidade Aluno
+	 * 
+	 * @return senha
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public String getPassword() {
 		return this.senha;
 	}
-
+	/**
+	 * Retorna a variavel email da entidade Aluno
+	 * 
+	 * @return email
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public String getUsername() {
 		return this.email;
 	}
 
+	/**
+	 * Verifica se a conta expirou
+	 * 
+	 * @return isAccountNonExpired
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
+	/**
+	 * Verifica se a conta está bloqueada
+	 * 
+	 * @return isAccountNonLocked
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
+	/**
+	 * Verifica se as credenciais estão expiradas
+	 * 
+	 * @return isCredentialsNonExpired
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
+	/**
+	 * Verifica se a conta está ativa
+	 * 
+	 * @return isEnabled
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean isEnabled() {
 		return true;
 	}
 	
+	/**
+	 * Retorna a variavel id da entidade Aluno
+	 * 
+	 * @return id
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Inicializa a variavel id da entidade Aluno
+	 * 
+	 * @param id
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Retorna a variavel email da entidade Aluno
+	 * 
+	 * @return email
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * Inicializa a variavel email da entidade Aluno
+	 * 
+	 * @param email
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Retorna a variavel senha da entidade Aluno
+	 * 
+	 * @return senha
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getSenha() {
 		return senha;
 	}
 
+	/**
+	 * Inicializa a variavel senha da entidade Aluno
+	 * 
+	 * @param senha
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
+	/**
+	 * Retorna a variavel permissao da entidade Aluno
+	 * 
+	 * @return permissao
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Set<Permissao> getPermissoes() {
 		return permissoes;
 	}
 
+	/**
+	 * Inicializa a variavel permissao da entidade Aluno
+	 * 
+	 * @param permissao
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setPermissoes(Set<Permissao> permissoes) {
 		this.permissoes = permissoes;
 	}
 
+	/**
+	 * Retorna a variavel cpf da entidade Aluno
+	 * 
+	 * @return cpf
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getCpf() {
 		return cpf;
 	}
 
+	/**
+	 * Inicializa a variavel cpf da entidade Aluno
+	 * 
+	 * @param cpf
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
+	/**
+	 * Retorna a variavel rg da entidade Aluno
+	 * 
+	 * @return rg
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getRg() {
 		return rg;
 	}
 
+	/**
+	 * Inicializa a variavel rg da entidade Aluno
+	 * 
+	 * @param rg
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
 
+	/**
+	 * Retorna a variavel naturalidade da entidade Aluno
+	 * 
+	 * @return naturalidade
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getNaturalidade() {
 		return naturalidade;
 	}
 
+	/**
+	 * Inicializa a variavel naturalidade da entidade Aluno
+	 * 
+	 * @param naturalidade
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setNaturalidade(String naturalidade) {
 		this.naturalidade = naturalidade;
 	}
 
+	/**
+	 * Retorna a variavel nome da entidade Aluno
+	 * 
+	 * @return nome
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * Inicializa a variavel nome da entidade Aluno
+	 * 
+	 * @param nome
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * Retorna a variavel endereco da entidade Aluno
+	 * 
+	 * @return endereco
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getEndereco() {
 		return endereco;
 	}
 
+	/**
+	 * Inicializa a variavel endereco da entidade Aluno
+	 * 
+	 * @param endereco
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
 
+	/**
+	 * Retorna a variavel telefone da entidade Aluno
+	 * 
+	 * @return telefone
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getTelefone() {
 		return telefone;
 	}
 
+	/**
+	 * Inicializa a variavel telefone da entidade Aluno
+	 * 
+	 * @param telefone
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 
+	/**
+	 * Retorna a variavel serialVersionUID da entidade Aluno
+	 * 
+	 * @return serialVersionUID
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
+	/**
+	 * Retorna a variavel hashcode da entidade Aluno
+	 * 
+	 * @return result
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -224,6 +419,13 @@ public class User implements UserDetails {
 		return result;
 	}
 
+	/**
+	 * Verifica a igualdade de atributos com um objeto recebido como parâmetro
+	 * 
+	 * @param obj
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -40,6 +40,13 @@ import com.ufab.biblioteca_ufab.models.repositorios.ReservaRepositorio;
 import com.ufab.biblioteca_ufab.propertyeditors.AlunoPropertyEditor;
 import com.ufab.biblioteca_ufab.propertyeditors.ItemDoAcervoPropertyEditor;
 
+
+/**
+ * Classe responsavel por manipular as informacoes dos objetos tipo Emprestimo.
+ * 
+ * @author Luis Lancellote
+ * @author Rauny Henrique
+ */
 @Controller
 @RequestMapping("/home")
 public class EmprestimoController {
@@ -58,6 +65,15 @@ public class EmprestimoController {
 	
 	@Autowired private ReservaRepositorio reservaRepositorio;
 	
+	/**
+	 * Atribui um tÃ­tulo, url e uma lista de emprestimos, alunos e itens do acervo cadastrados no banco ao modelo que serÃ¡
+	 * redirecionado Ã  view de reservas
+	 * 
+	 * @param model
+	 * @return "emprestimo/listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model, @RequestParam(value = "get_table", required = false)
     Boolean get_table) {
@@ -84,6 +100,14 @@ public class EmprestimoController {
 		
 	}
 
+	/**
+	 * Persiste um objeto do tipo Emprestimo recebido como parÃ¢metro
+	 * 
+	 * @param emprestimo, bindingResult, model
+	 * @return "emprestimo/table-listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@SuppressWarnings("deprecation")
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Valid @ModelAttribute Emprestimo emprestimo, BindingResult bindingResult, Model model) {
@@ -117,7 +141,7 @@ public class EmprestimoController {
 			long MAX_DIAS_EMPRESTIMO_GRADUACAO = 15;
 			long MAX_DIAS_EMPRESTIMO_POSGRADUACAO = 30;
 			
-			//checa graduação do aluno
+			//checa graduaï¿½ï¿½o do aluno
 			switch (emprestimo.getAluno().getTipo_curso()) {
 			
 				case GRADUACAO:
@@ -167,7 +191,7 @@ public class EmprestimoController {
 				
 			} 
 						
-			//antes de salvar, verificar se há alguma pendencia!
+			//antes de salvar, verificar se hï¿½ alguma pendencia!
 			emprestimoRepositorio.save(emprestimo);
 			logger.info("Item salvo com sucesso.");
 		}
@@ -180,6 +204,13 @@ public class EmprestimoController {
 
 	}
 	
+	/**
+	 * Retorna os dias passados desde o cadastro de um emprestimo
+	 * 
+	 * @return dt
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	private long diferencaDeDias(Emprestimo emprestimo) {
 
 		try {
@@ -207,8 +238,16 @@ public class EmprestimoController {
 		}
 
 	}
-	
-	//RequestMapping busca view's
+
+	/**
+	 * Realiza uma busca na tabela de emprestimos com base no id recebido como parÃ¢metro
+	 * e retorna um objeto que possua o id buscado
+	 * 
+	 * @param id
+	 * @return "emprestimo"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@ResponseBody//retorna JSON
 	public Emprestimo buscarById(@PathVariable Long id) {
@@ -219,7 +258,15 @@ public class EmprestimoController {
 
 	}
 	
-	//PENDENCIAS
+	/**
+	 * Atribui um tÃ­tulo, url e uma lista de pendencias e itens do acervo cadastrados no banco ao modelo que serÃ¡
+	 * redirecionado Ã  view de pendencias
+	 * 
+	 * @param model
+	 * @return "pendencia/listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/pendencias")
 	public String listarPendencias(Model model) {
 		
@@ -227,7 +274,7 @@ public class EmprestimoController {
 		Iterable<ItemDoAcervo> itensDoAcervo = itemDoAcervoRepositorio.findAll();
 		Double VALOR_MULTA = 0.50;
 		
-		model.addAttribute("titulo", "Listagem de Pendências");
+		model.addAttribute("titulo", "Listagem de Pendï¿½ncias");
 		model.addAttribute("url", "pendencias");
 		model.addAttribute("pendencias", pendencias);
 		model.addAttribute("itensDoAcervo", itensDoAcervo);
@@ -237,7 +284,15 @@ public class EmprestimoController {
 
 	}
 	
-	//RequestMapping busca view's
+	/**
+	 * Realiza uma busca na tabela de emprestimos com base no id recebido como parÃ¢metro
+	 * e retorna um objeto que possua o id buscado
+	 * 
+	 * @param id
+	 * @return "emprestimo"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/pendencias/{id}")
 	@ResponseBody//retorna JSON
 	public Emprestimo buscarPendenciaById(@PathVariable Long id) {
@@ -248,6 +303,15 @@ public class EmprestimoController {
 
 	}
 	
+	/**
+	 * Realiza uma busca na tabela de emprestimos com base no id recebido como parÃ¢metro
+	 * para finaliza-lo
+	 * 
+	 * @param id
+	 * @return "emprestimo/table-listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}/finalizar")
 	public String finalizarEmprestimo(@PathVariable Long id, Model model) {
 		
@@ -278,7 +342,7 @@ public class EmprestimoController {
 				
 			} else {
 
-				logger.error("Erro: Item não encontrado.");
+				logger.error("Erro: Item nï¿½o encontrado.");
 				throw new ItemInvalidoException();
 				
 			}
@@ -292,6 +356,15 @@ public class EmprestimoController {
 		
 	}
 	
+	/**
+	 * Realiza uma busca na tabela de emprestimos com base no id recebido como parÃ¢metro
+	 * para renova-lo
+	 * 
+	 * @param id
+	 * @return "emprestimo/table-listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}/renovar")
 	public ResponseEntity<String> renovarEmprestimo(@PathVariable Long id) {
 		
@@ -303,7 +376,7 @@ public class EmprestimoController {
 				
 				for (ItemDoAcervo item : emprestimo.get().getItems_emprestados()) {
 					
-					//verifica disponibilidade, se houver uma reserva do item, não podera efetuar renovação
+					//verifica disponibilidade, se houver uma reserva do item, nï¿½o podera efetuar renovaï¿½ï¿½o
 					Optional<Reserva> is_indisponivel = reservaRepositorio.findByIdItemReserva(item.getId());
 					
 					if (is_indisponivel.isPresent()) {//is_indisponivel != null
@@ -314,7 +387,7 @@ public class EmprestimoController {
 					
 				}
 				
-				logger.info("É possivel renovar o emprestimo.");
+				logger.info("ï¿½ possivel renovar o emprestimo.");
 
 				return new ResponseEntity<String>(HttpStatus.OK);
 				
@@ -324,13 +397,22 @@ public class EmprestimoController {
 			
 		} catch (Exception e) {
 			
-			logger.error("Não é possivel renovar o emprestimo.");
+			logger.error("Nï¿½o ï¿½ possivel renovar o emprestimo.");
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 			
 		}	
 
 	}
 	
+	/**
+	 * Realiza uma busca na tabela de emprestimos com base no id recebido como parÃ¢metro
+	 * para quitaÃ§Ã£o de um emprestimo pendente
+	 * 
+	 * @param id
+	 * @return "pendencia/table-listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/pendencias/{id}/quitar")
 	public String quitarPendencia(@PathVariable Long id, Model model) {
 		
@@ -353,7 +435,7 @@ public class EmprestimoController {
 				itemDoAcervoRepositorio.saveAll(emprestimo.get().getItems_emprestados());
 				
 				emprestimoRepositorio.save(emprestimo.get());
-				logger.info("Pendência quitada com sucesso.");
+				logger.info("Pendï¿½ncia quitada com sucesso.");
 
 				Iterable<Emprestimo> pendencias = emprestimoRepositorio.findAllPendencias();
 				model.addAttribute("pendencias", pendencias);
@@ -362,7 +444,7 @@ public class EmprestimoController {
 				
 			} else {
 
-				logger.error("Erro: Item não encontrado.");
+				logger.error("Erro: Item nï¿½o encontrado.");
 				throw new ItemInvalidoException();
 				
 			}
@@ -399,6 +481,14 @@ public class EmprestimoController {
 //
 //	}
 
+	/**
+	 * Exclui do banco, um objeto do tipo emprestimo que possua o id recebido como parÃ¢metro
+	 * 
+	 * @param id
+	 * @return ResponseEntity
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		
@@ -434,6 +524,14 @@ public class EmprestimoController {
 
 	}
 	
+	/**
+	 * Exclui do banco, um objeto do tipo Emprestimo pendente que possua o id recebido como parÃ¢metro
+	 * 
+	 * @param id
+	 * @return ResponseEntity
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/pendencias/{id}")
 	public ResponseEntity<String> deletarPendencia(@PathVariable Long id) {
 		
@@ -469,7 +567,13 @@ public class EmprestimoController {
 
 	}
 	
-	//Registra o PropertyEditor para o aluno, logo transforma id's em entidades de Aluno
+	/**
+	 * Registra o PropertyEditor para Aluno e ItemDoAcervo, transformando seus id's em entidades
+	 * 
+	 * @param webDataBinder
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
 		

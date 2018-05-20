@@ -11,12 +11,25 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.ufab.biblioteca_ufab.models.servicos.ServicoAutenticacao;
 
+/**
+ * Classe responsável por realizar autenticação e gerenciar permissões de usuários
+ * 
+ * @author Luis Lancellote
+ * @author Rauny Henrique
+ */
 @Configuration
 @EnableWebSecurity
 public class ConfiguracaoAutenticacao extends WebSecurityConfigurerAdapter {
 
 	@Autowired private ServicoAutenticacao servicoAutenticacao;
 	
+	/**
+	 * Define o objeto que gerencia os serviços de autenticação e codificação de senha
+	 * 
+	 * @param auth
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
@@ -26,6 +39,13 @@ public class ConfiguracaoAutenticacao extends WebSecurityConfigurerAdapter {
 			
 	}
 	
+	/**
+	 * Configura o acesso às url's com base na permissão do usuário
+	 * 
+	 * @param http
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -56,6 +76,13 @@ public class ConfiguracaoAutenticacao extends WebSecurityConfigurerAdapter {
 			.rememberMe();
 	}
 	
+	/**
+	 * Retorna uma instancia da classe BCryptPasswordEncoder utilizada para criptografar uma senha
+	 * 
+	 * @return BCryptPasswordEncoder
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Bean
 	public BCryptPasswordEncoder encoder(){
 		return new BCryptPasswordEncoder();

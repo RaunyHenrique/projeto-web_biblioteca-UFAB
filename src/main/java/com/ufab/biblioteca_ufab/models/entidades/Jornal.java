@@ -22,22 +22,57 @@ public class Jornal extends ItemDoAcervo {
 	@NotNull
 	private int edicao;
 
+	/**
+	 * Retorna a variavel data da entidade Jornal
+	 * 
+	 * @return data 
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Date getData() {
 		return data;
 	}
 
+	/**
+	 * Inicializa a variavel data da entidade Jornal
+	 * 
+	 * @param data 
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setData(Date data) {
 		this.data = data;
 	}
 
+	/**
+	 * Retorna a variavel edicao da entidade Jornal
+	 * 
+	 * @return edicao 
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public int getEdicao() {
 		return edicao;
 	}
 
+	/**
+	 * Inicializa a variavel edicao da entidade Jornal
+	 * 
+	 * @param edicao 
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setEdicao(int edicao) {
 		this.edicao = edicao;
 	}
 
+	/**
+	 * Retorna a variavel hashcode da entidade Jornal
+	 * 
+	 * @return result 
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -47,6 +82,13 @@ public class Jornal extends ItemDoAcervo {
 		return result;
 	}
 
+	/**
+	 * Verifica a igualdade de atributos com um objeto recebido como parâmetro
+	 * 
+	 * @param obj
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

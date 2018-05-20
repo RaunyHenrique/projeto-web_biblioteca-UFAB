@@ -127,6 +127,13 @@ public class Curso {
 		this.tipo = tipo;
 	}
 
+	/**
+	 * Retorna a variável hashcode da entidade AnaisDeCongresso
+	 * 
+	 * @return result
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -138,6 +145,13 @@ public class Curso {
 		return result;
 	}
 
+	/**
+	 * Verifica a igualdade de atributos com um objeto recebido como parâmetro
+	 * 
+	 * @param obj
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

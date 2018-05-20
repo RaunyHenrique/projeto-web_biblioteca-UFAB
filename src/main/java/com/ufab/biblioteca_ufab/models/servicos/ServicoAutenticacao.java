@@ -12,18 +12,31 @@ import org.springframework.stereotype.Service;
 import com.ufab.biblioteca_ufab.models.entidades.User;
 import com.ufab.biblioteca_ufab.models.repositorios.UserRepositorio;
 
+/**
+ * Classe responsavel por realizar a autenticaÃ§Ã£o de usuÃ¡rios
+ * 
+ * @author Luis Lancellote
+ * @author Rauny Henrique
+ */
 @Service
 public class ServicoAutenticacao implements UserDetailsService {
 	
 	@Autowired private UserRepositorio userRepositorio;
 
+	/**
+	 * Busca um nome de usuÃ¡rio cadastrado no banco
+	 * 
+	 * @param email
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
 		User emailUser = userRepositorio.findByEmail(email);
 		
 	    if (emailUser == null) {
-	        throw new UsernameNotFoundException("Usuário não encontrado!");
+	        throw new UsernameNotFoundException("Usuï¿½rio nï¿½o encontrado!");
 	    }
 		
 		//System.out.println("EMAIL: " + emailUser.getEmail());
@@ -32,13 +45,19 @@ public class ServicoAutenticacao implements UserDetailsService {
 		
 	}
 	
+	/**
+	 * Retorna um usuÃ¡rio logado no sistema
+	 * 
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public User getUserLogado() {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		if (auth == null) {
 			
-			throw new AuthenticationCredentialsNotFoundException("Usuário não encontrado!");
+			throw new AuthenticationCredentialsNotFoundException("Usuï¿½rio nï¿½o encontrado!");
 			
 		} 
 		

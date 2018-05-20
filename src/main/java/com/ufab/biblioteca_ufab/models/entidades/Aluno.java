@@ -79,110 +79,299 @@ public class Aluno {
 	@NotNull
 	private int periodo;
 
+	/**
+	 * Retorna a variável id da entidade Aluno
+	 * 
+	 * @return id
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Inicializa a variável id da entidade Aluno
+	 * 
+	 * @param id
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	/**
+	 * Retorna a variável matricula da entidade Aluno
+	 * 
+	 * @return matricula
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getMatricula() {
 		return matricula;
 	}
 
+	/**
+	 * Inicializa a variável matricula da entidade Aluno
+	 * 
+	 * @param matricula
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
 
+	/**
+	 * Retorna a variável cpf da entidade Aluno
+	 * 
+	 * @return cpf
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getCpf() {
 		return cpf;
 	}
-
+	
+	/**
+	 * Inicializa a variável cpf da entidade Aluno
+	 * 
+	 * @param cpf
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
+	/**
+	 * Retorna a variável rg da entidade Aluno
+	 * 
+	 * @return rg
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getRg() {
 		return rg;
 	}
 
+	/**
+	 * Inicializa a variável rg da entidade Aluno
+	 * 
+	 * @param rg
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
 
+	/**
+	 * Retorna a variável naturalidade da entidade Aluno
+	 * 
+	 * @return naturalidade
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getNaturalidade() {
 		return naturalidade;
 	}
 
+	/**
+	 * Inicializa a variável naturalidade da entidade Aluno
+	 * 
+	 * @param naturalidade
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setNaturalidade(String naturalidade) {
 		this.naturalidade = naturalidade;
 	}
 
+	/**
+	 * Retorna a variável nome da entidade Aluno
+	 * 
+	 * @return nome
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * Inicializa a variável nome da entidade Aluno
+	 * 
+	 * @param nome
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * Retorna a variável nomeDaMae da entidade Aluno
+	 * 
+	 * @return nomeDaMae
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getNomeDaMae() {
 		return nomeDaMae;
 	}
 
+	/**
+	 * Inicializa a variável nomeDaMae da entidade Aluno
+	 * 
+	 * @param nomeDaMae
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setNomeDaMae(String nomeDaMae) {
 		this.nomeDaMae = nomeDaMae;
 	}
 
+	/**
+	 * Retorna a variável endereco da entidade Aluno
+	 * 
+	 * @return endereco
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getEndereco() {
 		return endereco;
 	}
 
+	/**
+	 * Inicializa a variável endereco da entidade Aluno
+	 * 
+	 * @param endereco
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
 
+	/**
+	 * Retorna a variável telefone da entidade Aluno
+	 * 
+	 * @return telefone
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getTelefone() {
 		return telefone;
 	}
 
+	/**
+	 * Inicializa a variável telefone da entidade Aluno
+	 * 
+	 * @param telefone
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 
+	/**
+	 * Retorna a variável curso da entidade Aluno
+	 * 
+	 * @return curso
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Curso getCurso() {
 		return curso;
 	}
 
+	/**
+	 * Inicializa a variável curso da entidade Aluno
+	 * 
+	 * @param curso
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
 
+	/**
+	 * Retorna a variável tipo_curso da entidade Aluno
+	 * 
+	 * @return tipo_curso
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public TipoDeCurso getTipo_curso() {
 		return tipo_curso;
 	}
 
+	/**
+	 * Inicializa a variável tipo_curso da entidade Aluno
+	 * 
+	 * @param tipo_curso
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setTipo_curso(TipoDeCurso tipo_curso) {
 		this.tipo_curso = tipo_curso;
 	}
 
+	/**
+	 * Retorna a variável ano da entidade Aluno
+	 * 
+	 * @return ano
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getAno() {
 		return ano;
 	}
 
+	/**
+	 * Inicializa a variável ano da entidade Aluno
+	 * 
+	 * @param ano
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setAno(String ano) {
 		this.ano = ano;
 	}
 
+	/**
+	 * Retorna a variável periodo da entidade Aluno
+	 * 
+	 * @return periodo
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public int getPeriodo() {
 		return periodo;
 	}
 
+	/**
+	 * Inicializa a variável periodo da entidade Aluno
+	 * 
+	 * @param periodo
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setPeriodo(int periodo) {
 		this.periodo = periodo;
 	}
 
+	/**
+	 * Retorna a variável hashcode da entidade Aluno
+	 * 
+	 * @return result
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -203,6 +392,14 @@ public class Aluno {
 		return result;
 	}
 
+	/**
+	 * Verifica a igualdade de atributos com um objeto recebido como parâmetro
+	 * 
+	 * @param obj
+	 * @return boolean
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

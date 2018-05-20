@@ -48,13 +48,22 @@ public class UserController {
 	
 	@Autowired private PermissaoRepositorio permissaoRepositorio;
 
+	/**
+	 * Atribui um título, url e uma lista de permissoes e usuários cadastrados no banco
+	 * ao modelo que será redirecionado à view de funcionarios
+	 * 
+	 * @param model
+	 * @return "funcionario/listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model) {
 
 		Iterable<User> funcionarios = userRepositorio.findAll();
 		Iterable<Permissao> permissoes = permissaoRepositorio.findAll();
 
-		model.addAttribute("titulo", "Listagem de funcion�rios");
+		model.addAttribute("titulo", "Listagem de funcion�rios");
 		model.addAttribute("url", "funcionarios");
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("permissoes", permissoes);
@@ -65,6 +74,14 @@ public class UserController {
 
 	}
 	
+	/**
+	 * Persiste um objeto do tipo User recebido como parâmetro
+	 * 
+	 * @param user, bindingResult, model
+	 * @return "funcionario/table-listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model) {
 
@@ -115,6 +132,15 @@ public class UserController {
 
 	}
 	
+	/**
+	 * Realiza uma busca na tabela de usuarios com base no id recebido como parâmetro
+	 * e retorna um objeto que possua o id buscado
+	 * 
+	 * @param id
+	 * @return user
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@ResponseBody // retorna JSON
 	public User buscarById(@PathVariable Long id) {
@@ -125,6 +151,14 @@ public class UserController {
 
 	}
 	
+	/**
+	 * Exclui do banco, um usuário que possua o id recebido como parâmetro
+	 * 
+	 * @param id
+	 * @return ResponseEntity
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 
@@ -144,6 +178,14 @@ public class UserController {
 
 	}
 	
+	/**
+	 * Registra o PropertyEditor para permissao, transformando id's em entidades de
+	 * permissao
+	 * 
+	 * @param webDataBinder
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
 

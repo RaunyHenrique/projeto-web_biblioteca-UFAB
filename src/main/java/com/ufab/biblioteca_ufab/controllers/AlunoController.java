@@ -82,8 +82,7 @@ public class AlunoController {
 	/**
 	 * Persiste um objeto do tipo Aluno recebido como parÃ¢metro
 	 * 
-	 * @param aluno,
-	 *            bindingResult, model
+	 * @param aluno, bindingResult, model
 	 * @return "aluno/table-listar"
 	 * @author Luis Lancellote
 	 * @author Rauny Henrique
@@ -122,10 +121,10 @@ public class AlunoController {
 
 				switch (cursoNome) {
 
-				case "Administração":
+				case "Administraï¿½ï¿½o":
 					curso = "ADMI";
 					break;
-				case "Ciência da Computação":
+				case "Ciï¿½ncia da Computaï¿½ï¿½o":
 					curso = "COMP";
 					break;
 				case "Direito":
@@ -143,7 +142,7 @@ public class AlunoController {
 				case "Medicina":
 					curso = "MEDI";
 					break;
-				case "Nutrição":
+				case "Nutriï¿½ï¿½o":
 					curso = "NUTR";
 					break;
 				case "Odontologia":
@@ -204,7 +203,7 @@ public class AlunoController {
 	 * e retorna um objeto que possua o id buscado
 	 * 
 	 * @param id
-	 * @return "aluno"
+	 * @return aluno
 	 * @author Luis Lancellote
 	 * @author Rauny Henrique
 	 */

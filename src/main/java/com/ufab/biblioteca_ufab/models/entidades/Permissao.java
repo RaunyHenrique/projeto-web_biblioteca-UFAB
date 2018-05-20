@@ -14,22 +14,60 @@ public class Permissao {
 	
 	private String nome;
 
+	/**
+	 * Retorna a variavel id da entidade Permissao
+	 * 
+	 * @return id
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Long getId() {
 		return id;
 	}
 
+
+	/**
+	 * Inicializa a variavel id da entidade Permissao
+	 * 
+	 * @param id
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+
+	/**
+	 * Retorna a variavel nome da entidade Permissao
+	 * 
+	 * @return nome
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * Inicializa a variavel nome da entidade Permissao
+	 * 
+	 * @param nome
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+
+	/**
+	 * Retorna a variavel hashcode da entidade Permissao
+	 * 
+	 * @return result
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -39,6 +77,14 @@ public class Permissao {
 		return result;
 	}
 
+
+	/**
+	 * Verifica a igualdade de atributos com um objeto recebido como parâmetro
+	 * 
+	 * @param obj
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

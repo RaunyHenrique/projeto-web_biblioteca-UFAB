@@ -26,22 +26,57 @@ public class MidiaEletronica extends ItemDoAcervo {
 	@NotNull
 	private Date dataDeGravacao;
 
+	/**
+	 * Retorna a variavel tipo da entidade MidiaEletronica
+	 * 
+	 * @return tipo 
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public TipoDeMidiaEletronica getTipo() {
 		return tipo;
 	}
 
+	/**
+	 * Inicializa a variavel tipo da entidade MidiaEletronica
+	 * 
+	 * @param tipo 
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setTipo(TipoDeMidiaEletronica tipo) {
 		this.tipo = tipo;
 	}
-
+	
+	/**
+	 * Retorna a variavel dataDeGravacao da entidade MidiaEletronica
+	 * 
+	 * @return dataDeGravacao 
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Date getDataDeGravacao() {
 		return dataDeGravacao;
 	}
 
+	/**
+	 * Inicializa a variavel dataDeGravacao da entidade MidiaEletronica
+	 * 
+	 * @param dataDeGravacao 
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setDataDeGravacao(Date dataDeGravacao) {
 		this.dataDeGravacao = dataDeGravacao;
 	}
 
+	/**
+	 * Retorna a variavel hashcode da entidade MidiaEletronica
+	 * 
+	 * @return result 
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -51,6 +86,13 @@ public class MidiaEletronica extends ItemDoAcervo {
 		return result;
 	}
 
+	/**
+	 * Verifica a igualdade de atributos com um objeto recebido como parâmetro
+	 * 
+	 * @param obj 
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

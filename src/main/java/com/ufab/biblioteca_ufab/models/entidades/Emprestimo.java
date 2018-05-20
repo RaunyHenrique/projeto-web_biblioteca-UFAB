@@ -36,54 +36,145 @@ public class Emprestimo {
 	@NotNull
 	private Date data_devolucao;
 
+	/**
+	 * Retorna a variável id da entidade Emprestimo
+	 * 
+	 * @return id
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Inicializa a variável id da entidade Emprestimo
+	 * 
+	 * @param id
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	/**
+	 * Retorna a variável items_emprestados da entidade Emprestimo
+	 * 
+	 * @return items_emprestados
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Set<ItemDoAcervo> getItems_emprestados() {
 		return items_emprestados;
 	}
 
+	/**
+	 * Inicializa a variável items_emprestados da entidade Emprestimo
+	 * 
+	 * @param items_emprestados
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setItems_emprestados(Set<ItemDoAcervo> items_emprestados) {
 		this.items_emprestados = items_emprestados;
 	}
 
+	/**
+	 * Retorna a variável aluno da entidade Emprestimo
+	 * 
+	 * @return aluno
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Aluno getAluno() {
 		return aluno;
 	}
 
+	/**
+	 * Inicializa a variável aluno da entidade Emprestimo
+	 * 
+	 * @param aluno
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
 
+	/**
+	 * Retorna a variável is_pendente da entidade Emprestimo
+	 * 
+	 * @return is_pendente
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Boolean getIs_pendente() {
 		return is_pendente;
 	}
 
+	/**
+	 * Inicializa a variável is_pendente da entidade Emprestimo
+	 * 
+	 * @param is_pendente
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setIs_pendente(Boolean is_pendente) {
 		this.is_pendente = is_pendente;
 	}
 
+	/**
+	 * Retorna a variável data_emprestimo da entidade Emprestimo
+	 * 
+	 * @return data_emprestimo
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Date getData_emprestimo() {
 		return data_emprestimo;
 	}
 
+	/**
+	 * Inicializa a variável data_emprestimo da entidade Emprestimo
+	 * 
+	 * @param data_emprestimo
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setData_emprestimo(Date data_emprestimo) {
 		this.data_emprestimo = data_emprestimo;
 	}
 
+	/**
+	 * Retorna a variável data_devolucao da entidade Emprestimo
+	 * 
+	 * @return data_devolucao
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Date getData_devolucao() {
 		return data_devolucao;
 	}
 
+	/**
+	 * Inicializa a variável data_devolucao da entidade Emprestimo
+	 * 
+	 * @param data_devolucao
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setData_devolucao(Date data_devolucao) {
 		this.data_devolucao = data_devolucao;
 	}
-
+	
+	/**
+	 * Retorna a variável hashcode da entidade Emprestimo
+	 * 
+	 * @return result
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -96,6 +187,13 @@ public class Emprestimo {
 		return result;
 	}
 
+	/**
+	 * Verifica a igualdade de atributos com um objeto recebido como parâmetro
+	 * 
+	 * @param obj
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

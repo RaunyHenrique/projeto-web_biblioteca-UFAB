@@ -35,38 +35,101 @@ public class TrabalhoDeConclusao extends ItemDoAcervo {
 	@NotEmpty
 	private String local;
 
+	/**
+	 * Retorna a variavel orientadores da entidade TrabalhoDeConclusao
+	 * 
+	 * @return orientadores
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getOrientadores() {
 		return orientadores;
 	}
 
+	/**
+	 * Inicializa a variavel orientadores da entidade TrabalhoDeConclusao
+	 * 
+	 * @param orientadores
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setOrientadores(String orientadores) {
 		this.orientadores = orientadores;
 	}
 
+	/**
+	 * Retorna a variavel tipo da entidade TrabalhoDeConclusao
+	 * 
+	 * @return tipo
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public TipoDeTrabalhoDeConclusao getTipo() {
 		return tipo;
 	}
 
+	/**
+	 * Inicializa a variavel tipo da entidade TrabalhoDeConclusao
+	 * 
+	 * @param tipo
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setTipo(TipoDeTrabalhoDeConclusao tipo) {
 		this.tipo = tipo;
 	}
 
+	/**
+	 * Retorna a variavel anoDeDefesa da entidade TrabalhoDeConclusao
+	 * 
+	 * @return anoDeDefesa
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public int getAnoDeDefesa() {
 		return anoDeDefesa;
 	}
 
+	/**
+	 * Inicializa a variavel anoDeDefesa da entidade TrabalhoDeConclusao
+	 * 
+	 * @param anoDeDefesa
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setAnoDeDefesa(int anoDeDefesa) {
 		this.anoDeDefesa = anoDeDefesa;
 	}
 
+	/**
+	 * Retorna a variavel local da entidade TrabalhoDeConclusao
+	 * 
+	 * @return local
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public String getLocal() {
 		return local;
 	}
 
+	/**
+	 * Inicializa a variavel local da entidade TrabalhoDeConclusao
+	 * 
+	 * @param local
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setLocal(String local) {
 		this.local = local;
 	}
 
+	/**
+	 * Retorna a variavel hashcode da entidade TrabalhoDeConclusao
+	 * 
+	 * @return result
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,7 +140,14 @@ public class TrabalhoDeConclusao extends ItemDoAcervo {
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
 	}
-
+	
+	/**
+	 * Verifica a igualdade de atributos com um objeto recebido como parâmetro
+	 * 
+	 * @param obj
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

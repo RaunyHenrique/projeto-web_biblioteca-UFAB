@@ -30,46 +30,123 @@ public class Reserva {
 	@Type(type="boolean")
 	private Boolean receber_notificacao = false;
 
+	/**
+	 * Retorna a variavel id da entidade Reserva
+	 * 
+	 * @return id
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Inicializa a variavel id da entidade Reserva
+	 * 
+	 * @param id
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Retorna a variavel item da entidade Reserva
+	 * 
+	 * @return item
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public ItemDoAcervo getItem() {
 		return item;
 	}
 
+	/**
+	 * Inicializa a variavel item da entidade Reserva
+	 * 
+	 * @param item
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setItem(ItemDoAcervo item) {
 		this.item = item;
 	}
 
+	/**
+	 * Retorna a variavel aluno da entidade Reserva
+	 * 
+	 * @return aluno
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Aluno getAluno() {
 		return aluno;
 	}
 
+	/**
+	 * Inicializa a variavel aluno da entidade Reserva
+	 * 
+	 * @param aluno
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
 
+	/**
+	 * Retorna a variavel data_reserva_entrega da entidade Reserva
+	 * 
+	 * @return data_reserva_entrega
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public Date getData_reserva_entrega() {
 		return data_reserva_entrega;
 	}
-
+	
+	/**
+	 * Inicializa a variavel data_reserva_entrega da entidade Reserva
+	 * 
+	 * @param data_reserva_entrega
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setData_reserva_entrega(Date data_reserva_entrega) {
 		this.data_reserva_entrega = data_reserva_entrega;
 	}
 
+	/**
+	 * Retorna a variavel isReceber_Notificacao da entidade Reserva
+	 * 
+	 * @return isReceber_Notificacao
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public boolean isReceber_notificacao() {
 		return receber_notificacao;
 	}
 
+	/**
+	 * Inicializa a variavel isReceber_Notificacao da entidade Reserva
+	 * 
+	 * @param isReceber_Notificacao
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	public void setReceber_notificacao(boolean receber_notificacao) {
 		this.receber_notificacao = receber_notificacao;
 	}
 
+	/**
+	 * Retorna a variavel hashCode da entidade Reserva
+	 * 
+	 * @return result
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,6 +159,13 @@ public class Reserva {
 		return result;
 	}
 
+	/**
+	 * Verifica a igualdade de atributos com um objeto recebido como parâmetro
+	 * 
+	 * @param obj
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
