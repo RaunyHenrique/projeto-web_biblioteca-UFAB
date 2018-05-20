@@ -23,7 +23,11 @@ var aplicarDataTable = function() {
     		sNext: "Seguinte",
     		sLast: "Último",
     		}
-        }
+        },
+        dom: 'Bfrtip',
+        buttons: [
+            'excel', 'pdf'
+        ]
     });
 	
 };
