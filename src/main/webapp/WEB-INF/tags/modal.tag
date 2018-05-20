@@ -30,7 +30,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 					<button type="submit" class="btn btn-primary">
-						<span class="glyphicon glyphicon-ok"></span> Salvar
+						<span class="fas fa-check mr-1"></span> Salvar
 					</button>
 				</div>
 

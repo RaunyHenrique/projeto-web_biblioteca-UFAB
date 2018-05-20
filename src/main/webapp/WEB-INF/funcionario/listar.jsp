@@ -33,9 +33,9 @@
  
 <jsp:attribute name="body">
 
-	<div class="container">
+	<jsp:include page="../menu.jsp"></jsp:include>
 
-		<jsp:include page="../menu.jsp"></jsp:include>
+	<div class="container">
 
 		<c:if test="${not empty mensagensErro}">
 
@@ -75,7 +75,7 @@
 		</c:if>
 		
 		<button type="button" id="btn-inserir" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Inserir">
-			<span class="glyphicon glyphicon-plus"></span> Cadastrar funcionário
+			<span class="fas fa-plus mr-1"></span> Cadastrar funcionário
 		</button>
 
 		<section id="section-table">

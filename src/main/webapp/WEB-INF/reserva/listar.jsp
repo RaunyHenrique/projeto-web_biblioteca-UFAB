@@ -32,9 +32,9 @@
  
 <jsp:attribute name="body">
 
-	<div class="container">
+	<jsp:include page="../menu.jsp"></jsp:include>
 
-		<jsp:include page="../menu.jsp"></jsp:include>
+	<div class="container">
 
 		<c:if test="${not empty mensagensErro}">
 
@@ -83,7 +83,7 @@
 		  </ul>
 		
 			<button type="button" id="btn-inserir" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Inserir">
-				<span class="glyphicon glyphicon-plus"></span> Nova reserva
+				<span class="fas fa-plus mr-1"></span> Nova reserva
 			</button>
 	
 			<section id="section-table">
@@ -165,7 +165,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 					<button type="submit" class="btn btn-primary">
-						<span class="glyphicon glyphicon-ok"></span> Salvar
+						<span class="fas fa-check mr-1"></span> Salvar
 					</button>
 				</div>
 

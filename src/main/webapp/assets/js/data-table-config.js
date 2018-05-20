@@ -24,9 +24,18 @@ var aplicarDataTable = function() {
     		sLast: "Último",
     		}
         },
-        dom: 'Bfrtip',
+        dom: 'lrBftip',
         buttons: [
-            'excel', 'pdf'
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fas fa-file-excel"></i> Excel',
+                titleAttr: 'Excel'
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<i class="fas fa-file-pdf"></i> PDF',
+                titleAttr: 'PDF'
+            }
         ]
     });
 	

@@ -31,6 +31,19 @@
 			width: 100%;
 		}
 		
+		body {
+		  margin:0;
+		  padding:0;  
+		  display:flex;
+		  flex-direction:column;
+		  justify-content:space-between;
+		  min-height:100vh;
+		}
+		
+		section {
+		  flex:1 0 auto;
+		}
+		
 	</style>
 
 </jsp:attribute>
@@ -66,39 +79,44 @@
 			</div>
 		
 		</c:if>
-
-		<form action="${path}/autenticar" method="post">
-
-			<div class="panel-heading text-center"><h3>Biblioteca UFAB</h3></div>
-
-			<div class="panel-body">
-
-				<div class="form-group">
-
-					<label for="email" class="control-label">Email:</label> <input
-						type="email" class="form-control" id="email" name="email" required>
-
-					<label for="password" class="control-label">Senha:</label> <input
-						type="password" class="form-control" id="password" name="password" required>
-
-					 <div class="form-check">
-					   <input type="checkbox" class="form-check-input" id="remember-me" name="remember-me">
-					   <label class="form-check-label" for="remember-me">Lembrar-me?</label>
-					 </div>
-
-				</div>
-
-			</div>
-			
-			<div class="panel-footer">
-			
-				<button id="btn-login" type="submit" class="btn btn-primary">Login</button>
-			
-			</div>
-			
-			<input type="hidden" name="_csrf" value="${_csrf.token}">
-
-		</form>
+		
+		
+		<!-- Card -->
+		<div class="card lx-xl-5">
+		
+		    <!-- Card body -->
+		    <div class="card-body">
+		
+		        <form action="${path}/autenticar" method="post">
+		            <p class="h4 text-center py-4">Biblioteca - UFAB</p>
+		
+					<div class="form-group">
+	
+						<label for="email" class="control-label">Email:</label> <input
+							type="email" class="form-control" id="email" name="email" required>
+	
+						<label for="password" class="control-label">Senha:</label> <input
+							type="password" class="form-control" id="password" name="password" required>
+						
+					  <div class="custom-control custom-checkbox my-1 mr-sm-2">
+					    <input type="checkbox" class="custom-control-input" id="remember-me" name="remember-me">
+					    <label class="custom-control-label" for="remember-me">Lembrar-me?</label>
+					  </div>
+	
+					</div>
+					
+					<input type="hidden" name="_csrf" value="${_csrf.token}">
+		
+		            <div class="text-center py-4 mt-3">
+		                <button class="btn btn-indigo" type="submit"><i class="fas fa-sign-in-alt ml-2"></i> Login</button>
+		            </div>
+		        </form>
+		
+		    </div>
+		    <!-- Card body -->
+		
+		</div>
+		<!-- Card -->
 
 	</section>
 

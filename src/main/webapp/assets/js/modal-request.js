@@ -1,6 +1,8 @@
 var isAddIndex = 0;
 
 $(document).ready(function() {
+	
+	logoutHandler();
 		
 	aplicarListenersModal();
 
@@ -37,6 +39,26 @@ $(document).ready(function() {
 	});
 
 });
+
+var logoutHandler = function() {
+	
+	$('#btn-logout').on('click', function() {
+		
+		var csrf = $('#csrf').val();
+		
+		$.ajax({
+			url : '/biblioteca_ufab/logout',
+			type : 'POST',
+			headers: {'X-CSRF-TOKEN': csrf},
+		}).done(function(result) {
+			
+			showSuccessToast('Fez o logout com sucesso.');
+			
+		});
+		
+	});
+	
+};
 
 var showSuccessToast = function(msg) {
 

@@ -43,12 +43,12 @@
 						<button type="button" class="btn btn-info btn-editar"
 							data-toggle="modal" data-target="#modal-add-edit"
 							data-tipo="Editar">
-							<span class="glyphicon glyphicon-pencil"></span>
+							<span class="fas fa-pencil-alt mr-1"></span>
 						</button>
 
 						<security:authorize access="hasRole('ADMIN')">
 							<button type="button" class="btn btn-danger btn-deletar">
-								<span class="glyphicon glyphicon-trash"></span>
+								<span class="far fa-trash-alt mr-1"></span>
 							</button>
 						</security:authorize>
 					</div>

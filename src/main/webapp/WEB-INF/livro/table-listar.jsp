@@ -42,10 +42,10 @@
 									<td class="text-center">
 										<div class="btn-group">
 										  	<button type="button" class="btn btn-info btn-editar" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Editar">
-											<span class="glyphicon glyphicon-pencil"></span></button>
+											<span class="fas fa-pencil-alt mr-1"></span></button>
 											
 											<button type="button" class="btn btn-danger btn-deletar">
-											<span class="glyphicon glyphicon-trash"></span></button>
+											<span class="far fa-trash-alt mr-1"></span></button>
 										</div>
 									</td>
 
