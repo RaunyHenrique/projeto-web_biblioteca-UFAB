@@ -22,6 +22,7 @@ import com.ufab.biblioteca_ufab.models.entidades.MidiaEletronica;
 import com.ufab.biblioteca_ufab.models.enums.TipoDeItemDoAcervo;
 import com.ufab.biblioteca_ufab.models.enums.TipoDeMidiaEletronica;
 import com.ufab.biblioteca_ufab.models.repositorios.MidiaEletronicaRepositorio;
+import com.ufab.biblioteca_ufab.models.servicos.ServicoMidiaEletronica;
 
 /**
  * Classe responsável por manipular as informações dos objetos tipo
@@ -37,11 +38,15 @@ public class MidiaEletronicaController {
 
 	static final Logger logger = LoggerFactory.getLogger(MidiaEletronicaController.class);
 
-	@Autowired private MidiaEletronicaRepositorio midiaEletronicaRepositorio;
+	@Autowired
+	private MidiaEletronicaRepositorio midiaEletronicaRepositorio;
+
+	@Autowired
+	private ServicoMidiaEletronica servicoMidiaEletronica;
 
 	/**
-	 * Atribui um título, url e uma lista de midias e tipos de midia cadastrados no banco ao modelo que será
-	 * redirecionado à view de midia
+	 * Atribui um título, url e uma lista de midias e tipos de midia cadastrados no
+	 * banco ao modelo que será redirecionado à view de midia
 	 * 
 	 * @param model
 	 * @return "midia/listar"
@@ -50,23 +55,24 @@ public class MidiaEletronicaController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model) {
-				
-		Iterable<MidiaEletronica> midias = midiaEletronicaRepositorio.findAll();
-		
+
+		Iterable<MidiaEletronica> midias = servicoMidiaEletronica.findAll();
+
 		model.addAttribute("titulo", "Listagem de midias eletronicas");
 		model.addAttribute("url", "midias");
-		
-		model.addAttribute("tipos",TipoDeMidiaEletronica.values());
+
+		model.addAttribute("tipos", TipoDeMidiaEletronica.values());
 		model.addAttribute("midias", midias);
-		
-		logger.info("Itens listados com sucesso.");			
+
+		logger.info("Itens listados com sucesso.");
 		return "midia/listar";
 	}
-	
+
 	/**
 	 * Persiste um objeto do tipo MidiaEletronica recebido como parâmetro
 	 * 
-	 * @param midia, bindingResult, model
+	 * @param midia,
+	 *            bindingResult, model
 	 * @return "midia/table-listar"
 	 * @author Luis Lancellote
 	 * @author Rauny Henrique
@@ -75,31 +81,40 @@ public class MidiaEletronicaController {
 	public String salvar(@Valid @ModelAttribute MidiaEletronica midia, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
-			
+
 			System.out.println(bindingResult.getFieldErrors());
-			
+
 			logger.info("Erro ao salvar item.");
 			throw new ItemInvalidoException();
 
 		} else {
-			
+
 			midia.setItem_tipo(TipoDeItemDoAcervo.MIDIAELETRONICA);
-			
-			midiaEletronicaRepositorio.save(midia);
+
+			if (midia.getId() == null) {
+				
+				servicoMidiaEletronica.add(midia);
+
+			} else {
+
+				servicoMidiaEletronica.update(midia);
+
+			}
+
 			logger.info("Item salvo com sucesso.");
 		}
 
 		Iterable<MidiaEletronica> midias = midiaEletronicaRepositorio.findAll();
-		
+
 		model.addAttribute("midias", midias);
-		
+
 		return "midia/table-listar";
 
-	}	
+	}
 
 	/**
-	 * Realiza uma busca na tabela de midia eletronica com base no id recebido como parâmetro
-	 * e retorna um objeto que possua o id buscado
+	 * Realiza uma busca na tabela de midia eletronica com base no id recebido como
+	 * parâmetro e retorna um objeto que possua o id buscado
 	 * 
 	 * @param id
 	 * @return "midia"
@@ -107,16 +122,18 @@ public class MidiaEletronicaController {
 	 * @author Rauny Henrique
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
-	@ResponseBody//retorna JSON
+	@ResponseBody // retorna JSON
 	public MidiaEletronica buscarById(@PathVariable Long id) {
-		
-		Optional<MidiaEletronica> midia = midiaEletronicaRepositorio.findById(id);
+
+		Optional<MidiaEletronica> midia = servicoMidiaEletronica.findById(id);
 
 		return midia.get();
+		
 	}
-	
+
 	/**
-	 * Exclui do banco, um objeto do tipo MidiaEletronica que possua o id recebido como parâmetro
+	 * Exclui do banco, um objeto do tipo MidiaEletronica que possua o id recebido
+	 * como parâmetro
 	 * 
 	 * @param id
 	 * @return ResponseEntity
@@ -125,19 +142,21 @@ public class MidiaEletronicaController {
 	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
-				
+
 		try {
-			midiaEletronicaRepositorio.deleteById(id);
+			
+			servicoMidiaEletronica.deleteById(id);
+			
 			logger.info("Item deletado com sucesso.");
 
 			return new ResponseEntity<String>(HttpStatus.OK);
-			
+
 		} catch (Exception e) {
-			
+
 			logger.info("Erro ao deletar item.");
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-			
-		}	
+
+		}
 
 	}
 
