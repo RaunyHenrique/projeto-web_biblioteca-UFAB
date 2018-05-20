@@ -12,6 +12,7 @@
  <head>
  
  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
  	
  	<title>${title}</title>
  	
@@ -19,6 +20,9 @@
 	<link href="<c:url value="/assets/bootstrap/css/bootstrap-theme.min.css" />" rel="stylesheet">
 	<link href="<c:url value="/assets/css/jquery-confirm.min.css" />" rel="stylesheet">
 	<link href="<c:url value="/assets/css/datatables.min.css" />" rel="stylesheet">
+	<link href="<c:url value="/assets/css/jquery.toast.min.css" />" rel="stylesheet">
+	<link href="<c:url value="/assets/css/bootstrap-tagsinput.css" />" rel="stylesheet">
+<%-- 	<link href="<c:url value="/assets/css/mdb.min.css" />" rel="stylesheet"> --%>
 	
     <jsp:invoke fragment="header"/>
      
@@ -31,7 +35,10 @@
     <script type="text/javascript" src="<c:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/jquery-confirm.min.js" />"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/datatables.min.js" />"></script>
-     
+    <script type="text/javascript" src="<c:url value="/assets/js/jquery.toast.min.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/assets/js/bootstrap-tagsinput.min.js" />"></script>
+<%--     <script type="text/javascript" src="<c:url value="/assets/js/mdb.min.js" />"></script> --%>
+    
     <jsp:invoke fragment="footer"/>
      
  </body>

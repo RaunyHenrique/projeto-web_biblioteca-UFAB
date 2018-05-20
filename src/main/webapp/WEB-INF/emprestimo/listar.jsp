@@ -14,7 +14,6 @@
 
 	<link href="<c:url value="/assets/css/checkbox-nice.css" />" rel="stylesheet">
 	<link href="<c:url value="/assets/css/select2.min.css" />" rel="stylesheet">
-	<link href="<c:url value="/assets/css/bootstrap-datepicker3.min.css" />" rel="stylesheet">
 	
 	<style type="text/css">
 		
@@ -103,54 +102,7 @@
 
 	<script type="text/javascript" src="<c:url value="/assets/js/select2.full.min.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/assets/js/data-table-config.js" />"></script>
-	<script type="text/javascript" src="<c:url value="/assets/js/bootstrap-datepicker.min.js" />"></script>
-	<script type="text/javascript" src="<c:url value="/assets/js/bootstrap-datepicker.pt-BR.min.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/assets/js/modal-request.js" />"></script>
-	
-	<script>
-	
-		$(document).ready(function() {
-			
-			
-// 			$('#tabs').on('click','.tablink,#tabs-links a',function (e) {
-				
-// 			    e.preventDefault();
-			    			    
-// 			    var url = $(this).attr("data-url");
-// 			    var tabUrl = $(this).attr("id");
-			    
-// 			    if (typeof url !== "undefined") {
-			    	
-// 			        var href = this.hash;
-			        
-// 			        // ajax load from data-url
-// 			        $('#section-table').load(url,function(result){      
-			        				        				        				        				            
-// 			           // $(this).html(result);
-			               
-// 			            //update url
-// 			           	//$("#form-add-edit").data('url', tabUrl);
-			            
-// 			            //update listerners
-// 			            //aplicarDataTable();
-			            
-// 			            //aplicarListenersTable();
-			            
-// 			            //USAR??
-// 			            //aplicarListenersModal();
-			            			            			            
-// 			        });
-			        
-// 			    } else {
-			    	
-// 			        $(this).tab('show');
-			        
-// 			    }
-			//});
-	
-		});
-	
-	</script>
 
 	<jsp:include page="modal-add-edit.jsp"></jsp:include>
 

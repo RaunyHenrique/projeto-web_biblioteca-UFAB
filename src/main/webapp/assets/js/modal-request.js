@@ -1,7 +1,7 @@
 var isAddIndex = 0;
 
 $(document).ready(function() {
-	
+		
 	aplicarListenersModal();
 
 	aplicarListenersTable();
@@ -37,6 +37,19 @@ $(document).ready(function() {
 	});
 
 });
+
+var showSuccessToast = function(msg) {
+
+	$.toast({
+	    heading: 'Informação',
+	    text: msg,
+	    allowToastClose: true,
+	    showHideTransition: 'fade',
+	    icon: 'success',
+	    position: 'top-right',
+	})
+	
+};
 
 var selectTipoCursoOnChange = function() {
 	
@@ -185,6 +198,8 @@ var aplicarListenersModal = function() {
 				console.log(strParse);
 
 				$.post(url, dadosForm).done(function(pagina) {
+					
+					showSuccessToast('Item criado com sucesso.');
 
 					$('#section-table').html(pagina);
 					
@@ -194,7 +209,7 @@ var aplicarListenersModal = function() {
 
 				}).fail(function(errror) {
 
-					alert(errror);
+					$.alert('Ops, ocorreu algum erro na renovação do emprestimo.');
 
 				}).always(function() {
 
@@ -209,6 +224,8 @@ var aplicarListenersModal = function() {
 var limparCampos = function() {
 
 	var fields = $('#form-add-edit').serializeArray();
+	
+	console.log(fields);
 
 	$.each(fields, function(index, value) {
 
@@ -224,7 +241,6 @@ var limparCampos = function() {
 			
 		}
 		
-
 	});
 
 };
@@ -286,6 +302,8 @@ var handlerDeletar = function(itemEvt) {
 		type : 'DELETE',
 		headers: {'X-CSRF-TOKEN': csrf},
 	}).done(function(result) {
+		
+		showSuccessToast('Item deletado com sucesso.');
 				
 		//remove a row
 		var dt = $('#table-listar-datatable').DataTable();
@@ -300,7 +318,7 @@ var handlerDeletar = function(itemEvt) {
 		
 	}).fail(function(errror) {
 
-		alert(errror);
+		$.alert('Ops, ocorreu algum erro ao deletar.');
 
 	});
 	
@@ -438,7 +456,7 @@ var aplicarListenersTable = function() {
 	    		            data: strParse,
 	    		        }).done(function (pagina) {
 	    		        	
-	    	                $.alert('Renovação realizada com sucesso!');
+	    		        	showSuccessToast('Emprestimo realizado com sucesso.');
 
 	    					$('#section-table').html(pagina);
 	    					
@@ -456,7 +474,7 @@ var aplicarListenersTable = function() {
 
 	        			 $.alert('Ops, ocorreu algum erro na renovação do emprestimo.');
 	        			 
-			        });;
+			        });
 	                	        	
 	            }
 	        }
@@ -534,6 +552,8 @@ var aplicarListenersTable = function() {
 		            		type : 'POST',
 		            		headers: {'X-CSRF-TOKEN': csrf},
 		            	}).done(function(pagina) {
+		            		
+		            		showSuccessToast('Emprestimo finalizado com sucesso.');
 
 							$('#section-table').html(pagina);
 							
@@ -541,7 +561,11 @@ var aplicarListenersTable = function() {
 							
 							aplicarDataTable();
 
-		            	});
+		            	}).fail(function(){
+
+		        			 $.alert('Ops, ocorreu algum erro ao tentar finalizar emprestimo.');
+		        			 
+				        });
 		                
 		            }
 		        	
@@ -584,6 +608,8 @@ var aplicarListenersTable = function() {
 		            		type : 'POST',
 		            		headers: {'X-CSRF-TOKEN': csrf},
 		            	}).done(function(pagina) {
+		            		
+		            		showSuccessToast('Divida quitada com sucesso.');
 
 							$('#section-table').html(pagina);
 							
@@ -591,7 +617,11 @@ var aplicarListenersTable = function() {
 							
 							aplicarDataTable();
 
-		            	});
+		            	}).fail(function(){
+
+		        			 $.alert('Ops, ocorreu algum erro ao tentar quitar a divida.');
+		        			 
+				        });
 		                
 		            }
 		        	
