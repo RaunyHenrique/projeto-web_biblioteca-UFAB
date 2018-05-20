@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 var aplicarDataTable = function() {
 	
-	$('#table-listar-datatable').DataTable({
+	var table = $('#table-listar-datatable').DataTable({
         "language": {
     		sProcessing: "Processando...",
     		sLengthMenu: "Mostrar _MENU_ registros",
@@ -24,7 +24,7 @@ var aplicarDataTable = function() {
     		sLast: "Último",
     		}
         },
-        dom: 'lrBftip',
+        dom: '<"btns-table-top"lrBf>tip',
         buttons: [
             {
                 extend:    'excelHtml5',
@@ -38,5 +38,5 @@ var aplicarDataTable = function() {
             }
         ]
     });
-	
+		
 };

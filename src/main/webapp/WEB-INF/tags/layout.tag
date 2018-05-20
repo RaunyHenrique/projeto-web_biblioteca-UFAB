@@ -16,6 +16,11 @@
  		.dataTables_wrapper .dataTables_length {
 			float: left;
 		}
+		
+ 		.dataTables_wrapper .dataTables_length {
+			margin-bottom: 1rem !important;
+		}
+		
 		.dataTables_wrapper .dataTables_filter {
 			float: right;
 			text-align: left;
@@ -24,7 +29,7 @@
 		div.dt-buttons {
 			position:relative;
 			float:right;
-			margin-top: -2px;
+			margin-top: -8px;
 			padding-left: 8px;
 		}
 		
@@ -41,13 +46,52 @@
 		  flex:1 0 auto;
 		}
 		
-/* 		footer { */
-/* 		    position: fixed; */
-/* 		    bottom: 0; */
-/* 		    clear: both; */
-/* 		    width: 100%; */
-/* 		} */
- 		
+		.nav-tabs {
+			margin-top: 16px;
+		}
+		
+		.bootstrap-tagsinput {
+		
+			width: 100%;
+			padding: .375rem .75rem!important;
+		    background-clip: padding-box!;
+		    border: 1px solid #ced4da!;
+		}
+		
+		.bootstrap-tagsinput .label-info {
+		    background-color: #5bc0de !important;
+		}
+		
+		.bootstrap-tagsinput .label {
+		    display: inline;
+		    padding: .2em .6em .3em;
+		    font-size: 75%;
+		    font-weight: 700;
+		    color: #fff;
+		    text-align: center;
+		    white-space: nowrap;
+		    vertical-align: baseline;
+		    border-radius: .25em;
+		    line-height: 2 !important;
+		}
+		
+		.select2-container .select2-selection--single {
+			height: 38px !important;
+		}
+		
+		.select2-container--default .select2-selection--single .select2-selection__rendered {
+		    line-height: 38px !important;
+		}
+		
+		.select2-container--default .select2-selection--single .select2-selection__arrow {
+		    height: 38px !important;
+		}
+		
+		#btn-inserir {
+			margin-top: 16px !important;
+			margin-bottom: 16px !important;
+		}
+		
  	</style>
  
  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -94,6 +138,21 @@
     <script type="text/javascript" src="<c:url value="/assets/js/mdb.min.js" />"></script>
     
     <jsp:invoke fragment="footer"/>
+    
+    <script type="text/javascript">
+    
+	    $(document).ready(function() {
+	    	
+	    	//nav navegation
+	    	$('li.active').removeClass('active');
+	    	$('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
+	    	  
+	    	//fix select page do datatable
+	    	$(".pagination").find('.page-item:not(.next)').eq(1).addClass('active');
+	    	  
+	    });
+    
+    </script>
      
  </body>
 </html>

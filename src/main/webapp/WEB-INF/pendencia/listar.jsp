@@ -31,6 +31,10 @@
 			margin-top: 8px;
 		}
 		
+		.nav-tabs {
+			margin-bottom: 16px!important;
+		}
+		
 	</style>
 
 </jsp:attribute>
@@ -82,9 +86,9 @@
 
 		  <!-- Nav tabs -->
 		  <ul class="nav nav-tabs" role="tablist" id="tabs-links">
-		    <li role="presentation"><a href="/biblioteca_ufab/home" id="home" aria-controls="home" role="tab" data-url="/biblioteca_ufab/home">Emprestimos</a></li>
-		    <li role="presentation"><a href="/biblioteca_ufab/reservas" id="reservas" aria-controls="profile" role="tab" data-url="/biblioteca_ufab/reservas">Reservas</a></li>
-		    <li role="presentation" class="active"><a href="/biblioteca_ufab/home/pendencias" id="pendencias" aria-controls="messages" role="tab" data-url="/biblioteca_ufab/home/pendencias">Pendências</a></li>
+		    <li role="presentation" class="nav-item"><a class="nav-link" href="/biblioteca_ufab/home" id="home" aria-controls="home" role="tab" data-url="/biblioteca_ufab/home">Emprestimos</a></li>
+		    <li role="presentation" class="nav-item"><a class="nav-link" href="/biblioteca_ufab/reservas" id="reservas" aria-controls="profile" role="tab" data-url="/biblioteca_ufab/reservas">Reservas</a></li>
+		    <li role="presentation" class="nav-item active"><a class="nav-link active" href="/biblioteca_ufab/home/pendencias" id="pendencias" aria-controls="messages" role="tab" data-url="/biblioteca_ufab/home/pendencias">Pendências</a></li>
 		  </ul>
 		
 <!-- 			<button type="button" id="btn-inserir" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Inserir"> -->

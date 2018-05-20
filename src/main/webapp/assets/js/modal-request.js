@@ -2,6 +2,8 @@ var isAddIndex = 0;
 
 $(document).ready(function() {
 	
+	$('#palavra_chave').tagsinput();
+	
 	logoutHandler();
 		
 	aplicarListenersModal();

@@ -26,6 +26,10 @@
 			width:100%!important;
 		}
 		
+		.nav-tabs {
+			margin-bottom: 16px!important;
+		}
+		
 	</style>
 
 </jsp:attribute>
@@ -77,9 +81,9 @@
 
 		  <!-- Nav tabs -->
 		  <ul class="nav nav-tabs" role="tablist" id="tabs-links">
-		    <li role="presentation"><a href="home" id="home" aria-controls="home" role="tab" data-url="/biblioteca_ufab/home">Emprestimos</a></li>
-		    <li role="presentation" class="active"><a href="reservas" id="reservas" aria-controls="profile" role="tab" data-url="/biblioteca_ufab/reservas">Reservas</a></li>
-		    <li role="presentation"><a href="home/pendencias" id="pendencias" aria-controls="messages" role="tab" data-url="/biblioteca_ufab/home/pendencias">Pendências</a></li>
+		    <li role="presentation" class="nav-item"><a class="nav-link" href="home" id="home" aria-controls="home" role="tab" data-url="/biblioteca_ufab/home">Emprestimos</a></li>
+		    <li role="presentation" class="nav-item active"><a class="nav-link active" href="reservas" id="reservas" aria-controls="profile" role="tab" data-url="/biblioteca_ufab/reservas">Reservas</a></li>
+		    <li role="presentation" class="nav-item"><a class="nav-link" href="home/pendencias" id="pendencias" aria-controls="messages" role="tab" data-url="/biblioteca_ufab/home/pendencias">Pendências</a></li>
 		  </ul>
 		
 			<button type="button" id="btn-inserir" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Inserir">
@@ -109,7 +113,7 @@
 	<!-- Modal emprestimos -->
 	<div class="modal fade" id="modal-emprestimo" role="dialog"
 	aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
 
 			<form method="post" id="form-emprestimo" data-url="home">
@@ -117,11 +121,12 @@
 				<input type="hidden" id="csrf" name="_csrf" value="${_csrf.token}">
 
 				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Novo emprestimo</h4>
+				
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Novo emprestimo</h4>
 				</div>
 
 				<div class="modal-body">

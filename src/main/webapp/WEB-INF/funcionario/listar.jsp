@@ -14,7 +14,6 @@
 
 	<link href="<c:url value="/assets/css/checkbox-nice.css" />" rel="stylesheet">
 	<link href="<c:url value="/assets/css/select2.min.css" />" rel="stylesheet">
-	<link href="<c:url value="/assets/css/bootstrap-datepicker3.min.css" />" rel="stylesheet">
 	
 	<style type="text/css">
 		
@@ -92,8 +91,6 @@
 
 	<script type="text/javascript" src="<c:url value="/assets/js/select2.full.min.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/assets/js/data-table-config.js" />"></script>
-	<script type="text/javascript" src="<c:url value="/assets/js/bootstrap-datepicker.min.js" />"></script>
-	<script type="text/javascript" src="<c:url value="/assets/js/bootstrap-datepicker.pt-BR.min.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/assets/js/modal-request.js" />"></script>
 
 	<jsp:include page="modal-add-edit.jsp"></jsp:include>

@@ -73,16 +73,23 @@
 										${valorMulta}
 									</td>
 
-									<td class="text-center">
-										<div class="btn-group">
+									<td>
+									
+									<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+									    <div class="btn-group mr-2" role="group" aria-label="First group">
+									    
 										  	<button type="button" class="btn btn-info btn-editar" data-toggle="modal" data-target="#modal-add-edit" data-tipo="Editar">
 											<span class="fas fa-pencil-alt mr-1"></span></button>
 											
 											<button type="button" class="btn btn-danger btn-deletar">
 											<span class="far fa-trash-alt mr-1"></span></button>
-										</div>
-										<button type="button" class="btn btn-primary btn-quitar-divida" data-nome="${pendencia.aluno.nome}" data-valor="${valorMulta}" data-urlquitar="${url}">
-										<span class="fas fa-check mr-1"></span> Quitar pendência</button>
+						
+											<button type="button" class="btn btn-primary btn-quitar-divida" data-nome="${pendencia.aluno.nome}" data-valor="${valorMulta}" data-urlquitar="${url}">
+											<span class="fas fa-check mr-1"></span></button>
+						
+									    </div>
+									</div>
+									
 									</td>
 
 								</tr>

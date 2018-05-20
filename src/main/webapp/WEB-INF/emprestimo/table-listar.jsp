@@ -50,18 +50,22 @@
 										<c:if test="${emprestimo.is_pendente == true}">OK</c:if>
 									
 									</td>
-									<td class="text-center">
-									
-									<div class="btn-group">	
-										<button type="button" class="btn btn-danger btn-deletar">
+									<td>
+
+									<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+									    <div class="btn-group mr-2" role="group" aria-label="First group">
+									    
+									   	<button type="button" class="btn btn-danger btn-deletar lighten-2">
 										<span class="far fa-trash-alt mr-1"></span></button>
-									</div>
-							
-									  	<button type="button" class="btn btn-info btn-renovar" data-tipo="Editar">
-										<span class="glyphicon glyphicon-repeat"></span> Verificar renovação</button>
 										
-										<button type="button" class="btn btn-primary btn-finalizar" data-urlfinalizar="${url}">
-										<span class="fas fa-check mr-1"></span> Finalizar</button>
+										<button type="button" class="btn btn-info btn-renovar lighten-2" data-tipo="Editar">
+										<span class="fas fa-sync-alt mr-1"></span></button>
+										
+										<button type="button" class="btn btn-primary btn-finalizar lighten-2" data-urlfinalizar="${url}">
+										<span class="fas fa-check mr-1"></span></button>
+						
+									    </div>
+									</div>
 									
 									</td>
 

@@ -41,7 +41,7 @@
 <!--                 </a> -->
 <!--             </li> -->
 
-      	<li class="nav-item active"><a class="nav-link" href="/biblioteca_ufab/home">Home</a></li>
+      	<li class="nav-item"><a class="nav-link" href="/biblioteca_ufab/home">Home</a></li>
       	<li class="nav-item"><a class="nav-link" href="/biblioteca_ufab/alunos">Alunos</a></li>
       	<li class="nav-item"><a class="nav-link" href="/biblioteca_ufab/cursos">Cursos</a></li>
 		<security:authorize access="hasRole('ADMIN')">
