@@ -22,6 +22,13 @@ import com.ufab.biblioteca_ufab.excecoes.ItemInvalidoException;
 import com.ufab.biblioteca_ufab.models.entidades.ItemDoAcervo;
 import com.ufab.biblioteca_ufab.models.repositorios.ItemDoAcervoRepositorio;
 
+/**
+ * Classe responsável por manipular as informações dos objetos tipo
+ * ItemDoAcervo.
+ * 
+ * @author Luis Lancellote
+ * @author Rauny Henrique
+ */
 @Controller
 @RequestMapping("/itens-acervo")
 public class ItemDoAcervoController {
@@ -30,6 +37,15 @@ public class ItemDoAcervoController {
 
 	@Autowired private ItemDoAcervoRepositorio itemDoAcervoRepositorio;
 	
+	/**
+	 * Atribui um título, url e uma lista de itens do acervo cadastrados no
+	 * banco ao modelo que será redirecionado à view de itens do acervo
+	 * 
+	 * @param model
+	 * @return "itens_acervo/listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar(Model model) {
 
@@ -43,6 +59,15 @@ public class ItemDoAcervoController {
 		return "itens_acervo/listar";
 	}
 	
+	/**
+	 * Realiza uma busca na tabela de itens do acervo eletronica com base no id recebido como
+	 * parâmetro e retorna um objeto que possua o id buscado
+	 * 
+	 * @param id
+	 * @return "itemDoAcervo"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@ResponseBody // retorna JSON
 	public ItemDoAcervo buscarById(@PathVariable Long id) {
@@ -53,6 +78,14 @@ public class ItemDoAcervoController {
 
 	}
 	
+	/**
+	 * Persiste um objeto do tipo ItemDoAcervo recebido como parâmetro
+	 * 
+	 * @param itemDoAcervo, bindingResult, model
+	 * @return "midia/table-listar"
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Valid @ModelAttribute ItemDoAcervo itemDoAcervo, BindingResult bindingResult, Model model) {
 				
@@ -74,10 +107,19 @@ public class ItemDoAcervoController {
 
 		model.addAttribute("itens", itemDoAcervoAll);
 
-		return "curso/table-listar";
+		return "itens_acervo/table-listar";
 
 	}
 	
+	/**
+	 * Exclui do banco, um objeto do tipo ItemDoAcervo que possua o id recebido
+	 * como parâmetro
+	 * 
+	 * @param id
+	 * @return ResponseEntity
+	 * @author Luis Lancellote
+	 * @author Rauny Henrique
+	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 
