@@ -52,6 +52,8 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Itens do acervo</a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+        			<a class="dropdown-item" href="/biblioteca_ufab/itens-acervo">Informações gerais</a>
+        			<div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/biblioteca_ufab/livros">Livros</a>
                     <a class="dropdown-item" href="/biblioteca_ufab/jornais">Jornais</a>
                     <a class="dropdown-item" href="/biblioteca_ufab/revistas">Revistas</a>
@@ -61,6 +63,10 @@
                 </div>
             </li>
 	        
+		</security:authorize>
+	
+		<security:authorize access="!hasRole('ADMIN')">
+			<li class="nav-item"><a class="nav-link" href="/biblioteca_ufab/itens-acervo">Itens do acervo</a></li>
 		</security:authorize>
 
         </ul>
