@@ -67,6 +67,31 @@ public class UserController {
 		model.addAttribute("url", "funcionarios");
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("permissoes", permissoes);
+		
+		long permissoesCount = permissaoRepositorio.count();
+
+		// Seed de permissões
+		if (permissoesCount == 0) {
+
+			new Thread() {
+
+				@Override
+				public void run() {
+					
+					Permissao admin = new Permissao();
+					admin.setId(1L);
+					admin.setNome("ROLE_ADMIN");
+					permissaoRepositorio.save(admin);
+					
+					Permissao operador = new Permissao();
+					admin.setId(2L);
+					admin.setNome("ROLE_OPERADOR");
+					permissaoRepositorio.save(operador);		
+
+				}
+			}.start();
+
+		}
 
 		logger.info("Itens listados com sucesso.");
 

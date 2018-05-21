@@ -53,6 +53,7 @@ public class ConfiguracaoAutenticacao extends WebSecurityConfigurerAdapter {
 				.antMatchers("/assets/**").permitAll()
 				.antMatchers("/livros/**").hasRole("ADMIN")
 				.antMatchers("/jornais/**").hasRole("ADMIN")
+				.antMatchers("/revistas/**").hasRole("ADMIN")
 				.antMatchers("/anais/**").hasRole("ADMIN")
 				.antMatchers("/trabalhos/**").hasRole("ADMIN")
 				.antMatchers("/midias/**").hasRole("ADMIN")
